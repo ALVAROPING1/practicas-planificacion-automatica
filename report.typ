@@ -138,6 +138,87 @@
   [Meta], [-], $2 + 3 + 4 = 9$, $3$
 )), caption: [Valores heurísticos con HSP])
 
+== Heurística con FF
+#let ff-predicates = (
+  // Nivel 0
+  ("brazo-libre",
+   "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)",
+   "libre(A)"),
+  // Nivel 1
+  ("brazo-libre",
+   "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)",
+   "libre(A)", "libre(B)",
+   "sujeto(A)"),
+  // Nivel 2
+  ("brazo-libre",
+   "en-mesa(A)", "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)",
+   "libre(A)", "libre(B)", "libre(C)",
+   "sujeto(A)", "sujeto(B)"),
+  // Nivel 3
+  ("brazo-libre",
+   "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)", "encima(B, A)",
+   "libre(A)", "libre(B)", "libre(C)",
+   "sujeto(A)", "sujeto(B)", "sujeto(C)"),
+  // Nivel 4
+  ("brazo-libre",
+   "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)", "encima(B, A)", "encima(C, B)", "encima(C, A)", "encima(A, C)",
+   "libre(A)", "libre(B)", "libre(C)",
+   "sujeto(A)", "sujeto(B)", "sujeto(C)"))
+
+#let ff-actions = (
+  // Nivel 0-1
+  ("quitar(A, B)" : (pre  : ("encima(A, B)", "libre(A)", "brazo-libre"),
+                     post : ("libre(B)", "sujeto(A)"))),
+  // Nivel 1-2
+  ("quitar(B, C)" : (pre  : ("encima(B, C)", "libre(B)", "brazo-libre"),
+                     post : ("libre(C)", "sujeto(B)")),
+   "dejar(A)"     : (pre  : ("sujeto(A)",),
+                     post : ("en-mesa(A)", "libre(A)"))),
+  // Nivel 2-3
+  ("dejar(B)"     : (pre  : ("sujeto(B)"),
+                     post : ("en-mesa(B)", "libre(B)")),
+   "poner(B, A)"  : (pre  : ("sujeto(B)", "libre(A)"),
+                     post : ("encima(B, A)")),
+   "levantar(C)"  : (pre  : ("en-mesa(C)", "libre(C)", "brazo-libre"),
+                     post : ("sujeto(B)"))),
+  // Nivel 3-4
+                     // TODO: poner(A, C), poner(C, A), poner(C, B)
+  ())
+
+#let ff-marks = ()
+
+#let draw-ff(width, height, marks) = canvas({
+  draw.set-style(content: (padding: 0.5em))
+  let space = width / (ff-predicates.len() + 2)
+  for level in range(ff-predicates.len()) {
+    let x = (level + 1) * space
+    let predicates = ff-predicates.at(level)
+    let text-height = 1em
+    let predicates-height = text-height * (predicates.len() + 2)
+    let text-start = (height - predicates-height) / 2
+    draw.line((x, 0), (x, text-start))
+    draw.line((x, height), (x, height - text-start))
+    for p in range(predicates.len()) {
+      draw.content((x - space / 2, text-start + text-height * (p + 2)),
+                   (x + space / 2, text-start + text-height * (p + 2)),
+                   align(center)[#predicates.at(p)],
+                   name : predicates.at(p) + ":" + str(p))
+    }
+  }
+
+  for inter in range(ff-actions.len()) {
+    let x = (inter + 1.5) * space
+    draw.line((x, 0.2), (x, 0.8))
+  }
+})
+
+#figure(draw-ff(30cm, 10cm, false))
+
 == Costes arbitrarios con FF
 
 Como el coste de la heurística en FF es la cantidad de operadores utilizados
