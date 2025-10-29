@@ -22,7 +22,7 @@
   ),
   // professor: "Perico de los Palotes",
   toc: false,
-  logo: "old",
+  logo: "new",
   language: "es",
 )
 
@@ -153,16 +153,19 @@
    "sujeto(A)"),
   // Nivel 2
   ("brazo-libre",
-   "en-mesa(A)", "en-mesa(C)",
+   "encima(A, B)", "encima(B, C)",
+   "libre(C)",
+   "sujeto(A)", "en-mesa(C)","sujeto(B)",
+   "en-mesa(A)", 
+   "libre(B)", "libre(A)", 
+  ),
+  // Nivel 3
+  ("brazo-libre", "sujeto(B)", "sujeto(C)",  
+   "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
    "encima(A, B)", "encima(B, C)",
    "libre(A)", "libre(B)", "libre(C)",
-   "sujeto(A)", "sujeto(B)"),
-  // Nivel 3
-  ("brazo-libre",
-   "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
-   "encima(A, B)", "encima(B, C)", "encima(B, A)",
-   "libre(A)", "libre(B)", "libre(C)",
-   "sujeto(A)", "sujeto(B)", "sujeto(C)"),
+   "sujeto(A)", "encima(B, A)",
+  ),
   // Nivel 4
   ("brazo-libre",
    "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
@@ -180,44 +183,83 @@
    "dejar(A)"     : (pre  : ("sujeto(A)",),
                      post : ("en-mesa(A)", "libre(A)"))),
   // Nivel 2-3
-  ("dejar(B)"     : (pre  : ("sujeto(B)"),
+  (
+   "levantar(C)"  : (pre  : ("en-mesa(C)", "libre(C)", "brazo-libre"),
+                     post : ("sujeto(C)",)),
+   "dejar(B)"     : (pre  : ("sujeto(B)",),
                      post : ("en-mesa(B)", "libre(B)")),
    "poner(B, A)"  : (pre  : ("sujeto(B)", "libre(A)"),
-                     post : ("encima(B, A)")),
-   "levantar(C)"  : (pre  : ("en-mesa(C)", "libre(C)", "brazo-libre"),
-                     post : ("sujeto(B)"))),
+                     post : ("encima(B, A)",)),
+  ),
   // Nivel 3-4
-                     // TODO: poner(A, C), poner(C, A), poner(C, B)
-  ())
+  (
+    "poner(C, B)" : (pre  : ("sujeto(C)", "libre(B)"),
+                     post : ("encima(C, B)",)),
+    "poner(C, A)" : (pre  : ("sujeto(C)", "libre(A)"),
+                     post : ("encima(C, A)",)),
+    "poner(A, C)" : (pre  : ("sujeto(A)", "libre(C)"),
+                     post : ("encima(A, C)",)),
+  ))
 
-#let ff-marks = ()
+#let ff-final = (
+  "en-mesa(A)", "encima(B, A)", "encima(C, B)", "brazo-libre", "libre(C)",
+  "poner(C, B)", "poner(B, A)", "dejar(A)", "quitar(A, B)", "levantar(C)", "quitar(B, C)",
+)
 
-#let draw-ff(width, height, marks) = canvas({
-  draw.set-style(content: (padding: 0.5em))
+#let draw-ff(width, height) = canvas({
   let space = width / (ff-predicates.len() + 2)
+  let text-height = 1.0em
+  let inter-space = { h(0.4em) }
   for level in range(ff-predicates.len()) {
     let x = (level + 1) * space
     let predicates = ff-predicates.at(level)
-    let text-height = 1em
     let predicates-height = text-height * (predicates.len() + 2)
     let text-start = (height - predicates-height) / 2
     draw.line((x, 0), (x, text-start))
     draw.line((x, height), (x, height - text-start))
     for p in range(predicates.len()) {
-      draw.content((x - space / 2, text-start + text-height * (p + 2)),
-                   (x + space / 2, text-start + text-height * (p + 2)),
-                   align(center)[#predicates.at(p)],
-                   name : predicates.at(p) + ":" + str(p))
+      let name = predicates.at(p)
+      let color = if ff-final.contains(name) { rgb("#005ec8") } else { rgb("#000000") }
+      draw.content((x, text-start + text-height * (p + 1.5)),
+                   text(size : text-height, fill: color,
+                        align(center)[#inter-space #name #inter-space]),
+                   name : name + ":" + str(level))
     }
   }
 
-  for inter in range(ff-actions.len()) {
-    let x = (inter + 1.5) * space
-    draw.line((x, 0.2), (x, 0.8))
+  for a in range(ff-actions.len()) {
+    let x = (a + 1.5) * space
+    let text-start = 0pt
+    let i = 0
+    let actions = ff-actions.at(a)
+    let count = actions.len()
+    let actions-height = text-height * (actions.len() + 2)
+    let text-start = (height - actions-height) / 2
+    for (key, data) in actions {
+      let name = key + ":" + str(key)
+      let color = if ff-final.contains(key) { rgb("#c85e00") } else { rgb("#000000") }
+      draw.content((x, text-start + text-height * (i + 1.5)),
+                   text(size : text-height, fill: color,
+                        align(center)[#inter-space #key #inter-space]),
+                   name : name)
+      for pre in data.pre {
+        draw.line(pre + ":" + str(a) + ".mid-east", name + ".mid-west")
+      }
+      for post in data.post {
+        draw.line(post + ":" + str(a + 1) + ".mid-west", name + ".mid-east")
+      }
+      i = i + 1
+    }
   }
 })
 
-#figure(draw-ff(30cm, 10cm, false))
+#[
+  #set page(flipped: true)
+  #set align(horizon)
+  #figure(
+    caption: [Fast Forward],
+    draw-ff(40cm, 10cm))<fig:ff>
+]
 
 == Costes arbitrarios con FF
 
