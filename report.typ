@@ -36,6 +36,18 @@
 
 == Heuristic Search Planning
 
+Para cada predicado meta, se realiza una búsqueda en anchura hacia atrás sobre
+los operadores hasta encontrar una secuencia que obtenga la meta desde los
+literales ciertos en el estado inicial. Aunque el algoritmo instancia todos los
+operadores al inicio, para reducir el tamaño de los diagramas se dejarán
+operadores parcialmente instanciados en los casos en los que cualquier posible
+instanciación del operador no genera nuevos nodos. También se utilizará un
+código de colores para resaltar las precondiciones de los operadores, donde el
+rojo representa un predicado cierto en el estado inicial, el verde un predicado
+que todavía se tiene que obtener, y el azul un predicado que no se puede
+obtener, ya sea porque crearía un bucle en la búsqueda o porque no es cierto en
+el estado inicial.
+
 // Goals:
 // - en-mesa(A)
 // - encima(B, A)
@@ -52,10 +64,6 @@
 /// -> content
 #let pred(done, name) = text(fill: if done == none {blue} else if done {olive} else {red}, name)
 
-/// text (content):
-/// -> content
-#let op(name) = text(fill: blue, name)
-
 #let scale-to-width(body, factor: 100%) = context {
   let target = (
     page.width - page.margin.left.length - page.margin.right.length
@@ -70,12 +78,12 @@
     set-style(content: (padding: 0.5em))
     tree.tree(direction: "up",
       (pred(true, `en-mesa(A)`),
-        (op(`DEJAR(A)`),
+        (`DEJAR(A)`,
         (pred(true, `sujeto(A)`),
-          (op(`QUITAR(A, B)`), [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
-          (op(`QUITAR(A, C)`), [#pred(none, `encima(A, C)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
-          (op(`LEVANTAR(A)`),  [#pred(none, `en-mesa(A)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
-  }), factor: 70%
+          (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
+          (`QUITAR(A, C)`, [#pred(none, `encima(A, C)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
+          (`LEVANTAR(A)`,  [#pred(none, `en-mesa(A)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
+  }), factor: 45%
 ), caption: [Árbol para la meta `en-mesa(A)`])
 
 #figure(scale-to-width(
@@ -84,16 +92,16 @@
     set-style(content: (padding: 0.5em))
     tree.tree(direction: "up",
       (pred(true, `encima(B, A)`),
-        (op(`PONER(B, A)`),
+        (`PONER(B, A)`,
         ([#pred(true, `sujeto(B)`) \ #pred(false, `libre(A)`)],
-          (op(`QUITAR(B, C)`),
+          (`QUITAR(B, C)`,
             ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
-              (op(`DEJAR(B, x)`), [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-              (op(`DEJAR(B)`), pred(none, `sujeto(B)`)),
-              (op(`QUITAR(C, B)`), [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
-              (op(`QUITAR(A, B)`), [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]))),
-          (op(`QUITAR(B, A)`), [#pred(true, `libre(B)`) \ #pred(none, `encima(B, A)`) \ #pred(false, `brazo-libre`)]),
-          (op(`LEVANTAR(B)`),  [#pred(true, `libre(B)`) \ #pred(none, `en-mesa(B)`) \ #pred(false, `brazo-libre`)])))))
+              (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+              (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+              (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
+              (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]))),
+          (`QUITAR(B, A)`, [#pred(true, `libre(B)`) \ #pred(none, `encima(B, A)`) \ #pred(false, `brazo-libre`)]),
+          (`LEVANTAR(B)`,  [#pred(true, `libre(B)`) \ #pred(none, `en-mesa(B)`) \ #pred(false, `brazo-libre`)])))))
   }), factor: 70%
 ), caption: [Árbol para la meta `encima(B, A)`])
 
@@ -103,28 +111,37 @@
     set-style(content: (padding: 0.5em))
     tree.tree(direction: "up",
       (pred(true, `encima(C, B)`),
-        (op(`PONER(C, B)`),
+        (`PONER(C, B)`,
           (pred(true, `sujeto(C)`),
-            (op(`QUITAR(C, x)`), [#pred(true, `libre(C)`) \ #pred(none, `encima(C, x)`) \ #pred(false, `brazo-libre`)]),
-            (op(`LEVANTAR(C)`), 
+            (`QUITAR(C, x)`, [#pred(true, `libre(C)`) \ #pred(none, `encima(C, x)`) \ #pred(false, `brazo-libre`)]),
+            (`LEVANTAR(C)`,
               ([#pred(true, `libre(C)`) \ #pred(false, `en-mesa(C)`) \ #pred(false, `brazo-libre`)],
-                (op(`DEJAR(C, x)`), [#pred(none, `sujeto(C)`) \ #pred(true, `libre(x)`)]),
-                (op(`DEJAR(C)`), pred(none, `sujeto(C)`)),
-                (op(`QUITAR(A, C)`),
+                (`DEJAR(C, x)`, [#pred(none, `sujeto(C)`) \ #pred(true, `libre(x)`)]),
+                (`DEJAR(C)`, pred(none, `sujeto(C)`)),
+                (`QUITAR(A, C)`,
                   [#pred(false, `libre(A)`) \ #pred(none, `encima(A, C)`) \ #pred(false, `brazo-libre`)]),
-                (op(`QUITAR(B, C)`),
+                (`QUITAR(B, C)`,
                   ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
-                    (op(`DEJAR(B, x)`), [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-                    (op(`DEJAR(B)`), pred(none, `sujeto(B)`)),
-                    (op(`QUITAR(A, B)`), [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
-                    (op(`QUITAR(C, B)`), [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)])))))),
+                    (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+                    (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+                    (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
+                    (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)])))))),
           (pred(true, `libre(B)`),
-            (op(`DEJAR(B, x)`), [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-            (op(`DEJAR(B)`), pred(none, `sujeto(B)`)),
-            (op(`QUITAR(C, B)`), [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
-            (op(`QUITAR(A, B)`), [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
+            (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+            (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+            (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
+            (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
   }), factor: 70%
 ), caption: [Árbol para la meta `encima(C, B)`])
+
+El coste de las metas `en-mesa(A)` y `encima(B, A)` es la cantidad de operadores
+a aplicar para lograr esta meta desde el estado inicial. Como se ha encontrado
+un único camino que logre esto, el coste es el mismo para $g^+$ y $g^"max"$.
+Como para la meta `encima(C, B)` es necesario obtener dos predicados
+independientes, hay que calcular el coste de la heurística para ambos predicados
+y combinar los valores para obtener el valor final de la meta. Por último, es
+necesario combinar el valor de cada meta independiente para obtener el coste de
+lograr todas las metas.
 
 #figure(align(center, table(
   columns: (auto, auto, auto, auto),
@@ -134,8 +151,8 @@
   [`encima(B, A)`], $3$, $3$, $3$,
   [`sujeto(C)`], $3$, $3$, $3$,
   [`sujeto(B)`], $1$, $1$, $1$,
-  [`encima(C, B)`], [-], $4$, $3$,
-  [Meta], [-], $2 + 3 + 4 = 9$, $3$
+  [`encima(C, B)`], [-], $(3 + 1) + 1 = 5$, $max(3, 1) + 1 = 4$,
+  [Meta], [-], $2 + 3 + 5 = 10$, $max(2, 3, 4) = 4$
 )), caption: [Valores heurísticos con HSP])
 
 == Heurística con FF
@@ -156,11 +173,11 @@
    "encima(A, B)", "encima(B, C)",
    "libre(C)",
    "sujeto(A)", "en-mesa(C)","sujeto(B)",
-   "en-mesa(A)", 
-   "libre(B)", "libre(A)", 
+   "en-mesa(A)",
+   "libre(B)", "libre(A)",
   ),
   // Nivel 3
-  ("brazo-libre", "sujeto(B)", "sujeto(C)",  
+  ("brazo-libre", "sujeto(B)", "sujeto(C)",
    "en-mesa(A)", "en-mesa(B)", "en-mesa(C)",
    "encima(A, B)", "encima(B, C)",
    "libre(A)", "libre(B)", "libre(C)",
@@ -261,9 +278,15 @@
     draw-ff(40cm, 10cm))<fig:ff>
 ]
 
-== Costes arbitrarios con FF
+= Costes arbitrarios con FF
 
 Como el coste de la heurística en FF es la cantidad de operadores utilizados
 (coste de los operadores suponiendo coste unitario), se podría utilizar la suma
 de los costes de los operadores para permitir costes arbitrarios en las
-acciones.
+acciones. Es decir, si $O_i$ es el conjunto de operadores seleccionados en el nivel $i$ y $m$ el nivel de las metas, y el coste de la heurística de FF es:
+
+$ h(s) = sum_(i = 0)^m |O_i| $
+
+Se podría reemplazar esta expresión por:
+
+$ h(s) = sum_(i = 0)^m sum_(o in O_i) "cost"(o) $
