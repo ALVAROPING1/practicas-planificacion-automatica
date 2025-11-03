@@ -155,7 +155,34 @@ lograr todas las metas.
   [Meta], [-], $2 + 3 + 5 = 10$, $max(2, 3, 4) = 4$
 )), caption: [Valores heurísticos con HSP])
 
-== Heurística con FF
+== Heurística con _Fast Forward_ (FF)
+_Fast Forward_ utiliza una heurística admisible basada en aplicar _GRAPHPLAN_
+al mismo problema relajado del que partían las heurísticas de _Heuristic Search
+Planning_. Como se eliminan los borrados, no existen casos de exclusión mutua.
+
+Como se ve en la @fig:ff, se parte en el nivel primero (nivel 0) con los
+predicados que son ciertos en el estado inicial. A continuación, se buscan
+todas las acciones cuyas precondiciones estén todas en dicha lista de
+predicados y que produzcan (añadidos) predicados nuevos. Y así sucesivamente
+hasta que se llega al último nivel (en este caso nivel 4) en el que están todos
+los predicados que pertenecen al estado final.
+
+Finalmente se hace una búsqueda hacia atrás marcando las acciones que producían
+los predicados finales. A esta lista la vamos a llamar $O$:
+
+$ O = angle.l O_0, O_1, O_2, O_3 angle.r $
+
+Donde:
+
+- $O_0 = angle.l "quitar(A, B)" angle.r$
+- $O_1 = angle.l "dejar(A)", "quitar(B, C)" angle.r$
+- $O_2 = angle.l "poner(B, A)", "levantar(C)" angle.r$
+- $O_3 = angle.l "quitar(C, B)" angle.r$
+
+Finalmente la heurística $h$ se computa como:
+
+  $ h(S) = sum_(i=0)^3 |O_i| = 1 + 2 + 2 + 1 = 6 $
+
 #let ff-predicates = (
   // Nivel 0
   ("brazo-libre",
@@ -234,6 +261,7 @@ lograr todas las metas.
     let text-start = (height - predicates-height) / 2
     draw.line((x, 0), (x, text-start))
     draw.line((x, height), (x, height - text-start))
+    draw.content((x, height + text-height), [Nivel #level])
     for p in range(predicates.len()) {
       let name = predicates.at(p)
       let color = if ff-final.contains(name) { rgb("#005ec8") } else { rgb("#000000") }
