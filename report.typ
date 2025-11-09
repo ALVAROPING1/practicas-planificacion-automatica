@@ -151,7 +151,7 @@ Donde:
 - $O_0 = chevron.l "quitar(A, B)" chevron.r$
 - $O_1 = chevron.l "dejar(A)", "quitar(B, C)" chevron.r$
 - $O_2 = chevron.l "poner(B, A)", "levantar(C)" chevron.r$
-- $O_3 = chevron.l "quitar(C, B)" chevron.r$
+- $O_3 = chevron.l "poner(C, B)" chevron.r$
 
 Finalmente la heurística $h$ se computa como:
 

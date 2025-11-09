@@ -36,7 +36,7 @@
   [
     Departamento de Informática, Universidad Carlos III de Madrid
     #linebreak()
-    Avda. de la Universidad, 30. 28911 Leganés (Madrid). Spain
+    Avda. de la Universidad, 30. 28911 Leganés (Madrid). España
   ]
 
   v(1.8cm)
