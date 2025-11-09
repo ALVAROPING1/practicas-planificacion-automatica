@@ -20,59 +20,26 @@
   language: "en",
 ) = {
   set align(center)
-  set text(azuluc3m)
-  set text(size: 17pt)
-  set page(header: [], footer: [])
 
-  // logo
-  if logo == "new" {
-    image("img/new_uc3m_logo.svg", width: 100%)
-    v(1em)
-  } else {
-    image("img/old_uc3m_logo.svg", width: 45%)
-    v(1em)
-  }
-
-  emph(degree)
+  v(1.4cm)
+  text(size: 14pt, weight: "bold", title)
   parbreak()
 
-  [#subject #year.at(0)/#year.at(1)]
-  linebreak()
-  [#if language == "en" [Group] else [Grupo] #group]
-
-  v(2em)
-
-  emph(project)
-  linebreak()
-  text(25pt, ["#title"])
-
-  line(length: 70%, stroke: azuluc3m)
+  v(1cm)
 
   // authors
-  set text(20pt)
   for author in authors [
-    #author.name #author.surname --- #link(
-      "mailto:" + str(author.nia) + "@alumnos.uc3m.es",
-    )[#author.nia]\
+    #text(size: 11pt, weight: "bold")[#author.name #author.surname (#author.nia)]
+    #linebreak()
   ]
 
-  if team != none [
-    Team #team
+  [
+    Departamento de Informática, Universidad Carlos III de Madrid
+    #linebreak()
+    Avda. de la Universidad, 30. 28911 Leganés (Madrid). Spain
   ]
 
-  v(3em)
-
-  if professor != none [
-    #if language == "es" [
-      _Profesor_\
-    ] else [
-      _Professor_\
-    ]
-    #professor
-  ]
-
-  pagebreak()
-  counter(page).update(1)
+  v(1.8cm)
 }
 
 
@@ -118,53 +85,49 @@
   logo: "new",
   bibliography_file: none,
   chapter_on_new_page: true,
+  abstract: [],
   doc,
 ) = {
   /* CONFIG */
   set document(
     title: title,
     author: authors.map(x => x.name + " " + x.surname),
-    description: [#project, #subject #year.at(0)/#year.at(1). Universidad Carlos
-      III de Madrid],
+    description: [#project, #subject #year.at(0)/#year.at(1). Universidad Carlos III de Madrid],
   )
 
   /* TEXT */
 
-  set text(size: 12pt, lang: language)
+  // set text(size: 10pt, lang: language, font: "New Computer Modern")
+  set text(size: 10pt, lang: language, font: "Nimbus Roman")
 
   set par(
-    leading: 0.65em,
+    leading: 0.55em,
     spacing: 1em,
-    first-line-indent: 1.8em,
+    first-line-indent: (amount: 10pt, all: true),
     justify: true,
   )
-
 
   /* HEADINGS */
 
   set heading(numbering: "1.")
-  show heading: set text(azuluc3m)
   show heading: set block(above: 1.4em, below: 1em)
-  show heading.where(level: 1): it => {
-    if chapter_on_new_page { pagebreak(weak: true) }
-    it
-  }
-
+  show heading.where(level: 1): set text(size: 11pt)
+  show heading.where(level: 2): set text(size: 10pt)
+  show heading.where(level: 1): it => { align(center, it) }
   // allow to set headings with selector `<nonumber` to prevent numbering
   show selector(<nonumber>): set heading(numbering: none)
-
 
   /* FIGURES */
 
   // figure captions w/ blue
   show figure.caption: it => {
     [
-      #set text(azuluc3m, weight: "semibold")
+      // #set text(azuluc3m, weight: "semibold")
+      #set text(weight: "semibold")
       #it.supplement #context it.counter.display(it.numbering):
     ]
     it.body
   }
-
 
   // more space around figures
   // https://github.com/typst/typst/issues/6095#issuecomment-2755785839
@@ -188,18 +151,14 @@
     }
   }
 
-  // captions on top for tables
-  show figure.where(kind: table): set figure.caption(position: top)
-
-
   /* REFERENCES & LINKS */
 
   show ref: set text(azuluc3m)
   show link: set text(azuluc3m)
 
-
   /* FOOTNOTES */
 
+  /*
   // change line color
   set footnote.entry(separator: line(
     length: 30% + 0pt,
@@ -218,79 +177,48 @@
     h(.05em) // mini-space in between number and body (same as default)
     it.note.body
   }
-
+  */
 
   /* PAGE LAYOUT */
 
   set page(
+    columns: 2,
     paper: "a4",
     margin: (
-      y: 2.5cm,
-      x: 3cm,
+      y: 2cm,
+      x: 2.5cm,
     ),
-
-    // header
-    header: [
-      #set text(azuluc3m)
-      #project
-      #h(1fr)
-      #subject, grp. #group
-
-      #v(-0.7em)
-      #line(length: 100%, stroke: 0.4pt + azuluc3m)
-    ],
-
-    // footer
-    footer: context [
-      #line(length: 100%, stroke: 0.4pt + azuluc3m)
-      #v(-0.4em)
-
-      #set align(right)
-      #set text(azuluc3m)
-      #shortauthors(authors: authors)
-      #h(1fr)
-      #let page_delimeter = "of"
-      #if language == "es" {
-        page_delimeter = "de"
-      }
-      #counter(page).display(
-        "pg. 1 " + page_delimeter + " 1",
-        both: true,
-      )
-    ],
   )
-
 
   /* COVER */
 
-  cover(
-    degree,
-    subject,
-    project,
-    title,
-    year,
-    logo,
-    authors: authors,
-    professor: professor,
-    group: group,
-    team: team,
-    language: language,
-  )
+  place(
+    top + center,
+    float: true,
+    scope: "parent",
+    cover(
+      degree,
+      subject,
+      project,
+      title,
+      year,
+      logo,
+      authors: authors,
+      professor: professor,
+      group: group,
+      team: team,
+      language: language,
+    ))
 
 
   /* TOC */
 
-  if toc {
-    let outline_title = "Table of Contents"
-    if language == "es" {
-      outline_title = "Tabla de Contenidos"
-    }
-    outline(title: outline_title)
-    pagebreak()
+  {
+    align(center, [*Abstract*])
+    set par(first-line-indent: 0em)
+    text(size: 9pt, abstract)
   }
-
   doc
-
 
   /* BIBLIOGRAPHY */
 
@@ -299,3 +227,5 @@
     bibliography(bibliography_file, style: "ieee")
   }
 }
+
+

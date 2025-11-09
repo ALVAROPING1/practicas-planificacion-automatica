@@ -6,7 +6,7 @@
   subject: "Planificación Automática",
   year: (25, 26),
   project: "Práctica 3",
-  title: "Planificación Heurística",
+  title: [Planificación Heurística],
   group: 1,
   authors: (
     (
@@ -24,6 +24,9 @@
   toc: false,
   logo: "new",
   language: "es",
+  abstract: [
+    Esto es un resumen, no sé qué de lorem ipsum dolor amet
+  ]
 )
 
 #show table: block.with(stroke: (y: 0.7pt))
@@ -86,7 +89,7 @@ el estado inicial.
   }), factor: 45%
 ), caption: [Árbol para la meta `en-mesa(A)`])
 
-#figure(scale-to-width(
+#place(auto, float:true, scope:"parent", figure(scale-to-width(
   canvas({
     import draw: *
     set-style(content: (padding: 0.5em))
@@ -103,36 +106,7 @@ el estado inicial.
           (`QUITAR(B, A)`, [#pred(true, `libre(B)`) \ #pred(none, `encima(B, A)`) \ #pred(false, `brazo-libre`)]),
           (`LEVANTAR(B)`,  [#pred(true, `libre(B)`) \ #pred(none, `en-mesa(B)`) \ #pred(false, `brazo-libre`)])))))
   }), factor: 70%
-), caption: [Árbol para la meta `encima(B, A)`])
-
-#figure(scale-to-width(
-  canvas({
-    import draw: *
-    set-style(content: (padding: 0.5em))
-    tree.tree(direction: "up",
-      (pred(true, `encima(C, B)`),
-        (`PONER(C, B)`,
-          (pred(true, `sujeto(C)`),
-            (`QUITAR(C, x)`, [#pred(true, `libre(C)`) \ #pred(none, `encima(C, x)`) \ #pred(false, `brazo-libre`)]),
-            (`LEVANTAR(C)`,
-              ([#pred(true, `libre(C)`) \ #pred(false, `en-mesa(C)`) \ #pred(false, `brazo-libre`)],
-                (`DEJAR(C, x)`, [#pred(none, `sujeto(C)`) \ #pred(true, `libre(x)`)]),
-                (`DEJAR(C)`, pred(none, `sujeto(C)`)),
-                (`QUITAR(A, C)`,
-                  [#pred(false, `libre(A)`) \ #pred(none, `encima(A, C)`) \ #pred(false, `brazo-libre`)]),
-                (`QUITAR(B, C)`,
-                  ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
-                    (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-                    (`DEJAR(B)`, pred(none, `sujeto(B)`)),
-                    (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
-                    (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)])))))),
-          (pred(true, `libre(B)`),
-            (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-            (`DEJAR(B)`, pred(none, `sujeto(B)`)),
-            (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
-            (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
-  }), factor: 70%
-), caption: [Árbol para la meta `encima(C, B)`])
+), caption: [Árbol para la meta `encima(B, A)`]))
 
 El coste de las metas `en-mesa(A)` y `encima(B, A)` es la cantidad de operadores
 a aplicar para lograr esta meta desde el estado inicial. Como se ha encontrado
@@ -170,14 +144,14 @@ los predicados que pertenecen al estado final.
 Finalmente se hace una búsqueda hacia atrás marcando las acciones que producían
 los predicados finales. A esta lista la vamos a llamar $O$:
 
-$ O = angle.l O_0, O_1, O_2, O_3 angle.r $
+$ O = chevron.l O_0, O_1, O_2, O_3 chevron.r $
 
 Donde:
 
-- $O_0 = angle.l "quitar(A, B)" angle.r$
-- $O_1 = angle.l "dejar(A)", "quitar(B, C)" angle.r$
-- $O_2 = angle.l "poner(B, A)", "levantar(C)" angle.r$
-- $O_3 = angle.l "quitar(C, B)" angle.r$
+- $O_0 = chevron.l "quitar(A, B)" chevron.r$
+- $O_1 = chevron.l "dejar(A)", "quitar(B, C)" chevron.r$
+- $O_2 = chevron.l "poner(B, A)", "levantar(C)" chevron.r$
+- $O_3 = chevron.l "quitar(C, B)" chevron.r$
 
 Finalmente la heurística $h$ se computa como:
 
@@ -298,14 +272,6 @@ Finalmente la heurística $h$ se computa como:
   }
 })
 
-#[
-  #set page(flipped: true)
-  #set align(horizon)
-  #figure(
-    caption: [Fast Forward],
-    draw-ff(40cm, 10cm))<fig:ff>
-]
-
 = Costes arbitrarios con FF
 
 Como el coste de la heurística en FF es la cantidad de operadores utilizados
@@ -318,3 +284,42 @@ $ h(s) = sum_(i = 0)^m |O_i| $
 Se podría reemplazar esta expresión por:
 
 $ h(s) = sum_(i = 0)^m sum_(o in O_i) "cost"(o) $
+
+#[
+  #set page(flipped: true, columns: 1)
+  #set align(horizon)
+  #figure(scale-to-width(
+  canvas({
+    import draw: *
+    set-style(content: (padding: 0.5em))
+    tree.tree(direction: "up",
+      (pred(true, `encima(C, B)`),
+        (`PONER(C, B)`,
+          (pred(true, `sujeto(C)`),
+            (`QUITAR(C, x)`, [#pred(true, `libre(C)`) \ #pred(none, `encima(C, x)`) \ #pred(false, `brazo-libre`)]),
+            (`LEVANTAR(C)`,
+              ([#pred(true, `libre(C)`) \ #pred(false, `en-mesa(C)`) \ #pred(false, `brazo-libre`)],
+                (`DEJAR(C, x)`, [#pred(none, `sujeto(C)`) \ #pred(true, `libre(x)`)]),
+                (`DEJAR(C)`, pred(none, `sujeto(C)`)),
+                (`QUITAR(A, C)`,
+                  [#pred(false, `libre(A)`) \ #pred(none, `encima(A, C)`) \ #pred(false, `brazo-libre`)]),
+                (`QUITAR(B, C)`,
+                  ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
+                    (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+                    (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+                    (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
+                    (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)])))))),
+          (pred(true, `libre(B)`),
+            (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+            (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+            (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
+            (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
+  }), factor: 140%
+), caption: [Árbol para la meta `encima(C, B)`]))
+
+  #figure(
+    caption: [Fast Forward],
+    draw-ff(40cm, 10cm))<fig:ff>
+]
+
+
