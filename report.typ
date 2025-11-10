@@ -39,7 +39,8 @@ la mesa, encima de otros bloques o sujetos por un brazo mecánico (el cual solo
 puede sostener como mucho un bloque). Los predicados son los siguientes:
 
 - `en-mesa(X)`: para un bloque `X`, dice que está encima de la mesa.
-- `encima(X, Y)`: para dos bloques `X` e `Y`, dice que `X` está encima de `Y`.
+- `encima(X, Y)`: para dos bloques `X` e `Y`, dice que `X` está estrictamente
+  encima de `Y`.
 - `sujeto(X)`: para un bloque `X` dice que el brazo mecánico lo sujeta.
 - `brazo-libre`: dice si el brazo mecánico no sujeta ningún bloque.
 - `libre(X)`: para un bloque `X`, dice que este puede ser levantado por el
@@ -47,13 +48,13 @@ puede sostener como mucho un bloque). Los predicados son los siguientes:
 
 Y las acciones son las siguientes:
 
-- `levantar(X)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` si
+- `LEVANTAR(X)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` si
   este está _libre_ y _encima de la mesa_.
-- `dejar(X)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces lo
+- `DEJAR(X)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces lo
   deja _encima de la mesa_ y ambos quedan _libres_.
-- `quitar(X, Y)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` que
+- `QUITAR(X, Y)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` que
   esté _libre_ y esté _encima_ de otro bloque `Y`.
-- `poner(X, Y)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces
+- `PONER(X, Y)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces
   pone el bloque `X` encima de un bloque `Y` que esté libre, haciendo que `Y`
   ya no esté libre, pero tanto `X` como el brazo mecánico sí.
 
@@ -156,11 +157,11 @@ lograr todas las metas.
   columns: (auto, auto, auto, auto),
   align: (left, center, center, center),
   table.header([Predicado], $g(x)$, $g^+(x)$, $g^"max" (x)$),
-  [`en-mesa(A)`], $2$, $2$, $2$,
-  [`encima(B,A)`], $3$, $3$, $3$,
-  [`sujeto(C)`], $3$, $3$, $3$,
-  [`sujeto(B)`], $1$, $1$, $1$,
-  [`encima(C,B)`], [-], $(3 + 1) + 1 = 5$, $max(3, 1) + 1 = 4$,
+  [`EN-MESA(A)`], $2$, $2$, $2$,
+  [`ENCIMA(B,A)`], $3$, $3$, $3$,
+  [`SUJETO(C)`], $3$, $3$, $3$,
+  [`SUJETO(B)`], $1$, $1$, $1$,
+  [`ENCIMA(C,B)`], [-], $(3 + 1) + 1 = 5$, $max(3, 1) + 1 = 4$,
   [Meta], [-], $2 + 3 + 5 = 10$, $max(2, 3, 4) = 4$
 )), caption: [Valores heurísticos con HSP]) <tab:costes>
 
@@ -172,9 +173,9 @@ Planning_. Como se eliminan los borrados, no existen casos de exclusión mutua.
 Como se ve en la @fig:ff, se parte en el nivel primero (nivel 0) con los
 predicados que son ciertos en el estado inicial. A continuación, se buscan
 todas las acciones cuyas precondiciones estén todas en dicha lista de
-predicados y que produzcan (añadidos) predicados nuevos. Y así sucesivamente
-hasta que se llega al último nivel (en este caso nivel 4) en el que están todos
-los predicados que pertenecen al estado final.
+predicados y que produzcan predicados nuevos.
+Y así sucesivamente hasta que se llega al último nivel (en este caso
+nivel 4) en el que están todos los predicados que pertenecen al estado final.
 
 Finalmente se hace una búsqueda hacia atrás marcando las acciones que producían
 los predicados finales. En la @fig:ff aparecen las acciones necesarias en rojo
