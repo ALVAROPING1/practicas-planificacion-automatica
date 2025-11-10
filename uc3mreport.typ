@@ -213,11 +213,13 @@
 
   /* TOC */
 
+  /*
   {
     align(center, [*Abstract*])
     set par(first-line-indent: 0em)
     text(size: 9pt, abstract)
   }
+  */
   doc
 
   /* BIBLIOGRAPHY */

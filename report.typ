@@ -23,10 +23,7 @@
   // professor: "Perico de los Palotes",
   toc: false,
   logo: "new",
-  language: "es",
-  abstract: [
-    Esto es un resumen, no sé qué de lorem ipsum dolor amet
-  ]
+  language: "es"
 )
 
 #show table: block.with(stroke: (y: 0.7pt))
@@ -35,21 +32,51 @@
   stroke: (_, y) => if y == 0 { (bottom: 0.2pt) }
 )
 
-= Mundo de bloques
+// Código de colores
+= Mundo de los bloques
+El dominio del «mundo de los bloques» tiene bloques que pueden estar encima de
+la mesa, encima de otros bloques o sujetos por un brazo mecánico (el cual solo
+puede sostener como mucho un bloque). Los predicados son los siguientes:
+
+- `en-mesa(X)`: para un bloque `X`, dice que está encima de la mesa.
+- `encima(X, Y)`: para dos bloques `X` e `Y`, dice que `X` está encima de `Y`.
+- `sujeto(X)`: para un bloque `X` dice que el brazo mecánico lo sujeta.
+- `brazo-libre`: dice si el brazo mecánico no sujeta ningún bloque.
+- `libre(X)`: para un bloque `X`, dice que este puede ser levantado por el
+  brazo mecánico porque no tiene ningún bloque encima.
+
+Y las acciones son las siguientes:
+
+- `levantar(X)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` si
+  este está _libre_ y _encima de la mesa_.
+- `dejar(X)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces lo
+  deja _encima de la mesa_ y ambos quedan _libres_.
+- `quitar(X, Y)`: si el brazo mecánico está _libre_, _sujeta_ un bloque `X` que
+  esté _libre_ y esté _encima_ de otro bloque `Y`.
+- `poner(X, Y)`: si el brazo mecánico tiene _sujeto_ el bloque `X`, entonces
+  pone el bloque `X` encima de un bloque `Y` que esté libre, haciendo que `Y`
+  ya no esté libre, pero tanto `X` como el brazo mecánico sí.
+
+// TODO: Problem description
 
 == Heuristic Search Planning
 
-Para cada predicado meta, se realiza una búsqueda en anchura hacia atrás sobre
-los operadores hasta encontrar una secuencia que obtenga la meta desde los
-literales ciertos en el estado inicial. Aunque el algoritmo instancia todos los
-operadores al inicio, para reducir el tamaño de los diagramas se dejarán
-operadores parcialmente instanciados en los casos en los que cualquier posible
-instanciación del operador no genera nuevos nodos. También se utilizará un
-código de colores para resaltar las precondiciones de los operadores, donde el
-rojo representa un predicado cierto en el estado inicial, el verde un predicado
-que todavía se tiene que obtener, y el azul un predicado que no se puede
-obtener, ya sea porque crearía un bucle en la búsqueda o porque no es cierto en
-el estado inicial.
+El algoritmo, para cada predicado meta, realiza una búsqueda en anchura hacia
+atrás sobre los operadores hasta encontrar una secuencia que produzca dicha
+meta a partir de los literales ciertos en el estado inicial. Véanse en la
+@fig:en-mesa-A, en la @fig:encima-B-A y en la @fig:encima-C-B los predicados
+del estado final y los árboles generados a partir del algoritmo.
+
+Aunque el algoritmo instancia todos los operadores al inicio, para reducir el
+tamaño de los diagramas se dejarán operadores parcialmente instanciados en los
+casos en los que cualquier posible instanciación del operador no genera nuevos
+nodos.
+
+También se utilizará un código de colores para resaltar las precondiciones de
+los operadores, donde el rojo representa un predicado cierto en el estado
+inicial, el verde un predicado que todavía se tiene que obtener, y el azul un
+predicado que no se puede obtener, ya sea porque crearía un bucle en la
+búsqueda o porque no es cierto en el estado inicial.
 
 // Goals:
 // - en-mesa(A)
@@ -87,30 +114,38 @@ el estado inicial.
           (`QUITAR(A, C)`, [#pred(none, `encima(A, C)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]),
           (`LEVANTAR(A)`,  [#pred(none, `en-mesa(A)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
   }), factor: 45%
-), caption: [Árbol para la meta `en-mesa(A)`])
+), caption: [Árbol para la meta `en-mesa(A)`]) <fig:en-mesa-A>
 
-#place(auto, float:true, scope:"parent", figure(scale-to-width(
-  canvas({
-    import draw: *
-    set-style(content: (padding: 0.5em))
-    tree.tree(direction: "up",
-      (pred(true, `encima(B, A)`),
-        (`PONER(B, A)`,
-        ([#pred(true, `sujeto(B)`) \ #pred(false, `libre(A)`)],
-          (`QUITAR(B, C)`,
-            ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
-              (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
-              (`DEJAR(B)`, pred(none, `sujeto(B)`)),
-              (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
-              (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]))),
-          (`QUITAR(B, A)`, [#pred(true, `libre(B)`) \ #pred(none, `encima(B, A)`) \ #pred(false, `brazo-libre`)]),
-          (`LEVANTAR(B)`,  [#pred(true, `libre(B)`) \ #pred(none, `en-mesa(B)`) \ #pred(false, `brazo-libre`)])))))
-  }), factor: 70%
-), caption: [Árbol para la meta `encima(B, A)`]))
+#let diagram-encima-B-A = [
+  #figure(
+    caption: [Árbol para la meta `encima(B, A)`],
+    scale-to-width(
+      canvas({
+        import draw: *
+        set-style(content: (padding: 0.5em))
+        tree.tree(direction: "up",
+          (pred(true, `encima(B, A)`),
+            (`PONER(B, A)`,
+            ([#pred(true, `sujeto(B)`) \ #pred(false, `libre(A)`)],
+              (`QUITAR(B, C)`,
+                ([#pred(true, `libre(B)`) \ #pred(false, `encima(B, C)`) \ #pred(false, `brazo-libre`)],
+                  (`DEJAR(B, x)`, [#pred(none, `sujeto(B)`) \ #pred(true, `libre(x)`)]),
+                  (`DEJAR(B)`, pred(none, `sujeto(B)`)),
+                  (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
+                  (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)]))),
+              (`QUITAR(B, A)`, [#pred(true, `libre(B)`) \ #pred(none, `encima(B, A)`) \ #pred(false, `brazo-libre`)]),
+              (`LEVANTAR(B)`,  [#pred(true, `libre(B)`) \ #pred(none, `en-mesa(B)`) \ #pred(false, `brazo-libre`)])))))
+      }), factor: 70%))
+  #label("fig:encima-B-A")
+]
 
-El coste de las metas `en-mesa(A)` y `encima(B, A)` es la cantidad de operadores
-a aplicar para lograr esta meta desde el estado inicial. Como se ha encontrado
-un único camino que logre esto, el coste es el mismo para $g^+$ y $g^"max"$.
+#place(auto, float:true, scope:"parent", diagram-encima-B-A)
+
+Como se ve en la @tab:costes, el coste de las metas `en-mesa(A)` y
+`encima(B, A)` es la cantidad de operadores a aplicar para lograr esta meta
+desde el estado inicial. Como se ha encontrado un único camino que logre esto,
+el coste es el mismo para $g^+$ y $g^"max"$.
+
 Como para la meta `encima(C, B)` es necesario obtener dos predicados
 independientes, hay que calcular el coste de la heurística para ambos predicados
 y combinar los valores para obtener el valor final de la meta. Por último, es
@@ -122,12 +157,12 @@ lograr todas las metas.
   align: (left, center, center, center),
   table.header([Predicado], $g(x)$, $g^+(x)$, $g^"max" (x)$),
   [`en-mesa(A)`], $2$, $2$, $2$,
-  [`encima(B, A)`], $3$, $3$, $3$,
+  [`encima(B,A)`], $3$, $3$, $3$,
   [`sujeto(C)`], $3$, $3$, $3$,
   [`sujeto(B)`], $1$, $1$, $1$,
-  [`encima(C, B)`], [-], $(3 + 1) + 1 = 5$, $max(3, 1) + 1 = 4$,
+  [`encima(C,B)`], [-], $(3 + 1) + 1 = 5$, $max(3, 1) + 1 = 4$,
   [Meta], [-], $2 + 3 + 5 = 10$, $max(2, 3, 4) = 4$
-)), caption: [Valores heurísticos con HSP])
+)), caption: [Valores heurísticos con HSP]) <tab:costes>
 
 == Heurística con _Fast Forward_ (FF)
 _Fast Forward_ utiliza una heurística admisible basada en aplicar _GRAPHPLAN_
@@ -142,16 +177,18 @@ hasta que se llega al último nivel (en este caso nivel 4) en el que están todo
 los predicados que pertenecen al estado final.
 
 Finalmente se hace una búsqueda hacia atrás marcando las acciones que producían
-los predicados finales. A esta lista la vamos a llamar $O$:
+los predicados finales. En la @fig:ff aparecen las acciones necesarias en rojo
+y los predicados del estado final en verde. A esta lista de acciones por nivel
+la vamos a llamar $O$:
 
 $ O = chevron.l O_0, O_1, O_2, O_3 chevron.r $
 
 Donde:
 
-- $O_0 = chevron.l "quitar(A, B)" chevron.r$
-- $O_1 = chevron.l "dejar(A)", "quitar(B, C)" chevron.r$
-- $O_2 = chevron.l "poner(B, A)", "levantar(C)" chevron.r$
-- $O_3 = chevron.l "poner(C, B)" chevron.r$
+- $O_0 = chevron.l text(#raw("quitar(A, B)")) chevron.r$
+- $O_1 = chevron.l text(#raw("dejar(A)")), text(#raw("quitar(B, C)")) chevron.r$
+- $O_2 = chevron.l text(#raw("poner(B, A)")), text(#raw("levantar(C)")) chevron.r$
+- $O_3 = chevron.l text(#raw("poner(C, B)")) chevron.r$
 
 Finalmente la heurística $h$ se computa como:
 
@@ -238,10 +275,10 @@ Finalmente la heurística $h$ se computa como:
     draw.content((x, height + text-height), [Nivel #level])
     for p in range(predicates.len()) {
       let name = predicates.at(p)
-      let color = if ff-final.contains(name) { rgb("#005ec8") } else { rgb("#000000") }
+      let color = if ff-final.contains(name) { olive } else { rgb("#000000") }
       draw.content((x, text-start + text-height * (p + 1.5)),
                    text(size : text-height, fill: color,
-                        align(center)[#inter-space #name #inter-space]),
+                        align(center)[#inter-space #raw(name) #inter-space]),
                    name : name + ":" + str(level))
     }
   }
@@ -256,10 +293,10 @@ Finalmente la heurística $h$ se computa como:
     let text-start = (height - actions-height) / 2
     for (key, data) in actions {
       let name = key + ":" + str(key)
-      let color = if ff-final.contains(key) { rgb("#c85e00") } else { rgb("#000000") }
+      let color = if ff-final.contains(key) { red } else { rgb("#000000") }
       draw.content((x, text-start + text-height * (i + 1.5)),
                    text(size : text-height, fill: color,
-                        align(center)[#inter-space #key #inter-space]),
+                        align(center)[#inter-space #raw(upper(key)) #inter-space]),
                    name : name)
       for pre in data.pre {
         draw.line(pre + ":" + str(a) + ".mid-east", name + ".mid-west")
@@ -285,10 +322,9 @@ Se podría reemplazar esta expresión por:
 
 $ h(s) = sum_(i = 0)^m sum_(o in O_i) "cost"(o) $
 
-#[
-  #set page(flipped: true, columns: 1)
-  #set align(horizon)
-  #figure(scale-to-width(
+donde $"cost"(o)$ es el coste de aplicar el operador $o$.
+
+#let diagram-encima-C-B = scale-to-width(
   canvas({
     import draw: *
     set-style(content: (padding: 0.5em))
@@ -314,9 +350,14 @@ $ h(s) = sum_(i = 0)^m sum_(o in O_i) "cost"(o) $
             (`DEJAR(B)`, pred(none, `sujeto(B)`)),
             (`QUITAR(C, B)`, [#pred(none, `encima(C, B)`) \ #pred(true, `libre(C)`) \ #pred(false, `brazo-libre`)]),
             (`QUITAR(A, B)`, [#pred(false, `encima(A, B)`) \ #pred(false, `libre(A)`) \ #pred(false, `brazo-libre`)])))))
-  }), factor: 140%
-), caption: [Árbol para la meta `encima(C, B)`]))
+  }), factor: 140%)
 
+#[
+  #set page(flipped: true, columns: 1)
+  #set align(horizon)
+  #figure(
+    caption: [Árbol para la meta `encima(C, B)`],
+    diagram-encima-C-B)<fig:encima-C-B>
   #figure(
     caption: [Fast Forward],
     draw-ff(40cm, 10cm))<fig:ff>
