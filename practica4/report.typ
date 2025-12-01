@@ -85,3 +85,28 @@ Este dominio no cuenta con ningún tipo especial
   adyacente con comida, aumentando la longitud de la serpiente en 1 pero sin
   crear más comida.
 
+= Planificadores utilizados
+
+Los planificadores utilizados son:
+- *Lama-first*: resultado de la primera búsqueda del planificador LAMA de 2011.
+  Esta búsqueda es satisfacible y está optimizada para encontrar soluciones
+  rápidamente, aunque sin garantía de optimalidad, utilizando una búsqueda en
+  escalada con costes unitarios.
+- *Seq-sat-lama-2011*: planificador LAMA de 2011 satisfacible pero no óptimo.
+  Usa planificación _anytime_, es decir, tras obtener una solución rápidamente,
+  continua búscando mejores soluciones hasta que se agota el tiempo de búsqueda.
+- *Seq-opt-fdss-1*: _portfolio_ de 4 planificadores configurado para ser óptimo.
+
+Las principales diferencias entre estos planificadores son el tiempo necesario
+para encontrar una solución y la calidad de la solución encontrada. "Lama-first"
+encuentra una solución rápidamente, pero esta puede estar muy alejada del coste
+óptimo. En el otro extremo, "Seq-opt-fdss-1" garantiza una solución óptima, pero
+puede tardar mucho en encontrarla.
+
+"Seq-sat-lama-2011" está en un punto intermedio: es capaz de encontrar una
+solución rápidamente, y utiliza el tiempo restante para refinarla. Aunque no
+garantiza optimalidad, generalmente el resultado no estará muy alejado del
+óptimo, y ofrece la flexibilidad de poder parar la búsqueda en cualquier
+momento.
+
+= Resultados
