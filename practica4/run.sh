@@ -5,7 +5,7 @@ SEM=sem
 MUTEX=mutex
 
 delay () {
-		  sleep 0.01
+		  sleep 1.0
 }
 
 acquire_mutex () {
