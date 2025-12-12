@@ -65,7 +65,7 @@ downward_helper () {
 }
 
 downward () {
-		  downward_helper $@ 1 --alias lama-first
+		  downward_helper $@ 1 --alias lama-first --search-time-limit 1800
 		  downward_helper $@ 2 --alias seq-sat-lama-2011 --search-time-limit 1800
 		  downward_helper $@ 3 --alias seq-opt-fdss-1 --search-time-limit 1800
 }
