@@ -85,6 +85,53 @@ Este dominio no cuenta con ningún tipo especial
   adyacente con comida, aumentando la longitud de la serpiente en 1 pero sin
   crear más comida.
 
+== Tetris
+
+Este dominio define el clásico juego de "Tetris", en el que una serie de bloques
+caen desde la parte superior de la pantalla y se tienen que apilar en la parte
+inferior, evitantdo que estos lleguen a la parte superior de la pantalla.
+
+Este dominio añade varias modificaciones al juego original. La primera es que
+los bloques, en vez de aparecer cada vez que se coloca el bloque anterior,
+empiezan todos en la parte superior de la pantalla. La segunda modificación es
+que, en vez de tener que colocar los bloques en el orden en el aparecen, se
+pueden mover en cualquier orden.
+
+El objetivo en este dominio es colocar todas las piezas en la parte inferior de
+la pantalla.
+
+=== Tipos
+
+- `position`: Tipo base que representa una posición.
+- `pieces`: Tipo base que representa un bloque.
+- `one_square`, `two_straight`, y `right_l`: Tipos derivados del tipo `pieces`
+  que representan las diferentes piezas que existen en el juego.
+
+=== Predicados
+
+- `(clear ?xy - position)`: Indica que una posición está libre.
+- `(connected ?x - position ?y - position)`: Indica que dos posiciones son
+- `(at_square ?element - one_square ?xy - position)`: Indica que el bloque
+  cuadrado ocupa la posición dada.
+- `(at_two ?element - two_straight ?xy - position ?xy2 - position)`: Indica que
+  el bloque recto ocupa las dos posiciones dadas.
+- `(at_right_l ?element - right_l ?xy - position ?xy2 - position ?xy3 - position)`:
+  Indica que el bloque con forma de L ocupa las tres posiciones dadas.
+
+=== Fluents
+
+- `(total-cost)`: Establece la métrica seguida por el planificador.
+
+=== Acciones
+
+- `(:action move_square)`: Mueve el bloque cuadrado de una posición a otra.
+- `(:action move_two)`: Mueve el bloque recto de una posición a otra, con una
+  posible rotación.
+- `(:action move_l_right)`: Mueve el bloque con forma de L hacia la derecha.
+- `(:action move_l_left)`: Mueve el bloque con forma de L hacia la izquierda.
+- `(:action move_l_up)`: Mueve el bloque con forma de L hacia arriba.
+- `(:action move_l_down)`: Mueve el bloque con forma de L hacia abajo.
+
 = Planificadores utilizados
 
 Los planificadores utilizados son:
