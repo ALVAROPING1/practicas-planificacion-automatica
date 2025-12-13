@@ -6,58 +6,58 @@ INFO     Running translator.
 INFO     translator stdin: None
 INFO     translator time limit: None
 INFO     translator memory limit: None
-INFO     translator command line string: /usr/bin/python3 /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/translate/translate.py /home/joseaverde/Software/downward-benchmarks/tetris-opt14-strips/domain.pddl /home/joseaverde/Software/downward-benchmarks/tetris-opt14-strips/p01-10.pddl --sas-file output.sas
+INFO     translator command line string: /usr/bin/python3 /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/translate/translate.py /home/alvaro/Descargas/downward-release-24.06.1/downward-benchmarks-master/tetris-opt14-strips/domain.pddl /home/alvaro/Descargas/downward-release-24.06.1/downward-benchmarks-master/tetris-opt14-strips/p01-10.pddl --sas-file output.sas
 Parsing...
-Parsing: [0.010s CPU, 0.009s wall-clock]
-Normalizing task... [0.000s CPU, 0.001s wall-clock]
+Parsing: [0.010s CPU, 0.010s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
 Instantiating...
-Generating Datalog program... [0.000s CPU, 0.002s wall-clock]
+Generating Datalog program... [0.000s CPU, 0.007s wall-clock]
 Normalizing Datalog program...
-Normalizing Datalog program: [0.010s CPU, 0.007s wall-clock]
-Preparing model... [0.010s CPU, 0.004s wall-clock]
+Normalizing Datalog program: [0.000s CPU, 0.010s wall-clock]
+Preparing model... [0.010s CPU, 0.006s wall-clock]
 Generated 79 rules.
-Computing model... [0.760s CPU, 0.875s wall-clock]
+Computing model... [0.340s CPU, 0.499s wall-clock]
 25117 relevant atoms
 23820 auxiliary atoms
 48937 final queue length
 118081 total queue pushes
-Completing instantiation... [1.400s CPU, 1.559s wall-clock]
-Instantiating: [2.210s CPU, 2.482s wall-clock]
+Completing instantiation... [0.710s CPU, 0.847s wall-clock]
+Instantiating: [1.080s CPU, 1.385s wall-clock]
 Computing fact groups...
 Finding invariants...
 14 initial candidates
-Finding invariants: [0.040s CPU, 0.041s wall-clock]
+Finding invariants: [0.020s CPU, 0.019s wall-clock]
 Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
-Instantiating groups... [0.000s CPU, 0.001s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
 Collecting mutex groups... [0.000s CPU, 0.001s wall-clock]
 Choosing groups...
 756 uncovered facts
 Choosing groups: [0.000s CPU, 0.001s wall-clock]
-Building translation key... [0.010s CPU, 0.005s wall-clock]
-Computing fact groups: [0.060s CPU, 0.060s wall-clock]
-Building STRIPS to SAS dictionary... [0.000s CPU, 0.002s wall-clock]
-Building dictionary for full mutex groups... [0.000s CPU, 0.002s wall-clock]
+Building translation key... [0.010s CPU, 0.003s wall-clock]
+Computing fact groups: [0.030s CPU, 0.029s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.001s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.001s wall-clock]
 Building mutex information...
 Building mutex information: [0.000s CPU, 0.001s wall-clock]
 Translating task...
 Processing axioms...
 Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
 Translator axioms removed by simplifying: 0
-Processing axioms: [0.050s CPU, 0.045s wall-clock]
-Translating task: [1.180s CPU, 1.352s wall-clock]
+Processing axioms: [0.020s CPU, 0.028s wall-clock]
+Translating task: [0.450s CPU, 0.503s wall-clock]
 22300 effect conditions simplified
 0 implied preconditions added
 Detecting unreachable propositions...
 0 operators removed
 0 axioms removed
 5 propositions removed
-Detecting unreachable propositions: [0.480s CPU, 0.547s wall-clock]
+Detecting unreachable propositions: [0.450s CPU, 0.484s wall-clock]
 Reordering and filtering variables...
 761 of 761 variables necessary.
 0 of 5 mutex groups necessary.
 9532 of 9532 operators necessary.
 0 of 0 axiom rules necessary.
-Reordering and filtering variables: [0.490s CPU, 0.580s wall-clock]
+Reordering and filtering variables: [0.150s CPU, 0.212s wall-clock]
 Translator variables: 761
 Translator derived variables: 0
 Translator facts: 1712
@@ -67,239 +67,245 @@ Translator total mutex groups size: 0
 Translator operators: 9532
 Translator axioms: 0
 Translator task size: 80197
-Translator peak memory: 81364 KB
-Writing output... [0.300s CPU, 0.352s wall-clock]
-Done! [4.790s CPU, 5.466s wall-clock]
+Translator peak memory: 98540 KB
+Writing output... [0.080s CPU, 0.089s wall-clock]
+Done! [2.270s CPU, 2.744s wall-clock]
 translate exit code: 0
 
 INFO     Running search (release).
-INFO     search portfolio: /home/joseaverde/Software/downward-release-24.06.1/driver/portfolios/seq_opt_fdss_1.py
+INFO     search portfolio: /home/alvaro/Descargas/downward-release-24.06.1/driver/portfolios/seq_opt_fdss_1.py
 remaining time: 1800.0
 config 0: relative time 175, remaining time 1631, absolute time 193
-args: [PosixPath('/home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))', '--internal-plan-file', PosixPath('sas_plan')]
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))', '--internal-plan-file', PosixPath('sas_plan')]
 INFO     search stdin: output.sas
 INFO     search time limit: 193s
 INFO     search memory limit: None
-INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))' --internal-plan-file sas_plan < output.sas
-[t=0.000000s, 10052 KB] reading input...
-[t=0.115825s, 13852 KB] done reading input!
-[t=0.118825s, 14248 KB] Initializing merge-and-shrink heuristic...
-[t=0.118825s, 14248 KB] Running merge-and-shrink algorithm...
-[t=0.118825s, 14248 KB] Merge strategy options:
-[t=0.118825s, 14248 KB] Type: precomputed
-[t=0.118825s, 14248 KB] Merge tree options: 
-[t=0.118825s, 14248 KB] Type: linear
-[t=0.118825s, 14248 KB] Update option: use random
-[t=0.118825s, 14248 KB] Variable order type: by reverse level
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))' --internal-plan-file sas_plan < output.sas
+[t=0.000991s, 10296 KB] reading input...
+[t=0.050918s, 14100 KB] done reading input!
+[t=0.052921s, 14496 KB] Initializing merge-and-shrink heuristic...
+[t=0.052921s, 14496 KB] Running merge-and-shrink algorithm...
+[t=0.052921s, 14496 KB] Merge strategy options:
+[t=0.052921s, 14496 KB] Type: precomputed
+[t=0.052921s, 14496 KB] Merge tree options: 
+[t=0.052921s, 14496 KB] Type: linear
+[t=0.052921s, 14496 KB] Update option: use random
+[t=0.052921s, 14496 KB] Variable order type: by reverse level
 
-[t=0.118825s, 14248 KB] Options related to size limits and shrinking: 
-[t=0.118825s, 14248 KB] Transition system size limit: 2147483647
-[t=0.119830s, 14248 KB] Transition system size limit right before merge: 2147483647
-[t=0.119830s, 14248 KB] Threshold to trigger shrinking right before merge: 1
+[t=0.052921s, 14496 KB] Options related to size limits and shrinking: 
+[t=0.052921s, 14496 KB] Transition system size limit: 2147483647
+[t=0.052921s, 14496 KB] Transition system size limit right before merge: 2147483647
+[t=0.052921s, 14496 KB] Threshold to trigger shrinking right before merge: 1
 
-[t=0.119830s, 14248 KB] Shrink strategy options: 
-[t=0.119830s, 14248 KB] Type: bisimulation
-[t=0.119830s, 14248 KB] Bisimulation type: greedy
-[t=0.119830s, 14248 KB] At limit: return
+[t=0.052921s, 14496 KB] Shrink strategy options: 
+[t=0.052921s, 14496 KB] Type: bisimulation
+[t=0.052921s, 14496 KB] Bisimulation type: greedy
+[t=0.052921s, 14496 KB] At limit: return
 
-[t=0.119830s, 14248 KB] Pruning unreachable states: yes
-[t=0.119830s, 14248 KB] Pruning irrelevant states: yes
+[t=0.052921s, 14496 KB] Pruning unreachable states: yes
+[t=0.052921s, 14496 KB] Pruning irrelevant states: yes
 
-[t=0.119830s, 14248 KB] Label reduction options:
-[t=0.119830s, 14248 KB] Before merging: disabled
-[t=0.119830s, 14248 KB] Before shrinking: enabled
-[t=0.119830s, 14248 KB] Method: all transition systems with fixpoint computation
-[t=0.119830s, 14248 KB] System order: random
+[t=0.052921s, 14496 KB] Label reduction options:
+[t=0.052921s, 14496 KB] Before merging: disabled
+[t=0.052921s, 14496 KB] Before shrinking: enabled
+[t=0.052921s, 14496 KB] Method: all transition systems with fixpoint computation
+[t=0.052921s, 14496 KB] System order: random
 
-[t=0.119830s, 14248 KB] Main loop max time in seconds: inf
+[t=0.052921s, 14496 KB] Main loop max time in seconds: inf
 
 
-[t=0.119830s, 14248 KB] Building atomic transition systems... 
-[t=0.416825s, 121576 KB] M&S algorithm timer: 0.298000s (after computation of atomic factors)
+[t=0.052921s, 14496 KB] Building atomic transition systems... 
+[t=0.154053s, 121712 KB] M&S algorithm timer: 0.101132s (after computation of atomic factors)
 
-[t=0.416825s, 121576 KB] Starting main loop without a time limit.
-[t=0.417826s, 121576 KB] building causal graph...done! [t=0.104629s]
-[t=0.549402s, 125436 KB] Next pair of indices: (0, 1)
-[t=0.549402s, 125436 KB] M&S algorithm main loop timer: 0.132578s (after computation of next merge)
-Peak memory: 125436 KB
+[t=0.154053s, 121712 KB] Starting main loop without a time limit.
+[t=0.154053s, 121712 KB] building causal graph...done! [t=0.048607s]
+[t=0.226858s, 125596 KB] Next pair of indices: (0, 1)
+[t=0.226858s, 125596 KB] M&S algorithm main loop timer: 0.072804s (after computation of next merge)
+Peak memory: 125596 KB
 caught signal 24 -- exiting
 Time limit has been reached.
 exitcode: 23
 
-remaining time: 1613.6599999999999
+remaining time: 1612.88
 config 1: relative time 432, remaining time 1456, absolute time 478
-args: [PosixPath('/home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))', '--internal-plan-file', PosixPath('sas_plan')]
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))', '--internal-plan-file', PosixPath('sas_plan')]
 INFO     search stdin: output.sas
 INFO     search time limit: 478s
 INFO     search memory limit: None
-INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))' --internal-plan-file sas_plan < output.sas
-[t=0.000000s, 10052 KB] reading input...
-[t=0.127839s, 13852 KB] done reading input!
-[t=0.131154s, 14248 KB] Initializing merge-and-shrink heuristic...
-[t=0.131154s, 14248 KB] Running merge-and-shrink algorithm...
-[t=0.131154s, 14248 KB] Merge strategy options:
-[t=0.131154s, 14248 KB] Type: precomputed
-[t=0.131154s, 14248 KB] Merge tree options: 
-[t=0.131154s, 14248 KB] Type: linear
-[t=0.131154s, 14248 KB] Update option: use random
-[t=0.131154s, 14248 KB] Variable order type: by reverse level
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))' --internal-plan-file sas_plan < output.sas
+[t=0.000237s, 10296 KB] reading input...
+[t=0.066956s, 14100 KB] done reading input!
+[t=0.068076s, 14496 KB] Initializing merge-and-shrink heuristic...
+[t=0.069075s, 14496 KB] Running merge-and-shrink algorithm...
+[t=0.069075s, 14496 KB] Merge strategy options:
+[t=0.069075s, 14496 KB] Type: precomputed
+[t=0.069075s, 14496 KB] Merge tree options: 
+[t=0.069075s, 14496 KB] Type: linear
+[t=0.069075s, 14496 KB] Update option: use random
+[t=0.069075s, 14496 KB] Variable order type: by reverse level
 
-[t=0.131154s, 14248 KB] Options related to size limits and shrinking: 
-[t=0.131154s, 14248 KB] Transition system size limit: 200000
-[t=0.131154s, 14248 KB] Transition system size limit right before merge: 200000
-[t=0.131154s, 14248 KB] Threshold to trigger shrinking right before merge: 200000
+[t=0.069075s, 14496 KB] Options related to size limits and shrinking: 
+[t=0.069075s, 14496 KB] Transition system size limit: 200000
+[t=0.069075s, 14496 KB] Transition system size limit right before merge: 200000
+[t=0.069075s, 14496 KB] Threshold to trigger shrinking right before merge: 200000
 
-[t=0.131154s, 14248 KB] Shrink strategy options: 
-[t=0.131154s, 14248 KB] Type: bisimulation
-[t=0.131154s, 14248 KB] Bisimulation type: exact
-[t=0.132162s, 14248 KB] At limit: return
+[t=0.069075s, 14496 KB] Shrink strategy options: 
+[t=0.069075s, 14496 KB] Type: bisimulation
+[t=0.069075s, 14496 KB] Bisimulation type: exact
+[t=0.069075s, 14496 KB] At limit: return
 
-[t=0.132162s, 14248 KB] Pruning unreachable states: yes
-[t=0.132162s, 14248 KB] Pruning irrelevant states: yes
+[t=0.069075s, 14496 KB] Pruning unreachable states: yes
+[t=0.069075s, 14496 KB] Pruning irrelevant states: yes
 
-[t=0.132162s, 14248 KB] Label reduction options:
-[t=0.132162s, 14248 KB] Before merging: disabled
-[t=0.132162s, 14248 KB] Before shrinking: enabled
-[t=0.132162s, 14248 KB] Method: all transition systems with fixpoint computation
-[t=0.132162s, 14248 KB] System order: random
+[t=0.069075s, 14496 KB] Label reduction options:
+[t=0.069075s, 14496 KB] Before merging: disabled
+[t=0.069075s, 14496 KB] Before shrinking: enabled
+[t=0.069075s, 14496 KB] Method: all transition systems with fixpoint computation
+[t=0.069075s, 14496 KB] System order: random
 
-[t=0.132162s, 14248 KB] Main loop max time in seconds: inf
+[t=0.069075s, 14496 KB] Main loop max time in seconds: inf
 
 
-[t=0.132162s, 14248 KB] Building atomic transition systems... 
-[t=0.413307s, 121576 KB] M&S algorithm timer: 0.283153s (after computation of atomic factors)
+[t=0.069075s, 14496 KB] Building atomic transition systems... 
+[t=0.197441s, 121712 KB] M&S algorithm timer: 0.128366s (after computation of atomic factors)
 
-[t=0.414307s, 121576 KB] Starting main loop without a time limit.
-[t=0.414307s, 121576 KB] building causal graph...done! [t=0.095463s]
-[t=0.534729s, 125436 KB] Next pair of indices: (0, 1)
-[t=0.534729s, 125436 KB] M&S algorithm main loop timer: 0.120883s (after computation of next merge)
-Peak memory: 125436 KB
+[t=0.197441s, 121712 KB] Starting main loop without a time limit.
+[t=0.198500s, 121712 KB] building causal graph...done! [t=0.044280s]
+[t=0.265586s, 125596 KB] Next pair of indices: (0, 1)
+[t=0.265586s, 125596 KB] M&S algorithm main loop timer: 0.068145s (after computation of next merge)
+[t=457.823201s, 125596 KB] M&S algorithm main loop timer: 457.626758s (after label reduction)
+[t=457.824199s, 125596 KB] M&S algorithm main loop timer: 457.626758s (after merging)
+
+[t=457.824199s, 125596 KB] Next pair of indices: (761, 2)
+[t=457.824199s, 125596 KB] M&S algorithm main loop timer: 457.626758s (after computation of next merge)
+Peak memory: 125596 KB
 caught signal 24 -- exiting
 Time limit has been reached.
 exitcode: 23
 
-remaining time: 1153.7199999999998
-config 2: relative time 455, remaining time 1024, absolute time 512
-args: [PosixPath('/home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))', '--internal-plan-file', PosixPath('sas_plan')]
+remaining time: 1150.6800000000003
+config 2: relative time 455, remaining time 1024, absolute time 511
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))', '--internal-plan-file', PosixPath('sas_plan')]
 INFO     search stdin: output.sas
-INFO     search time limit: 512s
+INFO     search time limit: 511s
 INFO     search memory limit: None
-INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))' --internal-plan-file sas_plan < output.sas
-[t=0.000699s, 10052 KB] reading input...
-[t=0.119681s, 13852 KB] done reading input!
-[t=0.121684s, 14248 KB] Initializing landmark cost partitioning heuristic...
-[t=0.122688s, 14248 KB] Generating landmark graph...
-[t=0.124683s, 14380 KB] Merging 2 landmark graphs
-[t=0.126681s, 14644 KB] Initializing Exploration...
-[t=0.135683s, 17012 KB] Generating landmarks using the RPG/SAS+ approach
-[t=0.354057s, 18180 KB] Landmarks generation time: 0.229375s
-[t=0.354057s, 18180 KB] Discovered 39 landmarks, of which 2 are disjunctive and 0 are conjunctive.
-[t=0.354057s, 18180 KB] 21 edges
-[t=0.356042s, 18180 KB] h^m landmarks m=1
-[t=0.357041s, 18180 KB] Using 1712 P^m fluents.
-[t=0.471288s, 20008 KB] h^m landmarks computed.
-[t=0.479727s, 20008 KB] Calculating achievers.
-[t=0.483766s, 20008 KB] Landmarks generation time: 0.130545s
-[t=0.484602s, 20008 KB] Discovered 28 landmarks, of which 0 are disjunctive and 0 are conjunctive.
-[t=0.484761s, 20008 KB] 10 edges
-[t=0.484761s, 20008 KB] Adding simple landmarks
-[t=0.485765s, 20008 KB] Adding disjunctive landmarks
-[t=0.485765s, 20008 KB] Adding orderings
-[t=0.485765s, 20008 KB] Landmarks generation time: 0.363077s
-[t=0.485765s, 20008 KB] Discovered 40 landmarks, of which 2 are disjunctive and 0 are conjunctive.
-[t=0.485765s, 20008 KB] 24 edges
-[t=0.485765s, 20008 KB] Landmark graph generation time: 0.363077s
-[t=0.485765s, 20008 KB] Landmark graph contains 40 landmarks, of which 2 are disjunctive and 0 are conjunctive.
-[t=0.485765s, 20008 KB] Landmark graph contains 24 orderings.
-[t=0.489764s, 20008 KB] Building successor generator...done!
-[t=0.498124s, 20008 KB] peak memory difference for successor generator creation: 0 KB
-[t=0.498124s, 20008 KB] time for successor generation creation: 0.007359s
-[t=0.498124s, 20008 KB] Variables: 761
-[t=0.498124s, 20008 KB] FactPairs: 1712
-[t=0.498124s, 20008 KB] Bytes per state: 100
-[t=0.498124s, 20008 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
-[t=0.498124s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 16
-[t=0.498124s, 20008 KB] g=0, 1 evaluated, 0 expanded
-[t=0.498124s, 20008 KB] f = 16, 1 evaluated, 0 expanded
-[t=0.498124s, 20008 KB] Initial heuristic value for landmark_cost_partitioning: 16
-[t=0.498124s, 20008 KB] pruning method: none
-[t=0.498124s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 14
-[t=0.498124s, 20008 KB] g=2, 2 evaluated, 1 expanded
-[t=0.498124s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 13
-[t=0.498124s, 20008 KB] g=3, 5 evaluated, 1 expanded
-[t=0.499130s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 12
-[t=0.499130s, 20008 KB] g=5, 11 evaluated, 2 expanded
-[t=0.499130s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 11
-[t=0.499130s, 20008 KB] g=6, 23 evaluated, 3 expanded
-[t=0.500127s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 10
-[t=0.500127s, 20008 KB] g=7, 51 evaluated, 6 expanded
-[t=0.500127s, 20008 KB] f = 17, 70 evaluated, 8 expanded
-[t=0.500127s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 9
-[t=0.500127s, 20008 KB] g=9, 71 evaluated, 9 expanded
-[t=0.501127s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 8
-[t=0.501127s, 20008 KB] g=10, 84 evaluated, 10 expanded
-[t=0.509412s, 20008 KB] f = 18, 428 evaluated, 67 expanded
-[t=0.509412s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 7
-[t=0.509412s, 20008 KB] g=12, 429 evaluated, 68 expanded
-[t=0.557070s, 20008 KB] f = 19, 2115 evaluated, 376 expanded
-[t=0.557070s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 6
-[t=0.557070s, 20008 KB] g=14, 2117 evaluated, 377 expanded
-[t=0.782184s, 20008 KB] f = 20, 8832 evaluated, 1713 expanded
-[t=0.833460s, 20008 KB] New best heuristic value for landmark_cost_partitioning: 5
-[t=0.833460s, 20008 KB] g=16, 10663 evaluated, 1986 expanded
-[t=1.692314s, 20912 KB] f = 21, 33175 evaluated, 6826 expanded
-[t=4.918068s, 34236 KB] f = 22, 113679 evaluated, 24411 expanded
-[t=15.467745s, 68944 KB] f = 23, 359546 evaluated, 80021 expanded
-[t=15.467745s, 68944 KB] New best heuristic value for landmark_cost_partitioning: 4
-[t=15.467745s, 68944 KB] g=20, 359548 evaluated, 80022 expanded
-[t=46.829232s, 176540 KB] f = 24, 1058270 evaluated, 242985 expanded
-[t=138.518687s, 444656 KB] f = 25, 2903131 evaluated, 686442 expanded, 1 reopened
-[t=386.215333s, 1164108 KB] f = 26, 7460191 evaluated, 1814944 expanded, 4 reopened
-[t=386.275358s, 1164528 KB] New best heuristic value for landmark_cost_partitioning: 3
-[t=386.275358s, 1164528 KB] g=24, 7463201 evaluated, 1815328 expanded, 4 reopened
-Peak memory: 1493508 KB
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))' --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10296 KB] reading input...
+[t=0.074528s, 14100 KB] done reading input!
+[t=0.076471s, 14500 KB] Initializing landmark cost partitioning heuristic...
+[t=0.077362s, 14500 KB] Generating landmark graph...
+[t=0.079053s, 14500 KB] Merging 2 landmark graphs
+[t=0.080472s, 14892 KB] Initializing Exploration...
+[t=0.087181s, 17232 KB] Generating landmarks using the RPG/SAS+ approach
+[t=0.222605s, 18308 KB] Landmarks generation time: 0.143552s
+[t=0.222605s, 18308 KB] Discovered 39 landmarks, of which 2 are disjunctive and 0 are conjunctive.
+[t=0.222605s, 18308 KB] 21 edges
+[t=0.224683s, 18308 KB] h^m landmarks m=1
+[t=0.224683s, 18308 KB] Using 1712 P^m fluents.
+[t=0.299086s, 20204 KB] h^m landmarks computed.
+[t=0.306854s, 20204 KB] Calculating achievers.
+[t=0.310878s, 20204 KB] Landmarks generation time: 0.087793s
+[t=0.311398s, 20204 KB] Discovered 28 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=0.311398s, 20204 KB] 10 edges
+[t=0.311398s, 20204 KB] Adding simple landmarks
+[t=0.311398s, 20204 KB] Adding disjunctive landmarks
+[t=0.311398s, 20204 KB] Adding orderings
+[t=0.311398s, 20204 KB] Landmarks generation time: 0.234036s
+[t=0.311398s, 20204 KB] Discovered 40 landmarks, of which 2 are disjunctive and 0 are conjunctive.
+[t=0.312396s, 20204 KB] 24 edges
+[t=0.312396s, 20204 KB] Landmark graph generation time: 0.235034s
+[t=0.312396s, 20204 KB] Landmark graph contains 40 landmarks, of which 2 are disjunctive and 0 are conjunctive.
+[t=0.312396s, 20204 KB] Landmark graph contains 24 orderings.
+[t=0.315012s, 20204 KB] Building successor generator...done!
+[t=0.320591s, 20204 KB] peak memory difference for successor generator creation: 0 KB
+[t=0.320591s, 20204 KB] time for successor generation creation: 0.005579s
+[t=0.320591s, 20204 KB] Variables: 761
+[t=0.320591s, 20204 KB] FactPairs: 1712
+[t=0.320591s, 20204 KB] Bytes per state: 100
+[t=0.320591s, 20204 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.320591s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 16
+[t=0.320591s, 20204 KB] g=0, 1 evaluated, 0 expanded
+[t=0.320591s, 20204 KB] f = 16, 1 evaluated, 0 expanded
+[t=0.320591s, 20204 KB] Initial heuristic value for landmark_cost_partitioning: 16
+[t=0.320591s, 20204 KB] pruning method: none
+[t=0.320591s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 14
+[t=0.320591s, 20204 KB] g=2, 2 evaluated, 1 expanded
+[t=0.320591s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 13
+[t=0.320591s, 20204 KB] g=3, 5 evaluated, 1 expanded
+[t=0.320591s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 12
+[t=0.320591s, 20204 KB] g=5, 11 evaluated, 2 expanded
+[t=0.321592s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 11
+[t=0.321592s, 20204 KB] g=6, 23 evaluated, 3 expanded
+[t=0.321815s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 10
+[t=0.321815s, 20204 KB] g=7, 51 evaluated, 6 expanded
+[t=0.322212s, 20204 KB] f = 17, 70 evaluated, 8 expanded
+[t=0.322212s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 9
+[t=0.322212s, 20204 KB] g=9, 71 evaluated, 9 expanded
+[t=0.322212s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 8
+[t=0.322212s, 20204 KB] g=10, 84 evaluated, 10 expanded
+[t=0.326465s, 20204 KB] f = 18, 428 evaluated, 67 expanded
+[t=0.326465s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 7
+[t=0.326465s, 20204 KB] g=12, 429 evaluated, 68 expanded
+[t=0.350819s, 20204 KB] f = 19, 2115 evaluated, 376 expanded
+[t=0.350819s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 6
+[t=0.350819s, 20204 KB] g=14, 2117 evaluated, 377 expanded
+[t=0.459713s, 20204 KB] f = 20, 8832 evaluated, 1713 expanded
+[t=0.485678s, 20204 KB] New best heuristic value for landmark_cost_partitioning: 5
+[t=0.485678s, 20204 KB] g=16, 10663 evaluated, 1986 expanded
+[t=0.894450s, 21128 KB] f = 21, 33175 evaluated, 6826 expanded
+[t=2.470698s, 34436 KB] f = 22, 113679 evaluated, 24411 expanded
+[t=7.549537s, 69148 KB] f = 23, 359546 evaluated, 80021 expanded
+[t=7.549537s, 69148 KB] New best heuristic value for landmark_cost_partitioning: 4
+[t=7.549537s, 69148 KB] g=20, 359548 evaluated, 80022 expanded
+[t=22.709349s, 176748 KB] f = 24, 1058270 evaluated, 242985 expanded
+[t=64.470554s, 444856 KB] f = 25, 2903131 evaluated, 686442 expanded, 1 reopened
+[t=173.339011s, 1164316 KB] f = 26, 7460191 evaluated, 1814944 expanded, 4 reopened
+[t=173.368011s, 1164728 KB] New best heuristic value for landmark_cost_partitioning: 3
+[t=173.368011s, 1164728 KB] g=24, 7463201 evaluated, 1815328 expanded, 4 reopened
+[t=259.807003s, 1709584 KB] f = 27, 11450854 evaluated, 2660164 expanded, 4 reopened
+Peak memory: 3097236 KB
 caught signal 24 -- exiting
 Time limit has been reached.
 exitcode: 23
 
-remaining time: 667.6699999999998
-config 3: relative time 569, remaining time 569, absolute time 667
-args: [PosixPath('/home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(lmcut())', '--internal-plan-file', PosixPath('sas_plan')]
+remaining time: 654.8700000000001
+config 3: relative time 569, remaining time 569, absolute time 654
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(lmcut())', '--internal-plan-file', PosixPath('sas_plan')]
 INFO     search stdin: output.sas
-INFO     search time limit: 667s
+INFO     search time limit: 654s
 INFO     search memory limit: None
-INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search 'astar(lmcut())' --internal-plan-file sas_plan < output.sas
-[t=0.000000s, 10052 KB] reading input...
-[t=0.122180s, 13852 KB] done reading input!
-[t=0.135828s, 16916 KB] Initializing landmark cut heuristic...
-[t=0.135828s, 17056 KB] Building successor generator...done!
-[t=0.144781s, 18456 KB] peak memory difference for successor generator creation: 1400 KB
-[t=0.144781s, 18456 KB] time for successor generation creation: 0.008953s
-[t=0.144781s, 18456 KB] Variables: 761
-[t=0.145778s, 18456 KB] FactPairs: 1712
-[t=0.145778s, 18456 KB] Bytes per state: 100
-[t=0.145778s, 18456 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
-[t=0.156627s, 18456 KB] New best heuristic value for lmcut: 8
-[t=0.156627s, 18456 KB] g=0, 1 evaluated, 0 expanded
-[t=0.156627s, 18456 KB] f = 8, 1 evaluated, 0 expanded
-[t=0.156627s, 18456 KB] Initial heuristic value for lmcut: 8
-[t=0.156627s, 18456 KB] pruning method: none
-[t=0.206462s, 18456 KB] New best heuristic value for lmcut: 7
-[t=0.206462s, 18456 KB] g=3, 5 evaluated, 1 expanded
-[t=0.345950s, 18456 KB] f = 9, 18 evaluated, 2 expanded
-[t=0.520856s, 18456 KB] f = 10, 34 evaluated, 4 expanded
-[t=1.156383s, 18456 KB] f = 11, 89 evaluated, 12 expanded
-[t=1.761132s, 18456 KB] New best heuristic value for lmcut: 6
-[t=1.761132s, 18456 KB] g=5, 143 evaluated, 19 expanded
-[t=4.230045s, 18456 KB] f = 12, 349 evaluated, 47 expanded
-[t=10.626292s, 18456 KB] f = 13, 878 evaluated, 121 expanded
-[t=30.659379s, 18456 KB] f = 14, 2586 evaluated, 369 expanded
-[t=83.839823s, 18872 KB] f = 15, 7042 evaluated, 1054 expanded, 1 reopened
-[t=197.079387s, 20204 KB] f = 16, 16267 evaluated, 2528 expanded, 1 reopened
-[t=197.166764s, 20204 KB] New best heuristic value for lmcut: 5
-[t=197.166764s, 20204 KB] g=11, 16277 evaluated, 2529 expanded, 1 reopened
-[t=409.780932s, 23112 KB] f = 17, 37671 evaluated, 6100 expanded, 2 reopened
-Peak memory: 26408 KB
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(lmcut())' --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10296 KB] reading input...
+[t=0.075560s, 14100 KB] done reading input!
+[t=0.085336s, 17244 KB] Initializing landmark cut heuristic...
+[t=0.085336s, 17244 KB] Building successor generator...done!
+[t=0.091950s, 18656 KB] peak memory difference for successor generator creation: 1412 KB
+[t=0.092323s, 18656 KB] time for successor generation creation: 0.006614s
+[t=0.092323s, 18656 KB] Variables: 761
+[t=0.092323s, 18656 KB] FactPairs: 1712
+[t=0.092323s, 18656 KB] Bytes per state: 100
+[t=0.092323s, 18656 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.103344s, 18656 KB] New best heuristic value for lmcut: 8
+[t=0.103344s, 18656 KB] g=0, 1 evaluated, 0 expanded
+[t=0.103344s, 18656 KB] f = 8, 1 evaluated, 0 expanded
+[t=0.103344s, 18656 KB] Initial heuristic value for lmcut: 8
+[t=0.103344s, 18656 KB] pruning method: none
+[t=0.156314s, 18656 KB] New best heuristic value for lmcut: 7
+[t=0.156314s, 18656 KB] g=3, 5 evaluated, 1 expanded
+[t=0.312459s, 18656 KB] f = 9, 18 evaluated, 2 expanded
+[t=0.560020s, 18656 KB] f = 10, 34 evaluated, 4 expanded
+[t=1.195641s, 18656 KB] f = 11, 89 evaluated, 12 expanded
+[t=1.804995s, 18656 KB] New best heuristic value for lmcut: 6
+[t=1.804995s, 18656 KB] g=5, 143 evaluated, 19 expanded
+[t=4.248297s, 18656 KB] f = 12, 349 evaluated, 47 expanded
+[t=10.236857s, 18656 KB] f = 13, 878 evaluated, 121 expanded
+[t=27.664677s, 18656 KB] f = 14, 2586 evaluated, 369 expanded
+[t=75.341528s, 19072 KB] f = 15, 7042 evaluated, 1054 expanded, 1 reopened
+[t=167.233856s, 20404 KB] f = 16, 16267 evaluated, 2528 expanded, 1 reopened
+[t=167.320469s, 20404 KB] New best heuristic value for lmcut: 5
+[t=167.321363s, 20404 KB] g=11, 16277 evaluated, 2529 expanded, 1 reopened
+[t=335.899054s, 23312 KB] f = 17, 37671 evaluated, 6100 expanded, 2 reopened
+Peak memory: 28336 KB
 caught signal 24 -- exiting
 Time limit has been reached.
 exitcode: 23
@@ -309,4 +315,4 @@ Remove intermediate file output.sas
 search exit code: 23
 
 Driver aborting after search
-INFO     Planner time: 1777.60s
+INFO     Planner time: 1787.93s
