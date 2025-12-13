@@ -13,13 +13,13 @@ for kind in PROBLEMS:
         res = re.search(r"Solution found", data)
         time = re.findall(r"Planner time: (\d+\.\d+)s", data)[0]
         if res is not None:
-            length = re.findall(r"Plan length: (\d+) step", data)[0]
-            cost = re.findall(r"Plan cost: (\d+)", data)[0]
-            expanded = re.findall(r"Expanded (\d+) state", data)[0]
+            length = re.findall(r"Plan length: (\d+) step", data)[-1]
+            cost = re.findall(r"Plan cost: (\d+)", data)[-1]
+            expanded = re.findall(r"Expanded (\d+) state", data)[-1]
             solved = 1
         else:
             length = ""
             cost = ""
             solved = 0
-            expanded = re.findall(r"\d+ evaluated, (\d+) expanded", data)[-1]
+            expanded = ""
         print(f"{kind},{problem},{solver},{solved},{time},{length},{cost},{expanded}")
