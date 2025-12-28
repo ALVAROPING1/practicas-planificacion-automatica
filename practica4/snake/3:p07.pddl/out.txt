@@ -1,0 +1,478 @@
+Semaphore acquired 
+INFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python3 /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/translate/translate.py /home/alvaro/Descargas/downward-release-24.06.1/snake-opt18-strips/domain.pddl /home/alvaro/Descargas/downward-release-24.06.1/snake-opt18-strips/p07.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.000s CPU, 0.004s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.001s wall-clock]
+Normalizing Datalog program...
+Trivial rules: Converted to facts.
+Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock]
+Preparing model... [0.000s CPU, 0.001s wall-clock]
+Generated 32 rules.
+Computing model... [0.120s CPU, 0.162s wall-clock]
+11419 relevant atoms
+957 auxiliary atoms
+12376 final queue length
+57455 total queue pushes
+Completing instantiation... [1.010s CPU, 1.200s wall-clock]
+Instantiating: [1.140s CPU, 1.371s wall-clock]
+Computing fact groups...
+Finding invariants...
+13 initial candidates
+Finding invariants: [0.010s CPU, 0.006s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+151 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.001s wall-clock]
+Computing fact groups: [0.010s CPU, 0.009s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [0.060s CPU, 0.070s wall-clock]
+Translating task: [1.270s CPU, 1.388s wall-clock]
+20122 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+3 propositions removed
+Detecting unreachable propositions: [0.680s CPU, 0.736s wall-clock]
+Reordering and filtering variables...
+154 of 154 variables necessary.
+0 of 3 mutex groups necessary.
+11010 of 11010 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.230s CPU, 0.254s wall-clock]
+Translator variables: 154
+Translator derived variables: 0
+Translator facts: 381
+Translator goal facts: 23
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 11010
+Translator axioms: 0
+Translator task size: 128122
+Translator peak memory: 119008 KB
+Writing output... [0.140s CPU, 0.160s wall-clock]
+Done! [3.550s CPU, 3.992s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search portfolio: /home/alvaro/Descargas/downward-release-24.06.1/driver/portfolios/seq_opt_fdss_1.py
+remaining time: 1800.0
+config 0: relative time 175, remaining time 1631, absolute time 193
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))', '--internal-plan-file', PosixPath('sas_plan')]
+INFO     search stdin: output.sas
+INFO     search time limit: 193s
+INFO     search memory limit: None
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=true),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=infinity,threshold_before_merge=1))' --internal-plan-file sas_plan < output.sas
+[t=0.000636s, 10296 KB] reading input...
+[t=0.081728s, 15160 KB] done reading input!
+[t=0.084405s, 15556 KB] Initializing merge-and-shrink heuristic...
+[t=0.084706s, 15556 KB] Running merge-and-shrink algorithm...
+[t=0.084706s, 15556 KB] Merge strategy options:
+[t=0.084706s, 15556 KB] Type: precomputed
+[t=0.084706s, 15556 KB] Merge tree options: 
+[t=0.084706s, 15556 KB] Type: linear
+[t=0.084706s, 15556 KB] Update option: use random
+[t=0.084706s, 15556 KB] Variable order type: by reverse level
+
+[t=0.084706s, 15556 KB] Options related to size limits and shrinking: 
+[t=0.084706s, 15556 KB] Transition system size limit: 2147483647
+[t=0.084706s, 15556 KB] Transition system size limit right before merge: 2147483647
+[t=0.084706s, 15556 KB] Threshold to trigger shrinking right before merge: 1
+
+[t=0.084706s, 15556 KB] Shrink strategy options: 
+[t=0.084706s, 15556 KB] Type: bisimulation
+[t=0.084706s, 15556 KB] Bisimulation type: greedy
+[t=0.084706s, 15556 KB] At limit: return
+
+[t=0.084706s, 15556 KB] Pruning unreachable states: yes
+[t=0.084706s, 15556 KB] Pruning irrelevant states: yes
+
+[t=0.084706s, 15556 KB] Label reduction options:
+[t=0.084706s, 15556 KB] Before merging: disabled
+[t=0.084706s, 15556 KB] Before shrinking: enabled
+[t=0.084706s, 15556 KB] Method: all transition systems with fixpoint computation
+[t=0.084706s, 15556 KB] System order: random
+
+[t=0.084706s, 15556 KB] Main loop max time in seconds: inf
+
+
+[t=0.084706s, 15556 KB] Building atomic transition systems... 
+[t=0.130161s, 39256 KB] M&S algorithm timer: 0.046450s (after computation of atomic factors)
+
+[t=0.131298s, 39256 KB] Starting main loop without a time limit.
+[t=0.131298s, 39256 KB] building causal graph...done! [t=0.128340s]
+[t=0.291675s, 44272 KB] Next pair of indices: (0, 1)
+[t=0.291746s, 44272 KB] M&S algorithm main loop timer: 0.160448s (after computation of next merge)
+[t=25.408680s, 44272 KB] M&S algorithm main loop timer: 25.277382s (after shrinking)
+[t=25.408680s, 44272 KB] M&S algorithm main loop timer: 25.277382s (after merging)
+
+[t=25.408680s, 44272 KB] Next pair of indices: (154, 2)
+[t=25.408680s, 44272 KB] M&S algorithm main loop timer: 25.277382s (after computation of next merge)
+[t=61.728506s, 44272 KB] M&S algorithm main loop timer: 61.599211s (after label reduction)
+[t=61.730510s, 44272 KB] M&S algorithm main loop timer: 61.599211s (after shrinking)
+[t=61.730510s, 44272 KB] M&S algorithm main loop timer: 61.599211s (after merging)
+
+[t=61.731505s, 44272 KB] Next pair of indices: (155, 3)
+[t=61.731505s, 44272 KB] M&S algorithm main loop timer: 61.600207s (after computation of next merge)
+[t=101.696803s, 44272 KB] M&S algorithm main loop timer: 101.566498s (after label reduction)
+[t=101.698800s, 44272 KB] M&S algorithm main loop timer: 101.567501s (after shrinking)
+[t=101.698800s, 44272 KB] M&S algorithm main loop timer: 101.567501s (after merging)
+
+[t=101.698800s, 44272 KB] Next pair of indices: (156, 4)
+[t=101.698800s, 44272 KB] M&S algorithm main loop timer: 101.567501s (after computation of next merge)
+[t=127.787202s, 44272 KB] M&S algorithm main loop timer: 127.655903s (after shrinking)
+[t=127.787202s, 44272 KB] M&S algorithm main loop timer: 127.655903s (after merging)
+
+[t=127.787202s, 44272 KB] Next pair of indices: (157, 5)
+[t=127.788196s, 44272 KB] M&S algorithm main loop timer: 127.656898s (after computation of next merge)
+[t=163.183530s, 44272 KB] M&S algorithm main loop timer: 163.053231s (after label reduction)
+[t=163.184529s, 44272 KB] M&S algorithm main loop timer: 163.053231s (after shrinking)
+[t=163.184529s, 44272 KB] M&S algorithm main loop timer: 163.054233s (after merging)
+
+[t=163.185532s, 44272 KB] Next pair of indices: (158, 6)
+[t=163.185532s, 44272 KB] M&S algorithm main loop timer: 163.054233s (after computation of next merge)
+Peak memory: 44272 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+exitcode: 23
+
+remaining time: 1608.3600000000001
+config 1: relative time 432, remaining time 1456, absolute time 477
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))', '--internal-plan-file', PosixPath('sas_plan')]
+INFO     search stdin: output.sas
+INFO     search time limit: 477s
+INFO     search memory limit: None
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(merge_and_shrink(merge_strategy=merge_precomputed(merge_tree=linear(variable_order=reverse_level)),shrink_strategy=shrink_bisimulation(greedy=false),label_reduction=exact(before_shrinking=true,before_merging=false),max_states=200000))' --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10296 KB] reading input...
+[t=0.082491s, 15160 KB] done reading input!
+[t=0.085499s, 15556 KB] Initializing merge-and-shrink heuristic...
+[t=0.085499s, 15556 KB] Running merge-and-shrink algorithm...
+[t=0.085499s, 15556 KB] Merge strategy options:
+[t=0.085499s, 15556 KB] Type: precomputed
+[t=0.085499s, 15556 KB] Merge tree options: 
+[t=0.085499s, 15556 KB] Type: linear
+[t=0.085499s, 15556 KB] Update option: use random
+[t=0.085499s, 15556 KB] Variable order type: by reverse level
+
+[t=0.085499s, 15556 KB] Options related to size limits and shrinking: 
+[t=0.085499s, 15556 KB] Transition system size limit: 200000
+[t=0.085499s, 15556 KB] Transition system size limit right before merge: 200000
+[t=0.085499s, 15556 KB] Threshold to trigger shrinking right before merge: 200000
+
+[t=0.085499s, 15556 KB] Shrink strategy options: 
+[t=0.085499s, 15556 KB] Type: bisimulation
+[t=0.085499s, 15556 KB] Bisimulation type: exact
+[t=0.085499s, 15556 KB] At limit: return
+
+[t=0.085499s, 15556 KB] Pruning unreachable states: yes
+[t=0.085499s, 15556 KB] Pruning irrelevant states: yes
+
+[t=0.085499s, 15556 KB] Label reduction options:
+[t=0.085499s, 15556 KB] Before merging: disabled
+[t=0.085499s, 15556 KB] Before shrinking: enabled
+[t=0.085499s, 15556 KB] Method: all transition systems with fixpoint computation
+[t=0.085499s, 15556 KB] System order: random
+
+[t=0.085499s, 15556 KB] Main loop max time in seconds: inf
+
+
+[t=0.085499s, 15556 KB] Building atomic transition systems... 
+[t=0.133121s, 39256 KB] M&S algorithm timer: 0.048623s (after computation of atomic factors)
+
+[t=0.134121s, 39256 KB] Starting main loop without a time limit.
+[t=0.134121s, 39256 KB] building causal graph...done! [t=0.107410s]
+[t=0.268535s, 44272 KB] Next pair of indices: (0, 1)
+[t=0.269536s, 44272 KB] M&S algorithm main loop timer: 0.135414s (after computation of next merge)
+[t=25.024927s, 44272 KB] M&S algorithm main loop timer: 24.890805s (after merging)
+
+[t=25.024927s, 44272 KB] Next pair of indices: (154, 2)
+[t=25.024927s, 44272 KB] M&S algorithm main loop timer: 24.890805s (after computation of next merge)
+[t=51.042593s, 44272 KB] M&S algorithm main loop timer: 50.908471s (after merging)
+
+[t=51.042593s, 44272 KB] Next pair of indices: (155, 3)
+[t=51.042593s, 44272 KB] M&S algorithm main loop timer: 50.908471s (after computation of next merge)
+[t=75.837526s, 44272 KB] M&S algorithm main loop timer: 75.703404s (after merging)
+
+[t=75.837526s, 44272 KB] Next pair of indices: (156, 4)
+[t=75.837526s, 44272 KB] M&S algorithm main loop timer: 75.703404s (after computation of next merge)
+[t=99.260425s, 44272 KB] M&S algorithm main loop timer: 99.126304s (after merging)
+
+[t=99.260425s, 44272 KB] Next pair of indices: (157, 5)
+[t=99.260425s, 44272 KB] M&S algorithm main loop timer: 99.126304s (after computation of next merge)
+[t=120.716164s, 44272 KB] M&S algorithm main loop timer: 120.582043s (after merging)
+
+[t=120.716164s, 44272 KB] Next pair of indices: (158, 6)
+[t=120.716164s, 44272 KB] M&S algorithm main loop timer: 120.582043s (after computation of next merge)
+[t=141.573371s, 44272 KB] M&S algorithm main loop timer: 141.440246s (after merging)
+
+[t=141.574367s, 44272 KB] Next pair of indices: (159, 7)
+[t=141.574367s, 44272 KB] M&S algorithm main loop timer: 141.440246s (after computation of next merge)
+[t=163.431692s, 44272 KB] M&S algorithm main loop timer: 163.297571s (after merging)
+
+[t=163.431692s, 44272 KB] Next pair of indices: (160, 8)
+[t=163.431692s, 44272 KB] M&S algorithm main loop timer: 163.297571s (after computation of next merge)
+[t=185.204168s, 44272 KB] M&S algorithm main loop timer: 185.070047s (after merging)
+
+[t=185.204168s, 44272 KB] Next pair of indices: (161, 9)
+[t=185.204168s, 44272 KB] M&S algorithm main loop timer: 185.070047s (after computation of next merge)
+[t=206.371127s, 44272 KB] M&S algorithm main loop timer: 206.237006s (after merging)
+
+[t=206.371127s, 44272 KB] Next pair of indices: (162, 10)
+[t=206.371127s, 44272 KB] M&S algorithm main loop timer: 206.237006s (after computation of next merge)
+[t=228.582948s, 44272 KB] M&S algorithm main loop timer: 228.448827s (after merging)
+
+[t=228.582948s, 44272 KB] Next pair of indices: (163, 11)
+[t=228.582948s, 44272 KB] M&S algorithm main loop timer: 228.448827s (after computation of next merge)
+[t=248.976773s, 44272 KB] M&S algorithm main loop timer: 248.843651s (after merging)
+
+[t=248.977772s, 44272 KB] Next pair of indices: (164, 12)
+[t=248.977772s, 44272 KB] M&S algorithm main loop timer: 248.843651s (after computation of next merge)
+[t=266.465999s, 49944 KB] M&S algorithm main loop timer: 266.331877s (after merging)
+
+[t=266.466999s, 49944 KB] Next pair of indices: (165, 13)
+[t=266.466999s, 49944 KB] M&S algorithm main loop timer: 266.332878s (after computation of next merge)
+[t=284.716696s, 66472 KB] M&S algorithm main loop timer: 284.582575s (after merging)
+
+[t=284.717697s, 66472 KB] Next pair of indices: (166, 14)
+[t=284.717697s, 66472 KB] M&S algorithm main loop timer: 284.583575s (after computation of next merge)
+[t=303.227670s, 108112 KB] M&S algorithm main loop timer: 303.093549s (after merging)
+
+[t=303.229656s, 108112 KB] Next pair of indices: (167, 15)
+[t=303.229656s, 108112 KB] M&S algorithm main loop timer: 303.095535s (after computation of next merge)
+[t=322.110506s, 191368 KB] M&S algorithm main loop timer: 321.977386s (after merging)
+
+[t=322.115507s, 191368 KB] Next pair of indices: (168, 16)
+[t=322.115507s, 191368 KB] M&S algorithm main loop timer: 321.981385s (after computation of next merge)
+[t=336.209983s, 365240 KB] M&S algorithm main loop timer: 336.075862s (after merging)
+
+[t=336.216984s, 365240 KB] Next pair of indices: (169, 17)
+[t=336.217981s, 365240 KB] M&S algorithm main loop timer: 336.083860s (after computation of next merge)
+[t=350.912772s, 482720 KB] M&S algorithm main loop timer: 350.779651s (after shrinking)
+[t=350.913772s, 482720 KB] M&S algorithm main loop timer: 350.779651s (after merging)
+
+[t=350.914774s, 482720 KB] Next pair of indices: (170, 18)
+[t=350.914774s, 482720 KB] M&S algorithm main loop timer: 350.780653s (after computation of next merge)
+[t=370.664828s, 482720 KB] M&S algorithm main loop timer: 370.530707s (after label reduction)
+[t=370.664828s, 482720 KB] M&S algorithm main loop timer: 370.531707s (after merging)
+
+[t=370.665828s, 482720 KB] Next pair of indices: (171, 19)
+[t=370.665828s, 482720 KB] M&S algorithm main loop timer: 370.531707s (after computation of next merge)
+[t=381.185541s, 482720 KB] M&S algorithm main loop timer: 381.051419s (after merging)
+
+[t=381.185541s, 482720 KB] Next pair of indices: (172, 20)
+[t=381.186540s, 482720 KB] M&S algorithm main loop timer: 381.052419s (after computation of next merge)
+[t=392.926375s, 482720 KB] M&S algorithm main loop timer: 392.792254s (after merging)
+
+[t=392.926375s, 482720 KB] Next pair of indices: (173, 21)
+[t=392.926375s, 482720 KB] M&S algorithm main loop timer: 392.792254s (after computation of next merge)
+[t=404.358349s, 482720 KB] M&S algorithm main loop timer: 404.225228s (after merging)
+
+[t=404.359350s, 482720 KB] Next pair of indices: (174, 22)
+[t=404.359350s, 482720 KB] M&S algorithm main loop timer: 404.225228s (after computation of next merge)
+[t=415.601483s, 482720 KB] M&S algorithm main loop timer: 415.467362s (after merging)
+
+[t=415.601483s, 482720 KB] Next pair of indices: (175, 23)
+[t=415.601483s, 482720 KB] M&S algorithm main loop timer: 415.467362s (after computation of next merge)
+[t=426.802665s, 482720 KB] M&S algorithm main loop timer: 426.668544s (after merging)
+
+[t=426.802665s, 482720 KB] Next pair of indices: (176, 24)
+[t=426.802665s, 482720 KB] M&S algorithm main loop timer: 426.668544s (after computation of next merge)
+[t=437.736721s, 482720 KB] M&S algorithm main loop timer: 437.602600s (after merging)
+
+[t=437.736721s, 482720 KB] Next pair of indices: (177, 25)
+[t=437.736721s, 482720 KB] M&S algorithm main loop timer: 437.602600s (after computation of next merge)
+[t=449.148622s, 482720 KB] M&S algorithm main loop timer: 449.014501s (after merging)
+
+[t=449.148622s, 482720 KB] Next pair of indices: (178, 26)
+[t=449.148622s, 482720 KB] M&S algorithm main loop timer: 449.014501s (after computation of next merge)
+[t=460.252806s, 482720 KB] M&S algorithm main loop timer: 460.118685s (after merging)
+
+[t=460.252806s, 482720 KB] Next pair of indices: (179, 27)
+[t=460.252806s, 482720 KB] M&S algorithm main loop timer: 460.118685s (after computation of next merge)
+[t=470.638088s, 482720 KB] M&S algorithm main loop timer: 470.503966s (after merging)
+
+[t=470.639092s, 482720 KB] Next pair of indices: (180, 28)
+[t=470.639092s, 482720 KB] M&S algorithm main loop timer: 470.504970s (after computation of next merge)
+Peak memory: 482720 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+exitcode: 23
+
+remaining time: 1132.33
+config 2: relative time 455, remaining time 1024, absolute time 503
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))', '--internal-plan-file', PosixPath('sas_plan')]
+INFO     search stdin: output.sas
+INFO     search time limit: 503s
+INFO     search memory limit: None
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'let(lmc, landmark_cost_partitioning(lm_merged([lm_rhw(),lm_hm(m=1)])),astar(lmc,lazy_evaluator=lmc))' --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10296 KB] reading input...
+[t=0.074546s, 15160 KB] done reading input!
+[t=0.076423s, 15556 KB] Initializing landmark cost partitioning heuristic...
+[t=0.077426s, 15556 KB] Generating landmark graph...
+[t=0.079424s, 15688 KB] Merging 2 landmark graphs
+[t=0.082421s, 16084 KB] Initializing Exploration...
+[t=0.091424s, 21696 KB] Generating landmarks using the RPG/SAS+ approach
+[t=0.248965s, 21960 KB] Landmarks generation time: 0.169542s
+[t=0.248965s, 21960 KB] Discovered 36 landmarks, of which 3 are disjunctive and 0 are conjunctive.
+[t=0.248965s, 21960 KB] 14 edges
+[t=0.249968s, 21960 KB] h^m landmarks m=1
+[t=0.249968s, 21960 KB] Using 381 P^m fluents.
+[t=0.635109s, 21960 KB] h^m landmarks computed.
+[t=0.646107s, 21960 KB] Calculating achievers.
+[t=0.648108s, 21960 KB] Landmarks generation time: 0.399142s
+[t=0.648108s, 21960 KB] Discovered 37 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=0.648108s, 21960 KB] 30 edges
+[t=0.649109s, 21960 KB] Adding simple landmarks
+[t=0.649109s, 21960 KB] Adding disjunctive landmarks
+[t=0.649109s, 21960 KB] Adding orderings
+[t=0.649109s, 21960 KB] Landmarks generation time: 0.571683s
+[t=0.649109s, 21960 KB] Discovered 40 landmarks, of which 3 are disjunctive and 0 are conjunctive.
+[t=0.649109s, 21960 KB] 34 edges
+[t=0.649109s, 21960 KB] Landmark graph generation time: 0.571683s
+[t=0.649109s, 21960 KB] Landmark graph contains 40 landmarks, of which 3 are disjunctive and 0 are conjunctive.
+[t=0.649109s, 21960 KB] Landmark graph contains 34 orderings.
+[t=0.650107s, 21960 KB] Building successor generator...done!
+[t=0.657106s, 21960 KB] peak memory difference for successor generator creation: 0 KB
+[t=0.657106s, 21960 KB] time for successor generation creation: 0.006999s
+[t=0.657106s, 21960 KB] Variables: 154
+[t=0.657106s, 21960 KB] FactPairs: 381
+[t=0.657106s, 21960 KB] Bytes per state: 24
+[t=0.657106s, 21960 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.658108s, 21960 KB] New best heuristic value for landmark_cost_partitioning: 7
+[t=0.658108s, 21960 KB] g=0, 1 evaluated, 0 expanded
+[t=0.658108s, 21960 KB] f = 7, 1 evaluated, 0 expanded
+[t=0.658108s, 21960 KB] Initial heuristic value for landmark_cost_partitioning: 7
+[t=0.658108s, 21960 KB] pruning method: none
+[t=0.658108s, 21960 KB] New best heuristic value for landmark_cost_partitioning: 6
+[t=0.658108s, 21960 KB] g=1, 2 evaluated, 1 expanded
+[t=0.658108s, 21960 KB] f = 8, 5 evaluated, 2 expanded
+[t=0.658108s, 21960 KB] f = 9, 13 evaluated, 6 expanded
+[t=0.658108s, 21960 KB] New best heuristic value for landmark_cost_partitioning: 5
+[t=0.658108s, 21960 KB] g=4, 15 evaluated, 7 expanded
+[t=0.658108s, 21960 KB] f = 10, 22 evaluated, 10 expanded
+[t=0.659107s, 21960 KB] f = 11, 62 evaluated, 29 expanded
+[t=0.660108s, 21960 KB] f = 12, 110 evaluated, 54 expanded
+[t=0.662107s, 21960 KB] f = 13, 240 evaluated, 125 expanded
+[t=0.666108s, 21960 KB] f = 14, 446 evaluated, 246 expanded
+[t=0.672107s, 21960 KB] f = 15, 811 evaluated, 472 expanded
+[t=0.683106s, 21960 KB] f = 16, 1421 evaluated, 831 expanded
+[t=0.700108s, 21960 KB] f = 17, 2426 evaluated, 1444 expanded
+[t=0.727107s, 21960 KB] f = 18, 3938 evaluated, 2406 expanded
+[t=0.770109s, 21960 KB] f = 19, 6384 evaluated, 3997 expanded
+[t=0.833107s, 21960 KB] f = 20, 9846 evaluated, 6289 expanded
+[t=0.932109s, 21960 KB] f = 21, 15249 evaluated, 9848 expanded
+[t=1.078109s, 21960 KB] f = 22, 23635 evaluated, 15255 expanded
+[t=1.310990s, 21960 KB] f = 23, 36980 evaluated, 23798 expanded
+[t=1.660909s, 22068 KB] f = 24, 57181 evaluated, 37032 expanded
+[t=2.226645s, 24528 KB] f = 25, 89693 evaluated, 58041 expanded
+[t=3.067554s, 28548 KB] f = 26, 139364 evaluated, 90383 expanded
+[t=4.316277s, 32932 KB] f = 27, 214704 evaluated, 140560 expanded
+[t=6.252348s, 41836 KB] f = 28, 329906 evaluated, 218426 expanded
+[t=8.880691s, 56160 KB] f = 29, 493252 evaluated, 331847 expanded
+[t=12.783488s, 70508 KB] f = 30, 741220 evaluated, 504965 expanded
+[t=17.960406s, 98440 KB] f = 31, 1069347 evaluated, 743408 expanded
+[t=25.469302s, 127416 KB] f = 32, 1553074 evaluated, 1096156 expanded
+[t=34.865939s, 180236 KB] f = 33, 2162110 evaluated, 1559325 expanded
+[t=47.786494s, 230456 KB] f = 34, 3004081 evaluated, 2207258 expanded
+[t=63.512423s, 323848 KB] f = 35, 4021620 evaluated, 3019425 expanded
+[t=83.584079s, 401684 KB] f = 36, 5328618 evaluated, 4081901 expanded
+[t=106.140398s, 603464 KB] f = 37, 6849502 evaluated, 5350912 expanded
+[t=133.719916s, 668072 KB] f = 38, 8706218 evaluated, 6923494 expanded
+[t=134.572598s, 672752 KB] New best heuristic value for landmark_cost_partitioning: 4
+[t=134.572598s, 672752 KB] g=34, 8783705 evaluated, 6989931 expanded
+[t=163.810728s, 793340 KB] f = 39, 10817547 evaluated, 8725137 expanded
+[t=202.470290s, 942320 KB] f = 40, 13326963 evaluated, 10907479 expanded
+[t=242.741268s, 1240548 KB] f = 41, 16147950 evaluated, 13331876 expanded
+[t=242.742268s, 1240548 KB] New best heuristic value for landmark_cost_partitioning: 3
+[t=242.742268s, 1240548 KB] g=38, 16148003 evaluated, 13331919 expanded
+[t=288.724127s, 1437728 KB] f = 42, 19471452 evaluated, 16264491 expanded
+[t=288.724127s, 1437728 KB] New best heuristic value for landmark_cost_partitioning: 2
+[t=288.725127s, 1437728 KB] g=40, 19471498 evaluated, 16264525 expanded
+[t=338.356615s, 1658236 KB] f = 43, 23183451 evaluated, 19463544 expanded
+[t=398.260749s, 2348040 KB] f = 44, 27482435 evaluated, 23337524 expanded
+[t=460.073523s, 2454200 KB] f = 45, 32207407 evaluated, 27485991 expanded
+[t=460.073523s, 2454200 KB] New best heuristic value for landmark_cost_partitioning: 1
+[t=460.074523s, 2454200 KB] g=44, 32207430 evaluated, 27486010 expanded
+Peak memory: 2668896 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+exitcode: 23
+
+remaining time: 629.4800000000002
+config 3: relative time 569, remaining time 569, absolute time 629
+args: [PosixPath('/home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward'), '--search', 'astar(lmcut())', '--internal-plan-file', PosixPath('sas_plan')]
+INFO     search stdin: output.sas
+INFO     search time limit: 629s
+INFO     search memory limit: None
+INFO     search command line string: /home/alvaro/Descargas/downward-release-24.06.1/builds/release/bin/downward --search 'astar(lmcut())' --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10296 KB] reading input...
+[t=0.074790s, 15160 KB] done reading input!
+[t=0.081793s, 19080 KB] Initializing landmark cut heuristic...
+[t=0.081793s, 19080 KB] Building successor generator...done!
+[t=0.088790s, 21744 KB] peak memory difference for successor generator creation: 2664 KB
+[t=0.088790s, 21744 KB] time for successor generation creation: 0.006996s
+[t=0.088790s, 21744 KB] Variables: 154
+[t=0.088790s, 21744 KB] FactPairs: 381
+[t=0.088790s, 21744 KB] Bytes per state: 24
+[t=0.088790s, 21744 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.093791s, 21744 KB] New best heuristic value for lmcut: 5
+[t=0.093791s, 21744 KB] g=0, 1 evaluated, 0 expanded
+[t=0.093791s, 21744 KB] f = 5, 1 evaluated, 0 expanded
+[t=0.093791s, 21744 KB] Initial heuristic value for lmcut: 5
+[t=0.093791s, 21744 KB] pruning method: none
+[t=0.102793s, 21744 KB] f = 6, 3 evaluated, 1 expanded
+[t=0.112792s, 21744 KB] f = 7, 5 evaluated, 2 expanded
+[t=0.147789s, 21744 KB] f = 8, 13 evaluated, 5 expanded
+[t=0.172792s, 21744 KB] f = 9, 19 evaluated, 8 expanded
+[t=0.267777s, 21744 KB] f = 10, 40 evaluated, 18 expanded
+[t=0.423767s, 21744 KB] f = 11, 70 evaluated, 32 expanded
+[t=0.779766s, 21744 KB] f = 12, 144 evaluated, 72 expanded
+[t=1.293687s, 21744 KB] f = 13, 254 evaluated, 129 expanded
+[t=2.262499s, 21744 KB] New best heuristic value for lmcut: 4
+[t=2.262499s, 21744 KB] g=9, 452 evaluated, 233 expanded
+[t=2.314489s, 21744 KB] f = 14, 464 evaluated, 237 expanded
+[t=3.982159s, 21744 KB] f = 15, 817 evaluated, 419 expanded
+[t=7.124696s, 21744 KB] f = 16, 1454 evaluated, 765 expanded
+[t=11.635130s, 21744 KB] New best heuristic value for lmcut: 3
+[t=11.635130s, 21744 KB] g=13, 2391 evaluated, 1267 expanded
+[t=11.849107s, 21744 KB] f = 17, 2452 evaluated, 1305 expanded
+[t=15.933663s, 21744 KB] f = 18, 3940 evaluated, 2153 expanded
+[t=23.568872s, 21744 KB] f = 19, 6227 evaluated, 3414 expanded
+[t=35.375100s, 21744 KB] f = 20, 9456 evaluated, 5331 expanded
+[t=58.155003s, 21744 KB] f = 21, 14563 evaluated, 8221 expanded
+[t=89.480452s, 22320 KB] f = 22, 22257 evaluated, 12510 expanded
+[t=144.006958s, 23124 KB] f = 23, 33439 evaluated, 18794 expanded
+[t=208.183936s, 23812 KB] f = 24, 51306 evaluated, 28790 expanded
+[t=282.903582s, 25524 KB] f = 25, 77105 evaluated, 43528 expanded
+[t=407.766407s, 29232 KB] f = 26, 116239 evaluated, 66285 expanded
+[t=545.558587s, 30840 KB] f = 27, 171905 evaluated, 98374 expanded
+Peak memory: 32476 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+exitcode: 23
+
+Exit codes: [23, 23, 23, 23]
+Remove intermediate file output.sas
+search exit code: 23
+
+Driver aborting after search
+INFO     Planner time: 1803.21s
