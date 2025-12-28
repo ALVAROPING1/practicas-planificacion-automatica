@@ -170,10 +170,11 @@
                        (contains-slot ?orbament ?slot)
                        (not (filled ?slot))
                        (not (contains-quartz ?orbament ?quartz))
+                       (belongs ?quartz ?category)
                        ;; Check the amount in the inventory
                        (count ?quartz ?count)
                        (less-than n0 ?count)    ; ?count > 0
-                       (addition n1 ?count ?next-count)
+                       (addition n1 ?next-count ?count)
                        ;; If the quartz has an orbament-wide restriction, then
                        ;; check there is no other quartz with the same
                        ;; restriction in the same orbament.
@@ -191,6 +192,8 @@
                  (slot-to-be-modified ?slot)
                  (orbament-to-be-modified ?orbament)
                  (contains-quartz ?orbament ?quartz)
+                 (not (count ?quartz ?count))
+                 (count ?quartz ?next-count)
                  (increase (total-cost) 1)
                  (not (action-state))
                  (restrict-state)))
@@ -205,8 +208,8 @@
                  ?orbament - orbament)
     :precondition (and (restrict-state)
                        (category-to-be-modified ?category)
-                       (category-to-be-modified ?orbament)
-                       (orbament-wide category)
+                       (orbament-to-be-modified ?orbament)
+                       (orbament-wide ?category)
                        (not (restricted ?orbament ?category)))
     :effect (restricted ?orbament ?category)) ; If not restricted, restrict it
 
@@ -235,12 +238,6 @@
                        (category-to-be-modified ?category)
                        (slot-to-be-modified ?slot)
                        (orbament-to-be-modified ?orbament)
-                       ;; All lines that connect the slot where the quartz has
-                       ;; been inserted have been added to the elemental value
-                       ;; of the quartz.
-                       (forall (?line - line)
-                         (imply (connects ?line ?slot)
-                                (to-be-activated ?line)))
                        ;; If the category is orbament wide, then check it has
                        ;; been applied.
                        (imply (orbament-wide ?category)
@@ -264,16 +261,17 @@
                  ?slot    - slot
                  ?quartz  - quartz
                  ?element - element
-                 ?old     - old
-                 ?power   - power
-                 ?new     - new)
+                 ?old     - natural
+                 ?power   - natural
+                 ?new     - natural)
     :precondition (and (addition-state)
                        (slot-to-be-modified ?slot)
                        (quartz-to-be-modified ?quartz)
                        (connects ?line ?slot)
                        (not (modified ?element ?line))
                        (value ?element ?line ?old)
-                       (power ?element ?quartz ?power))
+                       (power ?element ?quartz ?power)
+                       (addition ?old ?power ?new))
     :effect (and (modified ?element ?line)
                  (not (value ?element ?line ?old))
                  (value ?element ?line ?new)))
@@ -290,13 +288,11 @@
     :effect (to-be-activated ?line))
 
   (:action finish-addition
-    :parameters (?quartz   - quartz
-                 ?category - category
-                 ?slot     - slot
-                 ?orbament - orbament)
+    :parameters (?quartz - quartz
+                 ?slot   - slot)
     :precondition (and (addition-state)
                        (quartz-to-be-modified ?quartz)
-                       (slot-to-be-modified ?category)
+                       (slot-to-be-modified ?slot)
                        ;; All lines that connect the slot where the quartz has
                        ;; been inserted have been added to the elemental value
                        ;; of the quartz.
@@ -365,16 +361,17 @@
   (:action unmark-line
     :parameters (?line    - line
                  ?element - element)
-    :precondition (modified ?element ?line)
+    :precondition (and (unmark-state)
+                       (modified ?element ?line))
     :effect (not (modified ?element ?line)))
 
   (:action finish-unmarking   ;; 2 rules
     :precondition (and (unmark-state)
                        (forall (?art - art)
-                         (not (marked ?art)))
-                       (forall (?element - element)
-                         (forall (?line - line)
-                           (not (modified ?element ?line)))))
+                         (not (marked ?art))))
+                       ;; (forall (?element - element)
+                       ;;   (forall (?line - line)
+                       ;;     (not (modified ?element ?line)))))
     :effect (and (not (unmark-state))
                  (action-state)))
 

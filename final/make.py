@@ -100,6 +100,12 @@ class Art:
     def __repr__ (self):
         return colour(self.element, f"{self.name}")
 
+def search (lst, name):
+    for item in lst:
+        if item.name == name:
+            return item
+    return None
+
 septium_vein_category = Category("Categoría veta de septium", True)
 heal_category = Category("Categoría curación", True)
 mercy_category = Category("Categoría compasión", True)
@@ -126,7 +132,7 @@ cast_category = Category("Categoría artes", True)
 hit_category = Category("Categoría precisión", True)
 ep_cut_category = Category("Categoría ahorro de PE", True)
 impede_category = Category("Categoría anulación", True)
-ep_category = Category("Categoría pE", True)
+ep_category = Category("Categoría PE", True)
 
 categories : typing.Final[list[Category]] = [
     septium_vein_category,
@@ -543,6 +549,7 @@ if __name__ == "__main__":
         print(f"USAGE: {sys.argv[0]}")
         exit(1)
     max_n = max_number()
+    max_n = 4
 
     print("; vim: ft=scheme")
     print("(define (problem orbament-settings-layout)")
@@ -564,8 +571,7 @@ if __name__ == "__main__":
     quartz_init()
     art_init()
     orbament_init()
-    put(2, "(power earth artes-2 n4)")
-    put(2, "(power earth defensa-3 n2)")
+    categories_init()
 
     print()
     print()
@@ -574,8 +580,13 @@ if __name__ == "__main__":
     put(2, ";;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv;;")
     print()
     put(2, ";; ~ Quartz count in inventory ~")
+    default_counts = {
+        search(quartz, "Defensa 1"): 2,
+        search(quartz, "Ataque 1"): 1,
+    }
     for q in quartz:
-        put(2, f"(count {lispify(q.name)} n0)")
+        n = default_counts[q] if q in default_counts else 0
+        put(2, f"(count {lispify(q.name)} n{n})")
     print()
     put(2, ";; ~ Elemental value of line ~")
     for o in orbaments:
@@ -587,9 +598,9 @@ if __name__ == "__main__":
 
     put(1, "(:goal")
     put(2, "(and")
-    put(3, "(action-state)")
-    put(3, "(power earth defensa-3 n7)")
-    put(3, "(power earth artes-2 n7)")
+    put(3, "(unmark-state)")
+    put(3, "(not (marked impacto-petreo))")
+    put(3, "(active estelle-line-1 impacto-petreo)")
     print("))")
 
     put(1, "(:minimize (total-cost))")
