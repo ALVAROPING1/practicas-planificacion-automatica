@@ -24,6 +24,12 @@ class Element (enum.Enum):
     Mirage = 7
 
     def __repr__ (self):
+        return colour(self, str(self))
+
+    def lisp(self):
+        return lispify(self.name)
+
+    def spanish (self):
         match self:
             case Element.Earth:  item = "Tierra"
             case Element.Water:  item = "Agua"
@@ -32,10 +38,10 @@ class Element (enum.Enum):
             case Element.Time:   item = "Tiempo"
             case Element.Space:  item = "Espacio"
             case Element.Mirage: item = "Espejismo"
-        return colour(self, item)
+        return item
 
     def __str__ (self):
-        return repr(self)
+        return self.spanish()
 
 def colour(element : Element | None, item : str) -> str:
     match element:
@@ -416,24 +422,19 @@ orbaments : typing.Final[list[Orbament]] = [
 def put (tab, *args, **kwargs):
     print(f"\n{' ' * (tab * 2 - 1)}", *args, **kwargs, end="")
 
+# ================================= OBJECTS ================================= #
+
 def peanno_objects (n):
     print()
     put(2, ";; Natural numbers")
     for i in range(n):
         put(2, f"n{i} - natural")
 
-def peanno_init (n):
+def element_objects ():
     print()
-    put(2, ";; Addition")
-    for lhs in range(n):
-        for rhs in range(n):
-            put(2, f"(addition n{lhs} n{rhs} n{min(lhs + rhs, n - 1)})")
-    print()
-    put(2, ";; Comparison")
-    for lhs in range(n):
-        for rhs in range(n):
-            if lhs < rhs:
-                put(2, f"(less-than n{lhs} n{rhs})")
+    put(2, ";; Elements")
+    for e in Element:
+        put(2, f"{e.lisp()} - element")
 
 def quartz_objects():
     print()
@@ -464,6 +465,21 @@ def category_objects():
     for c in categories:
         put(2, f"{lispify(c.name)} - category")
 
+# ================================== INIT =================================== #
+
+def peanno_init (n):
+    print()
+    put(2, ";; Addition")
+    for lhs in range(n):
+        for rhs in range(n):
+            put(2, f"(addition n{lhs} n{rhs} n{min(lhs + rhs, n - 1)})")
+    print()
+    put(2, ";; Comparison")
+    for lhs in range(n):
+        for rhs in range(n):
+            if lhs < rhs:
+                put(2, f"(less-than n{lhs} n{rhs})")
+
 def quartz_init():
     print()
     put(2, ";; ======== Quartz ======== ;;")
@@ -472,7 +488,7 @@ def quartz_init():
         put(2, f"(belongs {lispify(q.name)} {lispify(q.category.name)})")
         for e in Element:
             n = q.power[e] if e in q.power else 0
-            put(2, f"({lispify(e.name)}-power {lispify(q.name)} n{n})")
+            put(2, f"(power {e.lisp()} {lispify(q.name)} n{n})")
 
 def art_init():
     print()
@@ -481,7 +497,7 @@ def art_init():
         put(2, f";;; >>> {a.name} <<< ;;;")
         for e in Element:
             n = a.reqs[e] if e in a.reqs else 0
-            put(2, f"({lispify(e.name)}-requirement {lispify(a.name)} n{n})")
+            put(2, f"(requirement {e.lisp()} {lispify(a.name)} n{n})")
 
 def orbament_init():
     print()
@@ -528,11 +544,13 @@ if __name__ == "__main__":
         exit(1)
     max_n = max_number()
 
+    print("; vim: ft=scheme")
     print("(define (problem orbament-settings-layout)")
     print("  (:domain orbament-settings)")
 
     put(1, "(:objects")
     peanno_objects(max_n)
+    element_objects()
     category_objects()
     quartz_objects()
     art_objects()
@@ -546,7 +564,8 @@ if __name__ == "__main__":
     quartz_init()
     art_init()
     orbament_init()
-    put(2, "(earth-power artes-1 n2)")
+    put(2, "(power earth artes-2 n4)")
+    put(2, "(power earth defensa-3 n2)")
 
     print()
     print()
@@ -563,26 +582,17 @@ if __name__ == "__main__":
         put(2, f";; {o.name}")
         for i in range(1, 1 + len(o.lines)):
             for e in Element:
-                put(2, f"({lispify(e.name)}-value {lispify(o.name)}-line-{i} n0)")
+                put(2, f"(value {e.lisp()} {lispify(o.name)}-line-{i} n0)")
     print(")")
 
     put(1, "(:goal")
     put(2, "(and")
     put(3, "(action-state)")
-    put(3, "(earth-power defensa-3 n7)")
-    put(3, "(earth-power artes-2 n7)")
+    put(3, "(power earth defensa-3 n7)")
+    put(3, "(power earth artes-2 n7)")
     print("))")
 
     put(1, "(:minimize (total-cost))")
     print(")")
 
-    # insert: 36
-    # restrict-orbament: 6
-    # restrict-line: 9
-    # addition: 51
-    # finish-addition: 36
-    # finish-addition: 32
-    # deactivate: 39
-    # finish-activation: 5
-    # unmark: 2
-    # finish-unmarking: 2
+
