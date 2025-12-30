@@ -436,6 +436,12 @@ def peanno_objects (n):
     for i in range(n):
         put(2, f"n{i} - natural")
 
+def count_objects (n):
+    print()
+    put(2, ";; Natural numbers for counting")
+    for i in range(n):
+        put(2, f"c{i} - count")
+
 def element_objects ():
     print()
     put(2, ";; Elements")
@@ -486,6 +492,12 @@ def peanno_init (n):
             if lhs < rhs:
                 put(2, f"(less-than n{lhs} n{rhs})")
 
+def count_init (n):
+    print()
+    put(2, ";; Natural numbers for counting")
+    for i in range(1, n):
+        put(2, f"(succ c{i-1} c{i})")
+
 def quartz_init():
     print()
     put(2, ";; ======== Quartz ======== ;;")
@@ -514,6 +526,8 @@ def orbament_init():
             put(2, f"(contains-line {lispify(o.name)}-orbament {lispify(o.name)}-line-{line})")
         for slot in o.slots:
             put(2, f"(contains-slot {lispify(o.name)}-orbament {lispify(o.name)}-slot-{slot.num})")
+            c = sum(map(lambda x : x.count(slot.num), o.lines))
+            put(2, f"(connected-line-count {lispify(o.name)}-slot-{slot.num} c{c})")
         for line in range(1, len(o.lines) + 1):
             for slot in o.lines[line - 1]:
                 put(2, f"(connects {lispify(o.name)}-line-{line} {lispify(o.name)}-slot-{slot})")
@@ -549,7 +563,7 @@ if __name__ == "__main__":
         print(f"USAGE: {sys.argv[0]}")
         exit(1)
     max_n = max_number()
-    max_n = 4
+    max_count = 100
 
     print("; vim: ft=scheme")
     print("(define (problem orbament-settings-layout)")
@@ -557,6 +571,7 @@ if __name__ == "__main__":
 
     put(1, "(:objects")
     peanno_objects(max_n)
+    count_objects(max_count)
     element_objects()
     category_objects()
     quartz_objects()
@@ -564,10 +579,14 @@ if __name__ == "__main__":
     orbament_objects()
     print(")")
 
-    put(1, "(:init")
-    put(2, "(action-state)")
-    put(2, "(= (total-cost) 0)")
+    put(1, f"(:init")
+    put(2, f"(action-state)")
+    put(2, f"(= (total-cost) 0)")
+    put(2, f"(element-count c{len(Element)})")
+    put(2, f"(art-count c{len(arts)})")
+    put(2, f"(marked-count c0)")
     peanno_init(max_n)
+    count_init(max_count)
     quartz_init()
     art_init()
     orbament_init()
@@ -583,10 +602,11 @@ if __name__ == "__main__":
     default_counts = {
         search(quartz, "Defensa 1"): 2,
         search(quartz, "Ataque 1"): 1,
+        # search(quartz, "Defensa 3"): 1,
     }
     for q in quartz:
         n = default_counts[q] if q in default_counts else 0
-        put(2, f"(count {lispify(q.name)} n{n})")
+        put(2, f"(inventory-count {lispify(q.name)} n{n})")
     print()
     put(2, ";; ~ Elemental value of line ~")
     for o in orbaments:
@@ -598,9 +618,13 @@ if __name__ == "__main__":
 
     put(1, "(:goal")
     put(2, "(and")
-    put(3, "(unmark-state)")
-    put(3, "(not (marked impacto-petreo))")
-    put(3, "(active estelle-line-1 impacto-petreo)")
+    # put(3, "(value earth estelle-line-1 n3)")
+    # put(3, "(active estelle-line-1 martillo-petreo)")
+    put(3, "(active estelle-line-1 martillo-petreo)")
+    put(3, "(active estelle-line-2 martillo-petreo)")
+    put(3, "(active estelle-line-2 bola-ignea)")
+    put(3, "(active joshua-line-2 martillo-petreo)")
+
     print("))")
 
     put(1, "(:minimize (total-cost))")

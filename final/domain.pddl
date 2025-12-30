@@ -12,11 +12,12 @@
 
 
 (define (domain orbament-settings)
-  (:requirements :typing :action-costs)
+  (:requirements :typing :action-costs :derived-predicates)
 
   (:types
     ;; Miscellaneous
     natural  - object   ; The set of natural numbers: {0, 1, 2, ...}
+    count    - object   ; The set of natural numbers: {0, 1, 2, ...}
 
     element  - object   ; The different elements, in total 7.
                         ; Lower elements: Earth, Water, Fire, Wind
@@ -69,10 +70,14 @@
     ;; ~ Natural number operations ~
     (addition   ?lhs ?rhs ?res - natural)
     (less-than  ?lhs ?rhs - natural)
+    (succ       ?x ?y - count)
+
+    (element-count ?x - count)
+    (art-count ?x - count)
 
     ;; ~ Amount of quartz ~
     ;; This predicate indicates the amount of quartz in the inventory.
-    (count
+    (inventory-count
       ?quartz - quartz
       ?n      - natural)
 
@@ -92,6 +97,11 @@
       ?line    - line
       ?value   - natural)
 
+   (enough-power-for-element
+              ?element - element
+              ?line    - line
+              ?art     - art)
+
     ;; ~ Elemental requirements for arts ~
     ;; In order to activate an art in a line, there is an elemental requirement
     ;; for it. For instance to activate the art `Gran lágrima', you would need
@@ -110,6 +120,8 @@
     (contains-line ?orbament - orbament ?line - line)
     (contains-slot ?orbament - orbament ?slot - slot)
     (contains-quartz ?orbament - orbament ?quartz - quartz)
+    (connected-line-count ?slot - slot)
+
     (connects ?line - line ?slot - slot)
     (filled ?slot - slot)
     (belongs ?quartz - quartz ?category - category)
@@ -139,6 +151,8 @@
     (modified
       ?element - element
       ?line - line)
+    (modified-count
+      ?x - count)
 
     (to-be-activated
       ?line - line)
@@ -150,6 +164,7 @@
     (space-added ?line - line)
     (mirage-added ?line - line)
 
+    (marked-count ?x - count)
     (marked ?art - art)
 
 )
@@ -172,7 +187,7 @@
                        (not (contains-quartz ?orbament ?quartz))
                        (belongs ?quartz ?category)
                        ;; Check the amount in the inventory
-                       (count ?quartz ?count)
+                       (inventory-count ?quartz ?count)
                        (less-than n0 ?count)    ; ?count > 0
                        (addition n1 ?next-count ?count)
                        ;; If the quartz has an orbament-wide restriction, then
@@ -192,8 +207,8 @@
                  (slot-to-be-modified ?slot)
                  (orbament-to-be-modified ?orbament)
                  (contains-quartz ?orbament ?quartz)
-                 (not (count ?quartz ?count))
-                 (count ?quartz ?next-count)
+                 (not (inventory-count ?quartz ?count))
+                 (inventory-count ?quartz ?next-count)
                  (increase (total-cost) 1)
                  (not (action-state))
                  (restrict-state)))
@@ -276,7 +291,7 @@
                  (not (value ?element ?line ?old))
                  (value ?element ?line ?new)))
 
-  (:action addition
+  (:action finish-line-addition
     :parameters (?line - line
                  ?slot - slot)
     :precondition (and (addition-state)
@@ -302,93 +317,143 @@
     :effect (and (not (quartz-to-be-modified ?quartz))
                  (not (slot-to-be-modified ?slot))
                  (not (addition-state))
-                 (activation-state)))
-
-
-  ;;; Activation
-
-  (:action activate
-    :parameters (?line - line
-                 ?art  - art)
-
-    :precondition (and (activation-state)
-                       (to-be-activated ?line)
-                       (not (marked art))
-                       ;; When for all elements value >= requirement
-                       (forall (?element - element)
-                         (forall (?v - natural)
-                           (imply (value ?element ?line ?v)
-                                  (forall (?r - natural)
-                                    (imply (requirement ?element ?art ?r)
-                                           (not (less-than ?v ?r))))))))
-    :effect (and (active ?line ?art)
-                 (marked ?art)))
-
-  (:action deactivate
-    :parameters (?line - line
-                 ?art  - art)
-
-    :precondition (and (activation-state)
-                       (to-be-activated ?line)
-                       (not (marked art))
-                       ;; When for some elements value < requirement
-                       (forall (?element - element)
-                         (forall (?v - natural)
-                           (imply (value ?element ?line ?v)
-                                  (exists (?r - natural)
-                                    (imply (requirement ?element ?art ?r)
-                                           (less-than ?v ?r)))))))
-    :effect (and (not (active ?line ?art))
-                 (marked ?art)))
-
-  (:action finish-activation  ;; 5 rules
-    :parameters (?line - line)
-    :precondition (and (activation-state)
-                       (forall (?art - art)
-                         (marked ?art)))
-    :effect (and (not (to-be-activated ?line))
-                 (not (activation-state))
                  (unmark-state)))
 
-  ;;; Umarking
+  ; Unmarking
 
-  (:action unmark
-    :parameters (?art - art)
-    :precondition (and (unmark-state)
-                       (marked ?art))
-    :effect (not (marked ?art)))
-
-  (:action unmark-line
+  (:action unmark-element
     :parameters (?line    - line
-                 ?element - element)
+                ?element - element)
     :precondition (and (unmark-state)
                        (modified ?element ?line))
     :effect (not (modified ?element ?line)))
 
-  (:action finish-unmarking   ;; 2 rules
+  (:action unmark-line
+    :parameters (?line - line)
     :precondition (and (unmark-state)
-                       (forall (?art - art)
-                         (not (marked ?art))))
-                       ;; (forall (?element - element)
-                       ;;   (forall (?line - line)
-                       ;;     (not (modified ?element ?line)))))
+                       (to-be-activated ?line)
+                       (forall (?element - element)
+                         (not (modified ?element ?line))))
+    :effect (not (to-be-activated ?line)))
+
+  (:action finish-unmark
+    :precondition (and (unmark-state)
+                       (forall (?line - line)
+                         (not (to-be-activated ?line))))
     :effect (and (not (unmark-state))
                  (action-state)))
 
-  ;;; Removal
 
-  ;;; Subtraction
+  ;;; Activation
 
+; (:action activate
+;   :parameters (?line  - line
+;                ?art   - art
+;                ?count - count
+;                ?succ  - count)
 
-  (:action increment
-    :parameters (?quartz - quartz
-                 ?value  - natural
-                 ?next   - natural)
-    :precondition (and (power earth ?quartz ?value)
-                       (addition ?value n1 ?next))
-    :effect (and (not (power earth ?quartz ?value))
-                 (power earth ?quartz ?next)
-                 (increase (total-cost) 10)))
+;   :precondition (and (activation-state)
+;                      (to-be-activated ?line)
+;                      ;; Mark the art as viewed
+;                      (not (marked art))
+;                      (marked-count ?count)
+;                      (succ ?count ?succ)
+;                      ;; When for all elements value >= requirement
+;                      (forall (?element - element)
+;                        (forall (?v - natural)
+;                          (imply (value ?element ?line ?v)
+;                                 (forall (?r - natural)
+;                                   (imply (requirement ?element ?art ?r)
+;                                          (not (less-than ?v ?r))))))))
+;   :effect (and (active ?line ?art)
+;                ;; Increment the marked count in 1
+;                (marked ?art)   ; Art is activated
+;                (not (marked-count ?count))
+;                (marked-count ?succ)))
 
+; (:action deactivate
+;   :parameters (?line  - line
+;                ?art   - art
+;                ?count - count
+;                ?succ  - count)
+
+;   :precondition (and (activation-state)
+;                      (to-be-activated ?line)
+;                      ;; Mark the art as viewed
+;                      (not (marked art))
+;                      (marked-count ?count)
+;                      (succ ?count ?succ)
+;                      ;; When for some elements value < requirement
+;                      (forall (?element - element)
+;                        (forall (?v - natural)
+;                          (imply (value ?element ?line ?v)
+;                                 (exists (?r - natural)
+;                                   (imply (requirement ?element ?art ?r)
+;                                          (less-than ?v ?r)))))))
+;   :effect (and (not (active ?line ?art))   ; Art is deactivated
+;                ;; Increment the marked count in 1
+;                (marked ?art)
+;                (not (marked-count ?count))
+;                (marked-count ?succ)))
+
+; (:action finish-activation  ;; 5 rules
+;   :parameters (?line - line)
+;   :precondition (and (activation-state)
+;                      (forall (?art - art)
+;                        (marked ?art)))
+;   :effect (and (not (to-be-activated ?line))
+;                (not (activation-state))
+;                (unmark-state)))
+
+; ;;; Umarking
+
+; (:action unmark
+;   :parameters (?art   - art
+;                ?count - count
+;                ?pred  - count)
+;   :precondition (and (unmark-state)
+;                      (marked ?art)
+;                      (marked-count ?count)
+;                      (succ ?pred ?count))
+;   :effect (and (not (marked ?art))
+;                (not (marked-count ?count))
+;                (marked-count ?pred)))
+
+; (:action unmark-line
+;   :parameters (?line    - line
+;                ?element - element)
+;   :precondition (and (unmark-state)
+;                      (modified ?element ?line))
+;   :effect (not (modified ?element ?line)))
+
+; (:action finish-unmarking
+;   :precondition (and (unmark-state)
+;                      (marked-count c0))
+;                      ;; (forall (?element - element)
+;                      ;;   (forall (?line - line)
+;                      ;;     (not (modified ?element ?line)))))
+;   :effect (and (not (unmark-state))
+;                (action-state)))
+
+; ;;; Removal
+
+; ;;; Subtraction
+
+  (:derived (enough-power-for-element
+              ?element - element
+              ?line    - line
+              ?art     - art)
+    (exists (?v - natural)
+      (exists (?r - natural)
+        (and (value ?element ?line ?v)
+             (requirement ?element ?art ?r)
+             (not (less-than ?v ?r))))))
+
+  (:derived (active
+              ?line - line
+              ?art  - art)
+    (and (action-state)
+         (forall (?element - element)
+           (enough-power-for-element ?element ?line ?art))))
 
 )
