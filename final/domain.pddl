@@ -213,6 +213,8 @@
                  (not (action-state))
                  (restrict-state)))
 
+  ;;; Removal
+
   ;;; Restrict
 
   (:action restrict-orbament
@@ -319,7 +321,7 @@
                  (not (addition-state))
                  (unmark-state)))
 
-  ; Unmarking
+  ;;; Unmarking
 
   (:action unmark-element
     :parameters (?line    - line
@@ -344,96 +346,6 @@
                  (action-state)))
 
 
-  ;;; Activation
-
-; (:action activate
-;   :parameters (?line  - line
-;                ?art   - art
-;                ?count - count
-;                ?succ  - count)
-
-;   :precondition (and (activation-state)
-;                      (to-be-activated ?line)
-;                      ;; Mark the art as viewed
-;                      (not (marked art))
-;                      (marked-count ?count)
-;                      (succ ?count ?succ)
-;                      ;; When for all elements value >= requirement
-;                      (forall (?element - element)
-;                        (forall (?v - natural)
-;                          (imply (value ?element ?line ?v)
-;                                 (forall (?r - natural)
-;                                   (imply (requirement ?element ?art ?r)
-;                                          (not (less-than ?v ?r))))))))
-;   :effect (and (active ?line ?art)
-;                ;; Increment the marked count in 1
-;                (marked ?art)   ; Art is activated
-;                (not (marked-count ?count))
-;                (marked-count ?succ)))
-
-; (:action deactivate
-;   :parameters (?line  - line
-;                ?art   - art
-;                ?count - count
-;                ?succ  - count)
-
-;   :precondition (and (activation-state)
-;                      (to-be-activated ?line)
-;                      ;; Mark the art as viewed
-;                      (not (marked art))
-;                      (marked-count ?count)
-;                      (succ ?count ?succ)
-;                      ;; When for some elements value < requirement
-;                      (forall (?element - element)
-;                        (forall (?v - natural)
-;                          (imply (value ?element ?line ?v)
-;                                 (exists (?r - natural)
-;                                   (imply (requirement ?element ?art ?r)
-;                                          (less-than ?v ?r)))))))
-;   :effect (and (not (active ?line ?art))   ; Art is deactivated
-;                ;; Increment the marked count in 1
-;                (marked ?art)
-;                (not (marked-count ?count))
-;                (marked-count ?succ)))
-
-; (:action finish-activation  ;; 5 rules
-;   :parameters (?line - line)
-;   :precondition (and (activation-state)
-;                      (forall (?art - art)
-;                        (marked ?art)))
-;   :effect (and (not (to-be-activated ?line))
-;                (not (activation-state))
-;                (unmark-state)))
-
-; ;;; Umarking
-
-; (:action unmark
-;   :parameters (?art   - art
-;                ?count - count
-;                ?pred  - count)
-;   :precondition (and (unmark-state)
-;                      (marked ?art)
-;                      (marked-count ?count)
-;                      (succ ?pred ?count))
-;   :effect (and (not (marked ?art))
-;                (not (marked-count ?count))
-;                (marked-count ?pred)))
-
-; (:action unmark-line
-;   :parameters (?line    - line
-;                ?element - element)
-;   :precondition (and (unmark-state)
-;                      (modified ?element ?line))
-;   :effect (not (modified ?element ?line)))
-
-; (:action finish-unmarking
-;   :precondition (and (unmark-state)
-;                      (marked-count c0))
-;                      ;; (forall (?element - element)
-;                      ;;   (forall (?line - line)
-;                      ;;     (not (modified ?element ?line)))))
-;   :effect (and (not (unmark-state))
-;                (action-state)))
 
 ; ;;; Removal
 
