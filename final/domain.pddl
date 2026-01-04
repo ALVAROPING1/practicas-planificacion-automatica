@@ -17,7 +17,6 @@
   (:types
     ;; Miscellaneous
     natural  - object   ; The set of natural numbers: {0, 1, 2, ...}
-    count    - object   ; The set of natural numbers: {0, 1, 2, ...}
 
     element  - object   ; The different elements, in total 7.
                         ; Lower elements: Earth, Water, Fire, Wind
@@ -70,10 +69,6 @@
     ;; ~ Natural number operations ~
     (addition   ?lhs ?rhs ?res - natural)
     (less-than  ?lhs ?rhs - natural)
-    (succ       ?x ?y - count)
-
-    (element-count ?x - count)
-    (art-count ?x - count)
 
     ;; ~ Amount of quartz ~
     ;; This predicate indicates the amount of quartz in the inventory.
@@ -117,10 +112,8 @@
 
     (active ?line - line ?art - art)
 
-    (contains-line ?orbament - orbament ?line - line)
     (contains-slot ?orbament - orbament ?slot - slot)
     (contains-quartz ?orbament - orbament ?quartz - quartz)
-    (connected-line-count ?slot - slot)
 
     (connects ?line - line ?slot - slot)
     (filled ?slot - slot)
@@ -136,7 +129,6 @@
     (activation-state)
     (unmark-state)
     (unrestrict-state)
-    (deletion-state)
     (subtraction-state)
 
     (quartz-to-be-modified
@@ -151,22 +143,9 @@
     (modified
       ?element - element
       ?line - line)
-    (modified-count
-      ?x - count)
 
     (to-be-activated
       ?line - line)
-    (earth-added ?line - line)
-    (water-added ?line - line)
-    (fire-added ?line - line)
-    (wind-added ?line - line)
-    (time-added ?line - line)
-    (space-added ?line - line)
-    (mirage-added ?line - line)
-
-    (marked-count ?x - count)
-    (marked ?art - art)
-
 )
 
   (:functions (total-cost) - number)
