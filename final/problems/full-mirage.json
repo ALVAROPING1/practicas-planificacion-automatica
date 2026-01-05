@@ -1,0 +1,18 @@
+{
+   "name":        "Enable all Mirage",
+   "description": "Enable all mirage arts in any character.",
+   "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
+   "strict": "false",
+
+   "init": {
+      "inventory" : 1
+   },
+
+   "goal" : [
+      {
+         "arts": ["Santificación", "Marca del caos"]
+      }
+   ]
+
+}

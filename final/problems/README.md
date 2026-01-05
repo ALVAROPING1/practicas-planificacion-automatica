@@ -55,6 +55,9 @@ subtracted from inventory. So if one character has «Ataque 1», there is no nee
 to put one «Ataque 1» in inventory. Likewise if there is a character with
 «Ataque 1» and one «Ataque 1» in inventory, that number isn't decreased.
 
+The other value that it can take is an integer. It sets all elements to that
+integer value.
+
 ## `goal`
 Optional. A list of dictionaries with different goals. Everything is _and_ed
 together. The objects have:

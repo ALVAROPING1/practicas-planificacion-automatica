@@ -43,7 +43,7 @@
     orbament - limited  ; An orbament is a set of slots connected by lines
                         ; associated with a character in the game.
 
-    slot     - limited  ; A slot is a place in the orbament where a quartz can
+    slot     - object   ; A slot is a place in the orbament where a quartz can
                         ; be placed. There are slots with elemental
                         ; restrictions. So if a slot has an `Earth'
                         ; restriction, you cannot place a non-earth element in
@@ -162,11 +162,6 @@
     (orbament-to-be-modified
       ?orbament - orbament)
 
-    ; Restrictions
-
-    (restrict-state)
-    (unrestrict-state)
-
     ; Addition / Subtraction
 
     (addition-state)
@@ -204,8 +199,7 @@
                        ;; If the quartz has an orbament-wide restriction, then
                        ;; check there is no other quartz with the same
                        ;; restriction in the same orbament.
-                       (not (restricted ?orbament ?category))
-                       (not (restricted ?slot ?category)))
+                       (not (restricted ?orbament ?category)))
                        ;; Otherwise, check that there is no line that connects
                        ;; the slot which has a line-wide restriction.
                        ;; (imply (not (orbament-wide ?category))
@@ -214,15 +208,14 @@
                        ;;                 (not (restricted ?line ?slot))))))
     :effect (and (filled ?slot)
                  (quartz-to-be-modified ?quartz)
-                 (category-to-be-modified ?category)
                  (slot-to-be-modified ?slot)
-                 (orbament-to-be-modified ?orbament)
                  (contains-quartz ?slot ?quartz)
                  (not (inventory-count ?quartz ?count))
+                 (restricted ?orbament ?category)
                  (inventory-count ?quartz ?next-count)
-                 (increase (total-cost) 1)
+                 (increase (total-cost) 10)
                  (not (action-state))
-                 (restrict-state)))
+                 (addition-state)))
 
   ;;; Removal
 
@@ -238,81 +231,20 @@
                        (filled ?slot)
                        (contains-quartz ?slot ?quartz)
                        (belongs ?quartz ?category)
+                       (restricted ?orbament ?category)
                        ;; Check the amount in the inventory
                        (inventory-count ?quartz ?count)
                        (addition n1 ?count ?next-count))
     :effect (and (not (filled ?slot))
                  (quartz-to-be-modified ?quartz)
-                 (category-to-be-modified ?category)
                  (slot-to-be-modified ?slot)
-                 (orbament-to-be-modified ?orbament)
+                 (not (restricted ?orbament ?category))
                  (not (contains-quartz ?slot ?quartz))
                  (not (inventory-count ?quartz ?count))
                  (inventory-count ?quartz ?next-count)
                  (increase (total-cost) 1)
                  (not (action-state))
-                 (unrestrict-state)))
-
-  ;;; Restrict
-
-  (:action restrict-orbament
-    ;; This action is used to make sure that if there is an orbament-wide
-    ;; restriction category that is to be applied to the orbament by the quartz
-    ;; is done.
-    :parameters (?category - category
-                 ?orbament - orbament)
-    :precondition (and (restrict-state)
-                       (category-to-be-modified ?category)
-                       (orbament-to-be-modified ?orbament)
-                       (orbament-wide ?category)
-                       (not (restricted ?orbament ?category)))
-    :effect (restricted ?orbament ?category)) ; If not restricted, restrict it
-
-  (:action restrict-slot
-    ;; This action is to make sure all lines are marked in the event of placing
-    ;; a quartz with a line-wide restriction (such as blade or shield).
-    :parameters (?category  - category
-                 ?slot      - slot
-                 ?connected - slot
-                 ?line      - line)
-    :precondition (and (restrict-state)
-                       (category-to-be-modified ?category)
-                       (slot-to-be-modified ?slot)
-                       (not (orbament-wide ?category))
-                       (connects ?line ?slot)
-                       (connects ?line ?connected)
-                       (not (restricted ?connected ?category)))
-    :effect (restricted ?connected ?category))
-
-  (:action finish-restrict
-    ;; Finish restrictions if the restriction is applied where it has to be
-    ;; applied. And then pass to the next step: Addition
-    :parameters (?quartz   - quartz
-                 ?category - category
-                 ?slot     - slot
-                 ?orbament - orbament)
-    :precondition (and (restrict-state)
-                       (quartz-to-be-modified ?quartz)
-                       (category-to-be-modified ?category)
-                       (slot-to-be-modified ?slot)
-                       (orbament-to-be-modified ?orbament)
-                       ;; If the category is orbament wide, then check it has
-                       ;; been applied.
-                       (imply (orbament-wide ?category)
-                              (restricted ?orbament ?category))
-                       ;; Otherwise, check if it has been applied to every line
-                       (imply (not (orbament-wide ?category))
-                              (forall (?line - line)
-                                (imply (connects ?line ?slot)
-                                  (forall (?connected - slot)
-                                    (imply (connects ?line ?connected)
-                                           (restricted ?connected ?category)))))))
-    :effect (and (not (orbament-to-be-modified ?orbament))
-                 (not (category-to-be-modified ?category))
-                 ;; We can forget about orbaments and categories for now.
-                 ;; We still need the `?slot' and the `?quartz' for addition.
-                 (not (restrict-state))
-                 (addition-state)))
+                 (subtraction-state)))
 
   ;;; Addition
 
@@ -387,61 +319,6 @@
                          (not (to-be-activated ?line))))
     :effect (and (not (unmark-state))
                  (action-state)))
-
-
-  ;;; Unrestrict
-
-  (:action unrestrict-orbament
-    :parameters (?category - category
-                 ?orbament - orbament)
-    :precondition (and (unrestrict-state)
-                       (category-to-be-modified ?category)
-                       (orbament-to-be-modified ?orbament)
-                       (orbament-wide ?category)
-                       (restricted ?orbament ?category))
-    :effect (not (restricted ?orbament ?category)))
-
-  (:action unrestrict-slot
-    :parameters (?category  - category
-                 ?slot      - slot
-                 ?connected - slot
-                 ?line      - line)
-    :precondition (and (unrestrict-state)
-                       (category-to-be-modified ?category)
-                       (slot-to-be-modified ?slot)
-                       (not (orbament-wide ?category))
-                       (connects ?line ?slot)
-                       (connects ?line ?connected)
-                       (restricted ?connected ?category))
-    :effect (not (restricted ?connected ?category)))
-
-  (:action finish-unrestrict
-    :parameters (?quartz   - quartz
-                 ?category - category
-                 ?slot     - slot
-                 ?orbament - orbament)
-    :precondition (and (unrestrict-state)
-                       (quartz-to-be-modified ?quartz)
-                       (category-to-be-modified ?category)
-                       (slot-to-be-modified ?slot)
-                       (orbament-to-be-modified ?orbament)
-                       ;; If the category is orbament wide, then check it has
-                       ;; been applied.
-                       (imply (orbament-wide ?category)
-                              (not (restricted ?orbament ?category)))
-                       ;; Otherwise, check if it has been applied to every line
-                       (imply (not (orbament-wide ?category))
-                              (forall (?line - line)
-                                (imply (connects ?line ?slot)
-                                  (forall (?connected - slot)
-                                    (imply (connects ?line ?connected)
-                                           (not (restricted ?connected ?category))))))))
-    :effect (and (not (orbament-to-be-modified ?orbament))
-                 (not (category-to-be-modified ?category))
-                 ;; We can forget about orbaments and categories for now.
-                 ;; We still need the `?slot' and the `?quartz' for addition.
-                 (not (unrestrict-state))
-                 (subtraction-state)))
 
 
   ;;; Subtraction

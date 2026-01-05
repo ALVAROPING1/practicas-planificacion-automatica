@@ -143,8 +143,13 @@ def init (max_n : int):
 
 def config (json : dict):
     init = json.get("init") or {}
+    raw_inventory = init.get("inventory") or {}
+    default_value = 0
+    if isinstance(raw_inventory, int):
+        default_value = raw_inventory
+        raw_inventory = {}
     inventory = {search(quartz, key) : value
-                 for key, value in (init.get("inventory") or {}).items()}
+                 for key, value in raw_inventory.items()}
     config = {search(orbaments, o)
               : {search(orbaments, o).slots[int(s) - 1] : search(quartz, q)
                  for s, q in value.items()}
@@ -157,7 +162,7 @@ def config (json : dict):
     put(2, ";;; ~ Quartz count in inventory ~")
 
     for q in quartz:
-        n = inventory[q] if q in inventory else 0
+        n = inventory[q] if q in inventory else default_value
         put(2, f"(inventory-count {lispify(q.name)} n{n})")
     print()
 
