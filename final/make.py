@@ -3,9 +3,8 @@
 
 import sys
 import enum
-import typing
 
-MAX_SLOTS : typing.Final[int] = 6
+MAX_SLOTS = 6
 
 def lispify (name: str) -> str:
     accents = [("á", "a"), ("é", "e"), ("í", "i"), ("ó", "o"), ("ú", "u")]
@@ -134,7 +133,7 @@ ep_cut_category = Category("Categoría ahorro de PE", True)
 impede_category = Category("Categoría anulación", True)
 ep_category = Category("Categoría PE", True)
 
-categories : typing.Final[list[Category]] = [
+categories = [
     septium_vein_category,
     heal_category,
     mercy_category,
@@ -164,7 +163,7 @@ categories : typing.Final[list[Category]] = [
     ep_category,
 ]
 
-quartz : typing.Final[list[Quartz]] = [
+quartz = [
     # ==== Cuarzos de Tierra ================================================ #
     Quartz("Defensa 1", defense_category, Element.Earth, {Element.Earth: 1}),
     Quartz("Defensa 2", defense_category, Element.Earth, {Element.Earth: 2}),
@@ -312,7 +311,7 @@ quartz : typing.Final[list[Quartz]] = [
            {Element.Mirage: 5, Element.Wind: 5}),
 ]
 
-arts : typing.Final[list[Art]] = [
+arts = [
     # ==== Artes de Tierra ================================================== #
     Art("Martillo pétreo", Element.Earth, {Element.Earth: 1}),
     Art("Lanza de tierra", Element.Earth, {Element.Earth: 2}),
@@ -405,7 +404,7 @@ arts : typing.Final[list[Art]] = [
 ]
 
 
-orbaments : typing.Final[list[Orbament]] = [
+orbaments = [
     # Counter-clockwise from 12 o'clock
     Orbament("Estelle",
              [Slot(1), Slot(2), Slot(3),
@@ -431,30 +430,36 @@ def put (tab, *args, **kwargs):
 # ================================= OBJECTS ================================= #
 
 def peanno_objects (n):
+    """ Declare natural numbers: n0, n1, n2, ... """
     print()
+    n += 1
     put(2, ";; Natural numbers")
     for i in range(n):
         put(2, f"n{i} - natural")
 
 def element_objects ():
+    """ Declare the seven elements. """
     print()
     put(2, ";; Elements")
     for e in Element:
         put(2, f"{e.lisp()} - element")
 
 def quartz_objects():
+    """ Declare quartz """
     print()
     put(2, ";; ======== Quartz ======== ;;")
     for q in quartz:
         put(2, f"{lispify(q.name)} - quartz")
 
 def art_objects():
+    """ Declare arts """
     print()
     put(2, ";; ======== Arts ======== ;;")
     for a in arts:
         put(2, f"{lispify(a.name)} - art")
 
 def orbament_objects():
+    """ Declare orbaments """
     print()
     put(2, ";; ======== Orbaments ======== ;;")
     for o in orbaments:
@@ -466,6 +471,7 @@ def orbament_objects():
             put(2, f"{lispify(o.name)}-line-{line} - line")
 
 def category_objects():
+    """ Declare art categories """
     print()
     put(2, ";; ======== Categories ======== ;;")
     for c in categories:
@@ -474,7 +480,9 @@ def category_objects():
 # ================================== INIT =================================== #
 
 def peanno_init (n):
+    """ Define addition and comparison relationships for naturals. """
     print()
+    n += 1
     put(2, ";; Addition")
     for lhs in range(n):
         for rhs in range(n):
@@ -487,6 +495,7 @@ def peanno_init (n):
                 put(2, f"(less-than n{lhs} n{rhs})")
 
 def quartz_init():
+    """ Set quartz power and asign them to a unique category. """
     print()
     put(2, ";; ======== Quartz ======== ;;")
     for q in quartz:
@@ -497,6 +506,7 @@ def quartz_init():
             put(2, f"(power {e.lisp()} {lispify(q.name)} n{n})")
 
 def art_init():
+    """ Set art requirements for each element. """
     print()
     put(2, ";; ======== Arts ======== ;;")
     for a in arts:
@@ -506,6 +516,7 @@ def art_init():
             put(2, f"(requirement {e.lisp()} {lispify(a.name)} n{n})")
 
 def orbament_init():
+    """ Setup the orbament slots and how they are connected """
     print()
     put(2, ";; ======== Orbaments ======== ;;")
     for o in orbaments:
@@ -513,18 +524,22 @@ def orbament_init():
         for slot in o.slots:
             put(2, f"(contains-slot {lispify(o.name)}-orbament {lispify(o.name)}-slot-{slot.num})")
         for line in range(1, len(o.lines) + 1):
+            put(2, f"(contains-line {lispify(o.name)}-orbament {lispify(o.name)}-line-{line})")
             for slot in o.lines[line - 1]:
                 put(2, f"(connects {lispify(o.name)}-line-{line} {lispify(o.name)}-slot-{slot})")
 
 def categories_init():
+    """ Tell which categories are orbament-wide """
     print()
     put(2, ";; ======== Categories ======== ;;")
     for c in categories:
         if c.orbament_wide:
             put(2, f"(orbament-wide {lispify(c.name)})")
 
+# ================================== HELP =================================== #
 
 def max_number ():
+    """ Estimate the maximum number of power an element can have. """
     # To obtain the maximum number, for each element:
     best = 0
     for e in Element:
@@ -542,6 +557,8 @@ def max_number ():
         best = max(sum(map(lambda q : q.power[e], res)), best)
     return best
 
+# ================================== MAIN =================================== #
+
 if __name__ == "__main__":
     if len(sys.argv) != 1:
         print(f"USAGE: {sys.argv[0]}")
@@ -552,6 +569,11 @@ if __name__ == "__main__":
     print("(define (problem orbament-settings-layout)")
     print("  (:domain orbament-settings)")
 
+    # TODO: Filtrar del JSON los elementos y los personajes
+    # Si un arte requiere 0 o provee 0, se puede eliminar.
+
+    # Declare global objects
+
     put(1, "(:objects")
     peanno_objects(max_n)
     element_objects()
@@ -560,6 +582,8 @@ if __name__ == "__main__":
     art_objects()
     orbament_objects()
     print(")")
+
+    # Initialise object relationships
 
     put(1, f"(:init")
     put(2, f"(action-state)")
@@ -572,38 +596,89 @@ if __name__ == "__main__":
 
     print()
     print()
+
+    # Set up the "real" initial configuration.
+    # TODO: Cargar esto de un JSON con la misma estructura:
+
+    raw_inventory = {
+        # search(quartz, "Defensa 1"): 2,
+        "Hoja petrificadora": 0,
+        "Ataque 1": 1,
+        # search(quartz, "Defensa 3"): 1,
+    }
+
+    raw_config = {
+        "Joshua" : {
+            4 : "PV 2"
+        }
+    }
+
+    inventory = {search(quartz, key) : value
+                 for key, value in raw_inventory.items()}
+    config = {search(orbaments, o)
+              : {search(orbaments, o).slots[s - 1] : search(quartz, q)
+                 for s, q in value.items()}
+              for o, value in raw_config.items()}
+
     put(2, ";;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv;;")
     put(2, ";; H E R E   G O E S   T H E   I N I T I A L   C O N F I G U R A T I O N  ;;")
     put(2, ";;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv;;")
     print()
-    put(2, ";; ~ Quartz count in inventory ~")
-    default_counts = {
-        search(quartz, "Defensa 1"): 2,
-        search(quartz, "Ataque 1"): 1,
-        # search(quartz, "Defensa 3"): 1,
-    }
+    put(2, ";;; ~ Quartz count in inventory ~")
+
     for q in quartz:
-        n = default_counts[q] if q in default_counts else 0
+        n = inventory[q] if q in inventory else 0
         put(2, f"(inventory-count {lispify(q.name)} n{n})")
     print()
-    put(2, ";; ~ Elemental value of line ~")
+
+    put(2, ";;; ~ Initial configuration ~")
     for o in orbaments:
+        slots = config.get(o) or {}
         put(2, f";; {o.name}")
-        for i in range(1, 1 + len(o.lines)):
-            for e in Element:
-                put(2, f"(value {e.lisp()} {lispify(o.name)}-line-{i} n0)")
+        power = {l + 1 : {e : 0 for e in Element} for l in range(len(o.lines))}
+        for slot, q in slots.items():
+            put(2, f"(filled {lispify(o.name)}-slot-{slot.num})")
+            put(2, f"(contains-quartz {lispify(o.name)}-slot-{slot.num} {lispify(q.name)})")
+            lines = {i + 1 : line
+                     for i, line in enumerate(o.lines) if slot.num in line}
+            if q.category.orbament_wide:
+                put(2, f"(restricted {lispify(o.name)}-orbament {lispify(q.category.name)})")
+            else:
+                slots_to_restrict = \
+                        set(x for x in line for line in lines.values())
+                for slot in slots_to_restrict:
+                    put(2, f"(restricted {lispify(o.name)}-slot-{slot} {lispify(q.category.name)})")
+
+            # increment elemental value in every line
+            for line in lines.keys():
+                for e in Element:
+                    power[line][e] += q.power.get(e) or 0
+        for l, x in power.items():
+            for e, v in x.items():
+                put(2, f"(value {e.lisp()} {lispify(o.name)}-line-{l} n{v})")
+
     print(")")
+
+    # Define the goal
 
     put(1, "(:goal")
     put(2, "(and")
+    put(3, "(action-state)")
+    # put(3, "(orbament-active estelle-orbament martillo-petreo)")
+    # put(3, "(orbament-active estelle-orbament lagrima)")
+    put(3, "(line-active estelle-line-1 lagrima)")
+    # put(3, "(not (orbament-active joshua-orbament lagrima))")
+
     # put(3, "(value earth estelle-line-1 n3)")
     # put(3, "(active estelle-line-1 martillo-petreo)")
-    put(3, "(active estelle-line-1 martillo-petreo)")
-    put(3, "(active estelle-line-2 martillo-petreo)")
-    put(3, "(active estelle-line-2 bola-ignea)")
-    put(3, "(active joshua-line-2 martillo-petreo)")
+    # put(3, "(active estelle-line-1 martillo-petreo)")
+    # put(3, "(active estelle-line-2 martillo-petreo)")
+    # put(3, "(active estelle-line-2 bola-ignea)")
+    # put(3, "(active joshua-line-2 martillo-petreo)")
 
     print("))")
+
+    # Set up the metric
 
     put(1, "(:minimize (total-cost))")
     print(")")

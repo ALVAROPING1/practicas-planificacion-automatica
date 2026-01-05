@@ -40,19 +40,19 @@
                         ; wide restriction.
 
     ;; Orbaments
-    limited  - object   ; Orbaments and lines are limited in the sense that
+    limited  - object   ; Orbaments and losts are limited in the sense that
                         ; there are certain restrictions
 
     orbament - limited  ; An orbament is a set of slots connected by lines
                         ; associated with a character in the game.
 
-    slot     - object   ; A slot is a place in the orbament where a quartz can
+    slot     - limited  ; A slot is a place in the orbament where a quartz can
                         ; be placed. There are slots with elemental
                         ; restrictions. So if a slot has an `Earth'
                         ; restriction, you cannot place a non-earth element in
                         ; it.
 
-    line     - limited) ; Lines connect slots inside an orbament. There is an
+    line     - object)  ; Lines connect slots inside an orbament. There is an
                         ; element level associated with each line, which is
                         ; equal to the sum of all the elemental levels of the
                         ; quartz placed in slots connected by such a line.
@@ -66,9 +66,17 @@
 
   (:predicates
 
+    ;;;  ~ Relation predicates ~  ;;;
+
     ;; ~ Natural number operations ~
-    (addition   ?lhs ?rhs ?res - natural)
-    (less-than  ?lhs ?rhs - natural)
+    (addition
+      ?lhs - natural
+      ?rhs - natural
+      ?res - natural)
+
+    (less-than
+      ?lhs - natural
+      ?rhs - natural)
 
     ;; ~ Amount of quartz ~
     ;; This predicate indicates the amount of quartz in the inventory.
@@ -76,60 +84,77 @@
       ?quartz - quartz
       ?n      - natural)
 
-    ;; ~ Elemental power of quartz ~
-    ;; Element`-power' predicates represent the amount of power a quartz yields
-    ;; after placing it into a slot. A quartz may give power for multiple
-    ;; elements at once or just for one.
+    ;; ~ Universe ~
+
     (power
       ?element - element
       ?quartz  - quartz
       ?power   - natural)
 
-    ;; ~ Elemental value of a line  ~
-    ;; Current elemental value of each line.
-    (value
-      ?element - element
-      ?line    - line
-      ?value   - natural)
-
-   (enough-power-for-element
-              ?element - element
-              ?line    - line
-              ?art     - art)
-
-    ;; ~ Elemental requirements for arts ~
-    ;; In order to activate an art in a line, there is an elemental requirement
-    ;; for it. For instance to activate the art `Gran lágrima', you would need
-    ;; 4 points for Water, 2 points for Space and 2 points for Wind in at least
-    ;; one line of the orbament.
-    ;;
-    ;; This forces the problem to define the requirement for 
+    (belongs
+      ?quartz   - quartz
+      ?category - category)
 
     (requirement
       ?element - element
       ?art     - art
       ?value   - natural)
 
-    (active ?line - line ?art - art)
+    (contains-slot
+      ?orbament - orbament
+      ?slot     - slot)
 
-    (contains-slot ?orbament - orbament ?slot - slot)
-    (contains-quartz ?orbament - orbament ?quartz - quartz)
+    (contains-line
+      ?orbament - orbament
+      ?line     - line)
 
-    (connects ?line - line ?slot - slot)
-    (filled ?slot - slot)
-    (belongs ?quartz - quartz ?category - category)
-    (orbament-wide ?category - category)
-    (restricted ?o - limited ?category - category)
+    (orbament-wide
+      ?category - category)
+
+    (connects
+      ?line - line
+      ?slot - slot)
+
+    ;; ~ Dynamic properties ~
+
+    (value
+      ?element - element
+      ?line    - line
+      ?value   - natural)
+
+    (contains-quartz
+      ?slot   - slot
+      ?quartz - quartz)
+
+    (restricted
+      ?o        - limited
+      ?category - category)
+
+    (filled
+      ?slot - slot)
+
+    ;; ~ Axioms / Derived ~
+    ;; Current elemental value of each line.
+
+    (enough-power-for-element
+      ?element - element
+      ?line    - line
+      ?art     - art)
+
+    (line-active
+      ?line - line
+      ?art  - art)
+
+    (orbament-active
+      ?orbament - orbament
+      ?art      - art)
+
+    (any-active
+      ?art - art)
 
     ;; ~ State machine ~ ;;
-    (action-state)
 
-    (addition-state)
-    (restrict-state)
-    (activation-state)
-    (unmark-state)
-    (unrestrict-state)
-    (subtraction-state)
+    (action-state)
 
     (quartz-to-be-modified
       ?quartz - quartz)
@@ -140,11 +165,21 @@
     (orbament-to-be-modified
       ?orbament - orbament)
 
-    (modified
-      ?element - element
-      ?line - line)
+    ; Restrictions
+
+    (restrict-state)
+    (unrestrict-state)
+
+    ; Addition / Subtraction
+
+    (addition-state)
+    (subtraction-state)
+    (unmark-state)
 
     (to-be-activated
+      ?line - line)
+    (modified
+      ?element - element
       ?line - line)
 )
 
@@ -163,7 +198,7 @@
     :precondition (and (action-state)
                        (contains-slot ?orbament ?slot)
                        (not (filled ?slot))
-                       (not (contains-quartz ?orbament ?quartz))
+                       (not (contains-quartz ?slot ?quartz))
                        (belongs ?quartz ?category)
                        ;; Check the amount in the inventory
                        (inventory-count ?quartz ?count)
@@ -172,20 +207,20 @@
                        ;; If the quartz has an orbament-wide restriction, then
                        ;; check there is no other quartz with the same
                        ;; restriction in the same orbament.
-                       (imply (orbament-wide ?category)
-                              (not (restricted ?orbament ?category)))
+                       (not (restricted ?orbament ?category))
+                       (not (restricted ?slot ?category)))
                        ;; Otherwise, check that there is no line that connects
                        ;; the slot which has a line-wide restriction.
-                       (imply (not (orbament-wide ?category))
-                              (forall (?line - line)
-                                (imply (connects ?line ?slot)
-                                       (not (restricted ?line ?slot))))))
+                       ;; (imply (not (orbament-wide ?category))
+                       ;;        (forall (?line - line)
+                       ;;          (imply (connects ?line ?slot)
+                       ;;                 (not (restricted ?line ?slot))))))
     :effect (and (filled ?slot)
                  (quartz-to-be-modified ?quartz)
                  (category-to-be-modified ?category)
                  (slot-to-be-modified ?slot)
                  (orbament-to-be-modified ?orbament)
-                 (contains-quartz ?orbament ?quartz)
+                 (contains-quartz ?slot ?quartz)
                  (not (inventory-count ?quartz ?count))
                  (inventory-count ?quartz ?next-count)
                  (increase (total-cost) 1)
@@ -193,6 +228,33 @@
                  (restrict-state)))
 
   ;;; Removal
+
+  (:action remove
+    :parameters (?quartz     - quartz
+                 ?category   - category
+                 ?slot       - slot
+                 ?orbament   - orbament
+                 ?count      - natural
+                 ?next-count - natural)
+    :precondition (and (action-state)
+                       (contains-slot ?orbament ?slot)
+                       (filled ?slot)
+                       (contains-quartz ?slot ?quartz)
+                       (belongs ?quartz ?category)
+                       ;; Check the amount in the inventory
+                       (inventory-count ?quartz ?count)
+                       (addition n1 ?count ?next-count))
+    :effect (and (not (filled ?slot))
+                 (quartz-to-be-modified ?quartz)
+                 (category-to-be-modified ?category)
+                 (slot-to-be-modified ?slot)
+                 (orbament-to-be-modified ?orbament)
+                 (not (contains-quartz ?slot ?quartz))
+                 (not (inventory-count ?quartz ?count))
+                 (inventory-count ?quartz ?next-count)
+                 (increase (total-cost) 1)
+                 (not (action-state))
+                 (subtraction-state)))
 
   ;;; Restrict
 
@@ -209,18 +271,21 @@
                        (not (restricted ?orbament ?category)))
     :effect (restricted ?orbament ?category)) ; If not restricted, restrict it
 
-  (:action restrict-line
+  (:action restrict-slot
     ;; This action is to make sure all lines are marked in the event of placing
     ;; a quartz with a line-wide restriction (such as blade or shield).
-    :parameters (?category - category
-                 ?slot     - slot
-                 ?line     - line)
+    :parameters (?category  - category
+                 ?slot      - slot
+                 ?connected - slot
+                 ?line      - line)
     :precondition (and (restrict-state)
                        (category-to-be-modified ?category)
                        (slot-to-be-modified ?slot)
+                       (not (orbament-wide ?category))
                        (connects ?line ?slot)
-                       (not (restricted ?line ?category)))
-    :effect (restricted ?line ?category))
+                       (connects ?line ?connected)
+                       (not (restricted ?connected ?category)))
+    :effect (restricted ?connected ?category))
 
   (:action finish-restrict
     ;; Finish restrictions if the restriction is applied where it has to be
@@ -242,7 +307,9 @@
                        (imply (not (orbament-wide ?category))
                               (forall (?line - line)
                                 (imply (connects ?line ?slot)
-                                  (restricted ?line ?category)))))
+                                  (forall (?connected - slot)
+                                    (imply (connects ?line ?connected)
+                                           (restricted ?connected ?category)))))))
     :effect (and (not (orbament-to-be-modified ?orbament))
                  (not (category-to-be-modified ?category))
                  ;; We can forget about orbaments and categories for now.
@@ -325,26 +392,144 @@
                  (action-state)))
 
 
+  ;;; Unrestrict
 
-; ;;; Removal
+  (:action unrestrict-orbament
+    :parameters (?category - category
+                 ?orbament - orbament)
+    :precondition (and (unrestrict-state)
+                       (category-to-be-modified ?category)
+                       (orbament-to-be-modified ?orbament)
+                       (orbament-wide ?category)
+                       (restricted ?orbament ?category))
+    :effect (not (restricted ?orbament ?category)))
 
-; ;;; Subtraction
+  (:action unrestrict-slot
+    :parameters (?category  - category
+                 ?slot      - slot
+                 ?connected - slot
+                 ?line      - line)
+    :precondition (and (unrestrict-state)
+                       (category-to-be-modified ?category)
+                       (slot-to-be-modified ?slot)
+                       (not (orbament-wide ?category))
+                       (connects ?line ?slot)
+                       (connects ?line ?connected)
+                       (restricted ?connected ?category))
+    :effect (not (restricted ?connected ?category)))
 
-  (:derived (enough-power-for-element
-              ?element - element
-              ?line    - line
-              ?art     - art)
+  (:action finish-unrestrict
+    :parameters (?quartz   - quartz
+                 ?category - category
+                 ?slot     - slot
+                 ?orbament - orbament)
+    :precondition (and (unrestrict-state)
+                       (quartz-to-be-modified ?quartz)
+                       (category-to-be-modified ?category)
+                       (slot-to-be-modified ?slot)
+                       (orbament-to-be-modified ?orbament)
+                       ;; If the category is orbament wide, then check it has
+                       ;; been applied.
+                       (imply (orbament-wide ?category)
+                              (not (restricted ?orbament ?category)))
+                       ;; Otherwise, check if it has been applied to every line
+                       (imply (not (orbament-wide ?category))
+                              (forall (?line - line)
+                                (imply (connects ?line ?slot)
+                                  (forall (?connected - slot)
+                                    (imply (connects ?line ?connected)
+                                           (not (restricted ?connected ?category))))))))
+    :effect (and (not (orbament-to-be-modified ?orbament))
+                 (not (category-to-be-modified ?category))
+                 ;; We can forget about orbaments and categories for now.
+                 ;; We still need the `?slot' and the `?quartz' for addition.
+                 (not (unrestrict-state))
+                 (subtraction-state)))
+
+
+  ;;; Subtraction
+
+  (:action element-subtraction
+    :parameters (?line    - line
+                 ?slot    - slot
+                 ?quartz  - quartz
+                 ?element - element
+                 ?old     - natural
+                 ?power   - natural
+                 ?new     - natural)
+    :precondition (and (subtraction-state)
+                       (slot-to-be-modified ?slot)
+                       (quartz-to-be-modified ?quartz)
+                       (connects ?line ?slot)
+                       (not (modified ?element ?line))
+                       (value ?element ?line ?old)
+                       (power ?element ?quartz ?power)
+                       (addition ?new ?power ?old))
+    :effect (and (modified ?element ?line)
+                 (not (value ?element ?line ?old))
+                 (value ?element ?line ?new)))
+
+  (:action finish-line-subtraction
+    :parameters (?line - line
+                 ?slot - slot)
+    :precondition (and (subtraction-state)
+                       (slot-to-be-modified ?slot)
+                       (connects ?line ?slot)
+                       (not (to-be-activated ?line))
+                       (forall (?element - element)
+                         (modified ?element ?line)))
+    :effect (to-be-activated ?line))
+
+  (:action finish-subtraction
+    :parameters (?quartz - quartz
+                 ?slot   - slot)
+    :precondition (and (subtraction-state)
+                       (quartz-to-be-modified ?quartz)
+                       (slot-to-be-modified ?slot)
+                       ;; All lines that connect the slot where the quartz has
+                       ;; been inserted have been added to the elemental value
+                       ;; of the quartz.
+                       (forall (?line - line)
+                         (imply (connects ?line ?slot)
+                                (to-be-activated ?line))))
+    :effect (and (not (quartz-to-be-modified ?quartz))
+                 (not (slot-to-be-modified ?slot))
+                 (not (subtraction-state))
+                 (unmark-state)))
+
+  ;;;                        ~ Derived  predicates ~                        ;;;
+
+  (:derived
+    (enough-power-for-element
+      ?element - element
+      ?line    - line
+      ?art     - art)
     (exists (?v - natural)
       (exists (?r - natural)
         (and (value ?element ?line ?v)
              (requirement ?element ?art ?r)
              (not (less-than ?v ?r))))))
 
-  (:derived (active
-              ?line - line
-              ?art  - art)
-    (and (action-state)
-         (forall (?element - element)
+  (:derived
+    (line-active
+      ?line - line
+      ?art  - art)
+    (and (forall (?element - element)
            (enough-power-for-element ?element ?line ?art))))
+
+  (:derived
+    (orbament-active
+      ?orbament - orbament
+      ?art      - art)
+    (and (exists (?line - line)
+           (and (contains-line ?orbament ?line)
+                (line-active ?line ?art)))))
+
+  (:derived
+    (any-active
+      ?art - art)
+    (and (exists (?line - line)
+           (line-active ?line ?art))))
+
 
 )
