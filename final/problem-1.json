@@ -1,0 +1,17 @@
+{
+   "name":        "Problem 1",
+   "description": "",
+   "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
+
+   "init" : {
+      "Estelle" : {
+         "1": ""
+      }
+      "Inventory" : {
+
+      }
+   }
+
+
+}

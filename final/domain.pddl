@@ -254,7 +254,7 @@
                  (inventory-count ?quartz ?next-count)
                  (increase (total-cost) 1)
                  (not (action-state))
-                 (subtraction-state)))
+                 (unrestrict-state)))
 
   ;;; Restrict
 

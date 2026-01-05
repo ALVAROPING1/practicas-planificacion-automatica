@@ -603,7 +603,7 @@ if __name__ == "__main__":
     raw_inventory = {
         # search(quartz, "Defensa 1"): 2,
         "Hoja petrificadora": 0,
-        "Ataque 1": 1,
+        "Ataque 1": 0,
         # search(quartz, "Defensa 3"): 1,
     }
 
