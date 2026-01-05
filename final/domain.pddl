@@ -1,14 +1,11 @@
-; vim: ft=scheme
-;;;; Domain
-;;;;
-;;;;
-
-;;;;      .----------------------------------------------------------------.
-;;;;      |                                                                |
-;;;;      v     .-----> Restrict -----> Addition -----.                    |
-;;;;    Action |                                       |--> Activate --> Unmark
-;;;;            '----> Unrestrict ---> Subtraction ---'
-
+;;;;=======================================================================;;;;
+;;;; Authors:                                                              ;;;;
+;;;;  Álvaro Guerrero Espinosa (100472294)                                 ;;;;
+;;;;  José Antonio Verde Jiménez (100472221)                               ;;;;
+;;;;                                                                       ;;;;
+;;;; Description:                                                          ;;;;
+;;;;  This file contains the description for the.                          ;;;;
+;;;;---------------------------------------------------------------------- ;;;;
 
 
 (define (domain orbament-settings)
@@ -533,3 +530,5 @@
 
 
 )
+
+; vim: ft=scheme

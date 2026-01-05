@@ -1,0 +1,20 @@
+{
+   "name":        "Insert I",
+   "description": "The purpose of this test is to force a quartz to be placed in any character's orbament's slot so that an a water art is activated.",
+   "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space"],
+   "strict": "true",
+
+   "init": {
+      "inventory" : {
+         "PV 1": 1
+      }
+   },
+
+   "goal" : [
+      {
+         "arts": ["Lágrima"]
+      }
+   ]
+
+}
