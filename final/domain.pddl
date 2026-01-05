@@ -213,7 +213,7 @@
                  (not (inventory-count ?quartz ?count))
                  (restricted ?orbament ?category)
                  (inventory-count ?quartz ?next-count)
-                 (increase (total-cost) 10)
+                 (increase (total-cost) 1)
                  (not (action-state))
                  (addition-state)))
 

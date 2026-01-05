@@ -279,6 +279,6 @@ if __name__ == "__main__":
     init(max_n)
     config(data)
     goal(data)
-    put(1, "(:minimize (total-cost))")
+    put(1, "(:metric minimize (total-cost))")
     print(")")
     print()
