@@ -153,7 +153,7 @@ def config (json : dict):
     config = {search(orbaments, o)
               : {search(orbaments, o).slots[int(s) - 1] : search(quartz, q)
                  for s, q in value.items()}
-              for o, value in (init.get("config") or {}).items()}
+              for o, value in (init.get("configuration") or {}).items()}
 
     put(2, ";;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv;;")
     put(2, ";; H E R E   G O E S   T H E   I N I T I A L   C O N F I G U R A T I O N  ;;")
@@ -180,7 +180,7 @@ def config (json : dict):
                 put(2, f"(restricted {lispify(o.name)}-orbament {lispify(q.category.name)})")
             else:
                 slots_to_restrict = \
-                        set(x for x in line for line in lines.values())
+                        set((x for x in line) for line in lines.values())
                 for slot in slots_to_restrict:
                     put(2, f"(restricted {lispify(o.name)}-slot-{slot} {lispify(q.category.name)})")
 
