@@ -176,13 +176,13 @@ def config (json : dict):
             put(2, f"(contains-quartz {lispify(o.name)}-slot-{slot.num} {lispify(q.name)})")
             lines = {i + 1 : line
                      for i, line in enumerate(o.lines) if slot.num in line}
-            if q.category.orbament_wide:
-                put(2, f"(restricted {lispify(o.name)}-orbament {lispify(q.category.name)})")
-            else:
-                slots_to_restrict = \
-                        set((x for x in line) for line in lines.values())
-                for slot in slots_to_restrict:
-                    put(2, f"(restricted {lispify(o.name)}-slot-{slot} {lispify(q.category.name)})")
+            # if q.category.orbament_wide:
+            put(2, f"(restricted {lispify(o.name)}-orbament {lispify(q.category.name)})")
+            # else:
+            #     slots_to_restrict = \
+            #             set((x for x in line) for line in lines.values())
+            #     for slot in slots_to_restrict:
+            #         put(2, f"(restricted {lispify(o.name)}-slot-{slot} {lispify(q.category.name)})")
 
             # increment elemental value in every line
             for line in lines.keys():

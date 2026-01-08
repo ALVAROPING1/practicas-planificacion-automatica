@@ -1,0 +1,27 @@
+{
+   "name":        "Enable all Earth",
+   "description": "Enable all Earth arts in any character.",
+   "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
+   "strict": "false",
+
+   "init": {
+      "inventory" : 1
+   },
+
+   "goal" : [
+      {
+         "arts": [
+            "Martillo pétreo",
+            "Lanza de tierra",
+            "Vaho petrificante",
+            "Impacto pétreo",
+            "Rugido titánico",
+            "Favor térreo",
+            "Pared de tierra",
+            "Emblema"
+         ]
+      }
+   ]
+
+}

@@ -1,0 +1,67 @@
+{
+   "name":        "All arts for Estelle",
+   "description": "Activate all arts for Estelle",
+   "characters": ["Estelle"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
+   "strict": "false",
+
+   "init": {
+      "inventory" : 1
+   },
+   "goal" : [
+      {
+         "arts": [
+            "Martillo pétreo",
+            "Lanza de tierra",
+            "Vaho petrificante",
+            "Impacto pétreo",
+            "Rugido titánico",
+            "Favor térreo",
+            "Pared de tierra",
+            "Emblema",
+            "Ataque acuático",
+            "Impacto azul",
+            "Polvo de diamante",
+
+            "Lágrima",
+            "Lágrima+",
+            "Lágrima++",
+            "Gran lágrima",
+            "Gran lágrima+",
+            "Curalotodo",
+            "Gran curalotodo",
+            "Celestial",
+
+            "Bola ígnea",
+            "Flecha ígnea",
+            "Llama explosiva",
+            "Flecha ígnea+",
+            "Espiral ardiente",
+            "Ruina volcánica",
+            "Fortaleza",
+
+            "Ráfaga de aire",
+            "Tornado",
+            "Ciclón",
+            "Rayo",
+            "Oleada lumínica",
+            "Favor silfídico",
+            "Ala silfídica",
+
+            "Alama nublada",
+            "Lanza oscura",
+            "Puerata al infierno",
+
+            "Averno blanco",
+            "Acelerador",
+            "Acelerador+",
+            "Antiseptium",
+            "Gran antiseptium",
+
+            "Santificación",
+            "Marca del caos"
+         ]
+      }
+   ]
+
+}

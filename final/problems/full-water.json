@@ -1,0 +1,30 @@
+{
+   "name":        "Enable all Water",
+   "description": "Enable all water arts in any character.",
+   "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
+   "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
+   "strict": "false",
+
+   "init": {
+      "inventory" : 1
+   },
+
+   "goal" : [
+      {
+         "arts": [
+            "Ataque acuático",
+            "Impacto azul",
+            "Polvo de diamante",
+            "Lágrima",
+            "Lágrima+",
+            "Lágrima++",
+            "Gran lágrima",
+            "Gran lágrima+",
+            "Curalotodo",
+            "Gran curalotodo",
+            "Celestial"
+         ]
+      }
+   ]
+
+}

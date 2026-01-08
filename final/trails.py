@@ -112,13 +112,31 @@ great_fortune_category = Category("Categoría gran fortuna", True)
 heavenly_insight_category = Category("Categoría percepción celestial", True)
 heat_haze_category = Category("Categoría neblina ardiente", True)
 
-blade_category = Category("Categoría hoja", False)
-shield_category = Category("Categoría escudo", False)
+poison_blade_category = Category("Categoría hoja envenenada", False)
+petrify_blade_category = Category("Categoría hoja petrificadora", False)
+freeze_blade_category = Category("Categoría hoja congelante", False)
+burn_blade_category = Category("Categoría hoja abrasadora", False)
+seal_blade_category = Category("Categoría hoja selladora", False)
+sleep_blade_category = Category("Categoría hoja somnífera", False)
+blind_blade_category = Category("Categoría hoja ciega", False)
+mortal_blade_category = Category("Categoría hoja mortal", False)
+mute_blade_category = Category("Categoría hoja muda", False)
+lone_blade_category = Category("Categoría hoja solitaria", False)
+chaotic_blade_category = Category("Categoría hoja caótica", False)
+hidden_blade_category = Category("Categoría hoja oculta", False)
+
+topaz_shield_category = Category("Categoría escudo de topacio", False)
+saphire_shield_category = Category("Categoría escudo de zafiro", False)
+ruby_shield_category = Category("Categoría escudo de rubí", False)
+emerald_shield_category = Category("Categoría escudo de esmeralda", False)
+dark_shield_category = Category("Categoría escudo oscuro", False)
+golden_shield_category = Category("Categoría escudo dorado", False)
+silver_shield_category = Category("Categoría escudo plateado", False)
 
 defense_category = Category("Categoría defensa", True)
 break_category = Category("Categoría rotura", True)
 mind_category = Category("Categoría mente", True)
-hp_category = Category("Categoría pV", True)
+hp_category = Category("Categoría PV", True)
 attack_category = Category("Categoría ataque", True)
 strike_category = Category("Categoría crítico", True)
 arts_defense_category = Category("Categoría defensa de artes", True)
@@ -141,8 +159,26 @@ categories = [
     heavenly_insight_category,
     heat_haze_category,
 
-    blade_category,
-    shield_category,
+    poison_blade_category,
+    petrify_blade_category,
+    freeze_blade_category,
+    burn_blade_category,
+    seal_blade_category,
+    sleep_blade_category,
+    blind_blade_category,
+    mortal_blade_category,
+    mute_blade_category,
+    lone_blade_category,
+    chaotic_blade_category,
+    hidden_blade_category,
+
+    topaz_shield_category,
+    saphire_shield_category,
+    ruby_shield_category,
+    dark_shield_category,
+    emerald_shield_category,
+    golden_shield_category,
+    silver_shield_category,
 
     defense_category,
     break_category,
@@ -171,11 +207,11 @@ quartz = [
     Quartz("Rotura 2", break_category, Element.Earth, {Element.Earth: 2}),
     Quartz("Rotura 3", break_category, Element.Earth, {Element.Earth: 3}),
     Quartz("Rotura 3+", break_category, Element.Earth, {Element.Earth: 3}),
-    Quartz("Hoja envenenada", blade_category, Element.Earth,
+    Quartz("Hoja envenenada", poison_blade_category, Element.Earth,
            {Element.Earth: 1}),
-    Quartz("Hoja petrificadora", blade_category, Element.Earth,
+    Quartz("Hoja petrificadora", petrify_blade_category, Element.Earth,
            {Element.Earth: 2}),
-    Quartz("Escudo de topacio", shield_category, Element.Earth,
+    Quartz("Escudo de topacio", topaz_shield_category, Element.Earth,
            {Element.Earth: 2, Element.Mirage: 2}),
     Quartz("Veta de septium", septium_vein_category, Element.Earth,
            {Element.Earth: 3, Element.Wind: 3}),
@@ -189,9 +225,9 @@ quartz = [
     Quartz("PV 2", hp_category, Element.Water, {Element.Water: 2}),
     Quartz("PV 3", hp_category, Element.Water, {Element.Water: 3}),
     Quartz("PV 3+", hp_category, Element.Water, {Element.Water: 3}),
-    Quartz("Hoja congelante", blade_category, Element.Water,
+    Quartz("Hoja congelante", freeze_blade_category, Element.Water,
            {Element.Water: 2}),
-    Quartz("Escudo de zafiro", shield_category, Element.Water,
+    Quartz("Escudo de zafiro", saphire_shield_category, Element.Water,
            {Element.Water: 2, Element.Fire: 2}),
     Quartz("Curación", heal_category, Element.Water,
            {Element.Water: 2, Element.Wind: 2}),
@@ -207,11 +243,11 @@ quartz = [
     Quartz("Crítico 2", strike_category, Element.Fire, {Element.Fire: 2}),
     Quartz("Crítico 3", strike_category, Element.Fire, {Element.Fire: 3}),
     Quartz("Crítico 3+", strike_category, Element.Fire, {Element.Fire: 3}),
-    Quartz("Hoja abrasadora", blade_category, Element.Fire,
+    Quartz("Hoja abrasadora", burn_blade_category, Element.Fire,
            {Element.Fire: 1}),
-    Quartz("Hoja selladora", blade_category, Element.Fire,
+    Quartz("Hoja selladora", seal_blade_category, Element.Fire,
            {Element.Fire: 2}),
-    Quartz("Escudo de rubí", shield_category, Element.Fire,
+    Quartz("Escudo de rubí", ruby_shield_category, Element.Fire,
            {Element.Fire: 2, Element.Earth: 2}),
     Quartz("Ingenio", ingenuity_category, Element.Fire,
            {Element.Fire: 3, Element.Wind: 3}),
@@ -229,8 +265,8 @@ quartz = [
     Quartz("Evasión 2", evade_category, Element.Wind, {Element.Wind: 2}),
     Quartz("Evasión 3", evade_category, Element.Wind, {Element.Wind: 3}),
     Quartz("Evasión 3+", evade_category, Element.Wind, {Element.Wind: 3}),
-    Quartz("Hoja somnífera", blade_category, Element.Wind, {Element.Wind: 2}),
-    Quartz("Escudo de esmeralda", shield_category, Element.Wind,
+    Quartz("Hoja somnífera", sleep_blade_category, Element.Wind, {Element.Wind: 2}),
+    Quartz("Escudo de esmeralda", emerald_shield_category, Element.Wind,
            {Element.Wind: 2, Element.Space: 2}),
     Quartz("Dulce aroma", sweet_aroma_category, Element.Wind,
            {Element.Wind: 3, Element.Earth: 3, Element.Water: 3,
@@ -251,11 +287,11 @@ quartz = [
            {Element.Time: 3, Element.Space: 2, Element.Mirage: 3}),
     Quartz("Artes 3+", cast_category, Element.Time,
            {Element.Time: 3, Element.Space: 2, Element.Mirage: 3}),
-    Quartz("Hoja ciega", blade_category, Element.Time,
+    Quartz("Hoja ciega", blind_blade_category, Element.Time,
            {Element.Time: 1}),
-    Quartz("Hoja mortal", blade_category, Element.Time,
+    Quartz("Hoja mortal", mortal_blade_category, Element.Time,
            {Element.Time: 3}),
-    Quartz("Escudo oscuro", shield_category, Element.Time,
+    Quartz("Escudo oscuro", dark_shield_category, Element.Time,
            {Element.Time: 3, Element.Water: 3}),
     Quartz("Gran fortuna", great_fortune_category, Element.Time,
            {Element.Time: 5, Element.Earth: 5}),
@@ -273,13 +309,13 @@ quartz = [
            {Element.Space: 3, Element.Time: 3, Element.Mirage: 2}),
     Quartz("Ahorro de PE 3+", ep_cut_category, Element.Space,
            {Element.Space: 3, Element.Time: 3, Element.Mirage: 2}),
-    Quartz("Hoja muda", blade_category, Element.Space,
+    Quartz("Hoja muda", mute_blade_category, Element.Space,
            {Element.Space: 3}),
-    Quartz("Escudo dorado", shield_category, Element.Space,
+    Quartz("Escudo dorado", golden_shield_category, Element.Space,
            {Element.Space: 3, Element.Earth: 3}),
     Quartz("Percepción celestial", heavenly_insight_category, Element.Space,
            {Element.Space: 5, Element.Water: 5}),
-    Quartz("Hoja solitaria", blade_category, Element.Space,
+    Quartz("Hoja solitaria", lone_blade_category, Element.Space,
            {Element.Space: 5, Element.Fire: 5}),
 
     # ==== Cuarzos de Espejismo ============================================= #
@@ -299,13 +335,13 @@ quartz = [
            {Element.Mirage: 3, Element.Time: 2, Element.Space: 3}),
     Quartz("PE 3+", ep_category, Element.Mirage,
            {Element.Mirage: 3, Element.Time: 2, Element.Space: 3}),
-    Quartz("Hoja caótica", blade_category, Element.Mirage,
+    Quartz("Hoja caótica", chaotic_blade_category, Element.Mirage,
            {Element.Mirage: 3}),
-    Quartz("Escudo plateado", shield_category, Element.Mirage,
+    Quartz("Escudo plateado", silver_shield_category, Element.Mirage,
            {Element.Mirage: 3, Element.Fire: 3}),
     Quartz("Neblina ardiente", heat_haze_category, Element.Mirage,
            {Element.Mirage: 3, Element.Time: 3, Element.Space: 3}),
-    Quartz("Hoja oculta", blade_category, Element.Mirage,
+    Quartz("Hoja oculta", hidden_blade_category, Element.Mirage,
            {Element.Mirage: 5, Element.Wind: 5}),
 ]
 
@@ -320,6 +356,8 @@ arts = [
                                            Element.Space: 3}),
     Art("Favor térreo", Element.Earth, {Element.Earth: 2,
                                         Element.Mirage: 2}),
+    Art("Protección de tierra", Element.Earth, {Element.Earth: 2,
+                                                Element.Mirage: 2}),
     Art("Pared de tierra", Element.Earth, {Element.Earth: 4,
                                            Element.Space: 3}),
     Art("Emblema", Element.Earth, {Element.Earth: 1,
@@ -377,11 +415,11 @@ arts = [
                                         Element.Mirage: 4}),
 
     # ==== Artes de Tiempo ================================================== #
-    Art("Alama nublada", Element.Time, {Element.Time: 1}),
+    Art("Alma nublada", Element.Time, {Element.Time: 1}),
     Art("Lanza oscura", Element.Time, {Element.Time: 2}),
-    Art("Puerata al infierno", Element.Time, {Element.Time: 3,
-                                              Element.Fire: 2,
-                                              Element.Space: 2}),
+    Art("Puerta al infierno", Element.Time, {Element.Time: 3,
+                                             Element.Fire: 2,
+                                             Element.Space: 2}),
     Art("Averno blanco", Element.Time, {Element.Time: 5,
                                         Element.Mirage: 5}),
     Art("Acelerador", Element.Time, {Element.Time: 1,
@@ -421,6 +459,10 @@ orbaments = [
               Slot(4, Element.Mirage), Slot(5), Slot(6)],
              [[1, 2, 3, 4, 5, 6]]),
 ]
+
+print(len(arts))
+print(len(quartz))
+print(len(categories))
 
 
 def simplify_domain (json : dict):

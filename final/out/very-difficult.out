@@ -1,0 +1,481 @@
+INFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python3 /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/translate/translate.py domain.pddl problem.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.010s CPU, 0.014s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.002s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.000s CPU, 0.003s wall-clock]
+Preparing model... [0.010s CPU, 0.006s wall-clock]
+Generated 129 rules.
+Computing model... [6.920s CPU, 6.959s wall-clock]
+810544 relevant atoms
+842185 auxiliary atoms
+1652729 final queue length
+3483211 total queue pushes
+Completing instantiation... [19.350s CPU, 19.470s wall-clock]
+Instantiating: [26.620s CPU, 26.785s wall-clock]
+Computing fact groups...
+Finding invariants...
+28 initial candidates
+Finding invariants: [0.340s CPU, 0.338s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.001s wall-clock]
+Instantiating groups... [0.020s CPU, 0.016s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.002s wall-clock]
+Choosing groups...
+5011 uncovered facts
+Choosing groups: [0.000s CPU, 0.003s wall-clock]
+Building translation key... [0.020s CPU, 0.011s wall-clock]
+Computing fact groups: [0.400s CPU, 0.395s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.003s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.003s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.002s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.090s CPU, 0.092s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [1.370s CPU, 1.357s wall-clock]
+Translating task: [23.060s CPU, 23.127s wall-clock]
+125912 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+486 propositions removed
+Detecting unreachable propositions: [10.480s CPU, 10.498s wall-clock]
+Reordering and filtering variables...
+4959 of 4959 variables necessary.
+2 of 128 mutex groups necessary.
+748407 of 748407 operators necessary.
+49860 of 49860 axiom rules necessary.
+Reordering and filtering variables: [2.890s CPU, 2.885s wall-clock]
+Translator variables: 4959
+Translator derived variables: 2791
+Translator facts: 12643
+Translator goal facts: 44
+Translator mutex groups: 2
+Translator total mutex groups size: 30
+Translator operators: 748407
+Translator axioms: 49860
+Translator task size: 5986567
+Translator peak memory: 3141192 KB
+Writing output... [4.640s CPU, 4.655s wall-clock]
+Done! [68.910s CPU, 69.178s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: None
+INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < output.sas
+[t=0.000668s, 10708 KB] reading input...
+[t=2.621771s, 313076 KB] done reading input!
+[t=2.662174s, 314380 KB] Initializing landmark sum heuristic...
+[t=2.662216s, 314380 KB] Generating landmark graph...
+[t=2.698835s, 322328 KB] Building a landmark graph with reasonable orders.
+[t=2.735950s, 331448 KB] Initializing Exploration...
+[t=2.896023s, 445384 KB] Generating landmarks using the RPG/SAS+ approach
+[t=6.813872s, 446484 KB] Landmarks generation time: 4.115046s
+[t=6.813931s, 446484 KB] Discovered 53 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=6.813965s, 446484 KB] 9 edges
+[t=6.813996s, 446484 KB] approx. reasonable orders
+[t=6.814316s, 446484 KB] Landmarks generation time: 4.152097s
+[t=6.814328s, 446484 KB] Discovered 53 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=6.814358s, 446484 KB] 9 edges
+[t=6.814368s, 446484 KB] Landmark graph generation time: 4.152162s
+[t=6.814380s, 446484 KB] Landmark graph contains 53 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=6.814390s, 446484 KB] Landmark graph contains 9 orderings.
+[t=6.980718s, 476648 KB] Simplifying 1432795 unary operators... done! [1415317 unary operators]
+[t=12.747036s, 537632 KB] time to simplify: 5.766386s
+[t=12.769028s, 537632 KB] Initializing additive heuristic...
+[t=12.769086s, 537632 KB] Initializing FF heuristic...
+[t=12.769229s, 537632 KB] Building successor generator...done!
+[t=13.016261s, 537632 KB] peak memory difference for successor generator creation: 0 KB
+[t=13.016278s, 537632 KB] time for successor generation creation: 0.246960s
+[t=13.016318s, 537632 KB] Variables: 4959
+[t=13.016333s, 537632 KB] FactPairs: 12643
+[t=13.016349s, 537632 KB] Bytes per state: 684
+[t=13.016435s, 537632 KB] Conducting lazy best first search, (real) bound = 2147483647
+[t=13.039118s, 537632 KB] New best heuristic value for landmark_sum_heuristic: 9
+[t=13.039169s, 537632 KB] New best heuristic value for ff: 16
+[t=13.039181s, 537632 KB] g=0, 1 evaluated, 0 expanded
+[t=13.039514s, 537632 KB] Initial heuristic value for landmark_sum_heuristic: 9
+[t=13.039532s, 537632 KB] Initial heuristic value for ff: 16
+[t=32.549095s, 537632 KB] New best heuristic value for ff: 15
+[t=32.549152s, 537632 KB] g=7, 856 evaluated, 855 expanded
+[t=214.927269s, 537632 KB] New best heuristic value for ff: 14
+[t=214.927324s, 537632 KB] g=37, 8676 evaluated, 8675 expanded
+[t=319.918719s, 537632 KB] New best heuristic value for landmark_sum_heuristic: 8
+[t=319.918769s, 537632 KB] g=38, 13155 evaluated, 13154 expanded
+[t=329.553512s, 537632 KB] New best heuristic value for ff: 13
+[t=329.553565s, 537632 KB] g=45, 13573 evaluated, 13572 expanded
+[t=1085.930471s, 537632 KB] New best heuristic value for landmark_sum_heuristic: 7
+[t=1085.930525s, 537632 KB] g=62, 45455 evaluated, 45454 expanded
+[t=1088.883061s, 537632 KB] New best heuristic value for landmark_sum_heuristic: 6
+[t=1088.883118s, 537632 KB] g=76, 45587 evaluated, 45586 expanded
+[t=1274.456259s, 537632 KB] New best heuristic value for ff: 12
+[t=1274.456328s, 537632 KB] g=103, 53519 evaluated, 53518 expanded
+[t=1899.671400s, 537632 KB] New best heuristic value for ff: 11
+[t=1899.671461s, 537632 KB] g=113, 81587 evaluated, 81586 expanded
+[t=4837.025380s, 632824 KB] New best heuristic value for landmark_sum_heuristic: 5
+[t=4837.025435s, 632824 KB] g=152, 209752 evaluated, 209751 expanded
+[t=4939.121530s, 636452 KB] New best heuristic value for ff: 10
+[t=4939.121581s, 636452 KB] g=171, 213977 evaluated, 213976 expanded
+[t=4939.987018s, 636452 KB] New best heuristic value for ff: 9
+[t=4939.987070s, 636452 KB] g=179, 214016 evaluated, 214015 expanded
+[t=4942.215001s, 636588 KB] New best heuristic value for landmark_sum_heuristic: 4
+[t=4942.215048s, 636588 KB] g=190, 214114 evaluated, 214113 expanded
+[t=4984.474972s, 638200 KB] New best heuristic value for ff: 8
+[t=4984.475021s, 638200 KB] g=179, 215922 evaluated, 215921 expanded
+[t=4986.095131s, 638200 KB] New best heuristic value for ff: 7
+[t=4986.095181s, 638200 KB] g=189, 215991 evaluated, 215990 expanded
+[t=4986.141125s, 638200 KB] New best heuristic value for landmark_sum_heuristic: 3
+[t=4986.141172s, 638200 KB] g=190, 215993 evaluated, 215992 expanded
+[t=5073.775183s, 641564 KB] New best heuristic value for ff: 6
+[t=5073.775240s, 641564 KB] g=209, 219686 evaluated, 219685 expanded
+[t=6828.715770s, 704212 KB] New best heuristic value for landmark_sum_heuristic: 2
+[t=6828.715823s, 704212 KB] g=228, 295267 evaluated, 295266 expanded
+[t=14159.746588s, 966304 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=14159.746644s, 966304 KB] New best heuristic value for ff: 5
+[t=14159.746677s, 966304 KB] g=266, 610444 evaluated, 610443 expanded
+[t=14383.059618s, 975984 KB] New best heuristic value for ff: 4
+[t=14383.059673s, 975984 KB] g=285, 622005 evaluated, 622004 expanded
+[t=14383.434832s, 975984 KB] New best heuristic value for ff: 3
+[t=14383.434886s, 975984 KB] g=293, 622029 evaluated, 622028 expanded
+[t=14383.887607s, 975984 KB] New best heuristic value for ff: 2
+[t=14383.887662s, 975984 KB] g=302, 622075 evaluated, 622074 expanded
+[t=14383.898590s, 975984 KB] New best heuristic value for ff: 1
+[t=14383.898660s, 975984 KB] g=303, 622076 evaluated, 622075 expanded
+[t=14383.902899s, 975984 KB] Solution found!
+[t=14383.902955s, 975984 KB] Actual search time: 14370.886491s
+remove defensa-2 categoria-defensa joshua-slot-6 joshua-orbament n4 n5 (1)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 wind n0 n0 n0 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 earth n2 n2 n0 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 space n5 n0 n5 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 time n7 n0 n7 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 mirage n5 n0 n5 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 water n0 n0 n0 (0)
+element-subtraction joshua-line-1 joshua-slot-6 defensa-2 fire n0 n0 n0 (0)
+finish-line-subtraction joshua-line-1 joshua-slot-6 (0)
+finish-subtraction defensa-2 joshua-slot-6 (0)
+unmark-element joshua-line-1 fire (0)
+unmark-element joshua-line-1 wind (0)
+unmark-element joshua-line-1 earth (0)
+unmark-element joshua-line-1 space (0)
+unmark-element joshua-line-1 time (0)
+unmark-element joshua-line-1 mirage (0)
+unmark-element joshua-line-1 water (0)
+unmark-line joshua-line-1 (0)
+finish-unmark  (0)
+insert escudo-de-rubi categoria-escudo-de-rubi joshua-slot-6 joshua-orbament n4 n3 (1)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi water n0 n0 n0 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi fire n0 n2 n2 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi wind n0 n0 n0 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi space n5 n0 n5 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi time n7 n0 n7 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi mirage n5 n0 n5 (0)
+element-addition joshua-line-1 joshua-slot-6 escudo-de-rubi earth n0 n2 n2 (0)
+finish-line-addition joshua-line-1 joshua-slot-6 (0)
+finish-addition escudo-de-rubi joshua-slot-6 (0)
+unmark-element joshua-line-1 water (0)
+unmark-element joshua-line-1 fire (0)
+unmark-element joshua-line-1 earth (0)
+unmark-element joshua-line-1 space (0)
+unmark-element joshua-line-1 time (0)
+unmark-element joshua-line-1 mirage (0)
+unmark-element joshua-line-1 wind (0)
+unmark-line joshua-line-1 (0)
+finish-unmark  (0)
+remove mente-2 categoria-mente scherazard-slot-5 scherazard-orbament n4 n5 (1)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 water n2 n2 n0 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 wind n4 n0 n4 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 earth n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 time n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 mirage n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 fire n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-5 mente-2 space n1 n0 n1 (0)
+finish-line-subtraction scherazard-line-1 scherazard-slot-5 (0)
+finish-subtraction mente-2 scherazard-slot-5 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+insert escudo-dorado categoria-escudo-dorado scherazard-slot-5 scherazard-orbament n4 n3 (1)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado wind n4 n0 n4 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado earth n2 n3 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado space n1 n3 n4 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado time n2 n0 n2 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado mirage n2 n0 n2 (0)
+element-addition scherazard-line-1 scherazard-slot-5 escudo-dorado fire n2 n0 n2 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-5 (0)
+finish-addition escudo-dorado scherazard-slot-5 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+remove escudo-de-zafiro categoria-escudo-de-zafiro scherazard-slot-3 scherazard-orbament n4 n5 (1)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro water n2 n2 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro fire n2 n2 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro wind n2 n0 n2 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro earth n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro space n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro time n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 escudo-de-zafiro mirage n0 n0 n0 (0)
+finish-line-subtraction scherazard-line-2 scherazard-slot-3 (0)
+finish-subtraction escudo-de-zafiro scherazard-slot-3 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 time (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+remove ahorro-de-pe-2 categoria-ahorro-de-pe joshua-slot-2 joshua-orbament n4 n5 (1)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 water n0 n0 n0 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 wind n0 n0 n0 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 earth n2 n0 n2 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 space n5 n2 n3 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 time n7 n2 n5 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 fire n2 n0 n2 (0)
+element-subtraction joshua-line-1 joshua-slot-2 ahorro-de-pe-2 mirage n5 n1 n4 (0)
+finish-line-subtraction joshua-line-1 joshua-slot-2 (0)
+finish-subtraction ahorro-de-pe-2 joshua-slot-2 (0)
+unmark-element joshua-line-1 water (0)
+unmark-element joshua-line-1 fire (0)
+unmark-element joshua-line-1 wind (0)
+unmark-element joshua-line-1 earth (0)
+unmark-element joshua-line-1 space (0)
+unmark-element joshua-line-1 time (0)
+unmark-element joshua-line-1 mirage (0)
+unmark-line joshua-line-1 (0)
+finish-unmark  (0)
+insert hoja-mortal categoria-hoja-mortal scherazard-slot-3 scherazard-orbament n4 n3 (1)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal water n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal fire n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal wind n2 n0 n2 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal earth n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal space n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal time n0 n3 n3 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-mortal mirage n0 n0 n0 (0)
+finish-line-addition scherazard-line-2 scherazard-slot-3 (0)
+finish-addition hoja-mortal scherazard-slot-3 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 time (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert escudo-plateado categoria-escudo-plateado joshua-slot-2 joshua-orbament n4 n3 (1)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado water n0 n0 n0 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado fire n2 n3 n5 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado wind n0 n0 n0 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado earth n2 n0 n2 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado space n3 n0 n3 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado time n5 n0 n5 (0)
+element-addition joshua-line-1 joshua-slot-2 escudo-plateado mirage n4 n3 n7 (0)
+finish-line-addition joshua-line-1 joshua-slot-2 (0)
+finish-addition escudo-plateado joshua-slot-2 (0)
+unmark-element joshua-line-1 water (0)
+unmark-element joshua-line-1 fire (0)
+unmark-element joshua-line-1 wind (0)
+unmark-element joshua-line-1 earth (0)
+unmark-element joshua-line-1 space (0)
+unmark-element joshua-line-1 time (0)
+unmark-element joshua-line-1 mirage (0)
+unmark-line joshua-line-1 (0)
+finish-unmark  (0)
+remove defensa-de-artes-2 categoria-defensa-de-artes scherazard-slot-6 scherazard-orbament n4 n5 (1)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 water n0 n0 n0 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 wind n4 n2 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 earth n5 n0 n5 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 space n4 n0 n4 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 time n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 mirage n2 n0 n2 (0)
+element-subtraction scherazard-line-1 scherazard-slot-6 defensa-de-artes-2 fire n2 n0 n2 (0)
+finish-line-subtraction scherazard-line-1 scherazard-slot-6 (0)
+finish-subtraction defensa-de-artes-2 scherazard-slot-6 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+insert escudo-plateado categoria-escudo-plateado scherazard-slot-6 scherazard-orbament n3 n2 (1)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado fire n2 n3 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado wind n2 n0 n2 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado earth n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado space n4 n0 n4 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado time n2 n0 n2 (0)
+element-addition scherazard-line-1 scherazard-slot-6 escudo-plateado mirage n2 n3 n5 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-6 (0)
+finish-addition escudo-plateado scherazard-slot-6 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+remove veta-de-septium categoria-veta-de-septium olivier-slot-1 olivier-orbament n0 n1 (1)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium fire n3 n0 n3 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium earth n3 n3 n0 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium time n2 n0 n2 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium mirage n5 n0 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium water n4 n0 n4 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium space n3 n0 n3 (0)
+element-subtraction olivier-line-1 olivier-slot-1 veta-de-septium wind n7 n3 n4 (0)
+finish-line-subtraction olivier-line-1 olivier-slot-1 (0)
+finish-subtraction veta-de-septium olivier-slot-1 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+insert escudo-oscuro categoria-escudo-oscuro olivier-slot-1 olivier-orbament n4 n3 (1)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro water n4 n3 n7 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro fire n3 n0 n3 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro earth n0 n0 n0 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro time n2 n3 n5 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro mirage n5 n0 n5 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro wind n4 n0 n4 (0)
+element-addition olivier-line-1 olivier-slot-1 escudo-oscuro space n3 n0 n3 (0)
+finish-line-addition olivier-line-1 olivier-slot-1 (0)
+finish-addition escudo-oscuro olivier-slot-1 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+remove mente-2 categoria-mente olivier-slot-3 olivier-orbament n5 n6 (1)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 water n7 n2 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 fire n3 n0 n3 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 earth n0 n0 n0 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 time n5 n0 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 mirage n5 n0 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 wind n4 n0 n4 (0)
+element-subtraction olivier-line-1 olivier-slot-3 mente-2 space n3 n0 n3 (0)
+finish-line-subtraction olivier-line-1 olivier-slot-3 (0)
+finish-subtraction mente-2 olivier-slot-3 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+insert ahorro-de-pe-3 categoria-ahorro-de-pe olivier-slot-3 olivier-orbament n4 n3 (1)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 water n5 n0 n5 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 fire n3 n0 n3 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 earth n0 n0 n0 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 space n3 n3 n6 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 time n5 n3 n8 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 mirage n5 n2 n7 (0)
+element-addition olivier-line-1 olivier-slot-3 ahorro-de-pe-3 wind n4 n0 n4 (0)
+finish-line-addition olivier-line-1 olivier-slot-3 (0)
+finish-addition ahorro-de-pe-3 olivier-slot-3 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+remove artes-2 categoria-artes olivier-slot-2 olivier-orbament n4 n5 (1)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 water n5 n0 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 fire n3 n0 n3 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 earth n0 n0 n0 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 space n6 n1 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 time n8 n2 n6 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 mirage n7 n2 n5 (0)
+element-subtraction olivier-line-1 olivier-slot-2 artes-2 wind n4 n0 n4 (0)
+finish-line-subtraction olivier-line-1 olivier-slot-2 (0)
+finish-subtraction artes-2 olivier-slot-2 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+insert hoja-oculta categoria-hoja-oculta olivier-slot-2 olivier-orbament n1 n0 (1)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta water n5 n0 n5 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta fire n3 n0 n3 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta wind n4 n5 n9 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta earth n0 n0 n0 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta space n5 n0 n5 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta time n6 n0 n6 (0)
+element-addition olivier-line-1 olivier-slot-2 hoja-oculta mirage n5 n5 n10 (0)
+finish-line-addition olivier-line-1 olivier-slot-2 (0)
+finish-addition hoja-oculta olivier-slot-2 (0)
+unmark-element olivier-line-1 water (0)
+unmark-element olivier-line-1 fire (0)
+unmark-element olivier-line-1 wind (0)
+unmark-element olivier-line-1 earth (0)
+unmark-element olivier-line-1 space (0)
+unmark-element olivier-line-1 time (0)
+unmark-element olivier-line-1 mirage (0)
+unmark-line olivier-line-1 (0)
+finish-unmark  (0)
+[t=14383.902969s, 975984 KB] Plan length: 304 step(s).
+[t=14383.902969s, 975984 KB] Plan cost: 16
+[t=14383.902969s, 975984 KB] Expanded 622076 state(s).
+[t=14383.902969s, 975984 KB] Reopened 0 state(s).
+[t=14383.902969s, 975984 KB] Evaluated 622077 state(s).
+[t=14383.902969s, 975984 KB] Evaluations: 1244154
+[t=14383.902969s, 975984 KB] Generated 3230522 state(s).
+[t=14383.902969s, 975984 KB] Dead ends: 0 state(s).
+[t=14383.902969s, 975984 KB] Number of registered states: 622077
+[t=14383.902969s, 975984 KB] Int hash set load factor: 622077/1048576 = 0.593259
+[t=14383.902969s, 975984 KB] Int hash set resizes: 20
+[t=14383.902969s, 975984 KB] Search time: 14370.886535s
+[t=14383.902969s, 975984 KB] Total time: 14383.902969s
+Solution found.
+Peak memory: 975984 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 14453.36s

@@ -1,46 +1,11 @@
 {
-   "name":        "The name of the problem",
-   "description": "The purpouse of the problem, with a brief description of the test.",
+   "name":        "Enable all arts",
+   "description": "All arts",
    "characters": ["Estelle", "Joshua", "Scherazard", "Olivier"],
    "elements": ["Earth", "Water", "Fire", "Wind", "Time", "Space", "Mirage"],
    "strict": "false",
 
    "init": {
-      "configuration" : {
-         "Estelle" : {
-            "1": "Escudo de topacio",
-            "2": "Precisión 2",
-            "3": "Rotura 2",
-            "4": "Ataque 2",
-            "5": "Hoja petrificadora",
-            "6": "PE 2"
-         },
-         "Joshua" : {
-            "1": "Artes 2",
-            "2": "Ahorro de PE 2",
-            "3": "PE 2",
-            "4": "Acción 2",
-            "5": "Mente 2",
-            "6": "Defensa 2"
-         },
-         "Scherazard" : {
-            "1": "Artes 2",
-            "2": "Escudo de rubí",
-            "3": "Escudo de zafiro",
-            "4": "Hoja somnífera",
-            "5": "Mente 2",
-            "6": "Defensa de artes 2"
-         },
-         "Olivier" : {
-            "1": "Veta de septium",
-            "2": "Artes 2",
-            "3": "Mente 2",
-            "4": "Escudo plateado",
-            "5": "Curación",
-            "6": "Escudo de esmeralda"
-         }
-      },
-
       "inventory" : {
          "Defensa 1": 4,
          "Defensa 2": 4,
@@ -53,7 +18,7 @@
          "Hoja envenenada": 4,
          "Hoja petrificadora": 4,
          "Escudo de topacio": 4,
-         "Veta de septium": 1,
+         "Veta de septium": 4,
 
          "Mente 1": 4,
          "Mente 2": 4,
@@ -65,8 +30,8 @@
          "PV 3+": 4,
          "Hoja congelante": 4,
          "Escudo de zafiro": 4,
-         "Curación": 1,
-         "Compasión": 1,
+         "Curación": 4,
+         "Compasión": 4,
 
          "Ataque 1": 4,
          "Ataque 2": 4,
@@ -79,7 +44,7 @@
          "Hoja abrasadora": 4,
          "Hoja selladora": 4,
          "Escudo de rubí": 4,
-         "Ingenio": 1,
+         "Ingenio": 4,
 
          "Defensa de artes 1": 4,
          "Defensa de artes 2": 4,
@@ -91,8 +56,8 @@
          "Evasión 3+": 4,
          "Hoja somnífera": 4,
          "Escudo de esmeralda": 4,
-         "Dulce aroma": 1,
-         "Furia": 1,
+         "Dulce aroma": 4,
+         "Furia": 4,
 
          "Acción 1": 4,
          "Acción 2": 4,
@@ -105,7 +70,7 @@
          "Hoja ciega": 4,
          "Hoja mortal": 4,
          "Escudo oscuro": 4,
-         "Gran fortuna": 1,
+         "Gran fortuna": 4,
 
          "Precisión 1": 4,
          "Precisión 2": 4,
@@ -117,8 +82,8 @@
          "Ahorro de PE 3+": 4,
          "Hoja muda": 4,
          "Escudo dorado": 4,
-         "Percepción celestial": 1,
-         "Hoja solitaria": 1,
+         "Percepción celestial": 4,
+         "Hoja solitaria": 4,
 
          "Anulación 1": 4,
          "Anulación 2": 4,
@@ -130,23 +95,64 @@
          "PE 3+": 4,
          "Hoja caótica": 4,
          "Escudo plateado": 4,
-         "Neblina ardiente": 1,
-         "Hoja oculta": 1
+         "Neblina ardiente": 4,
+         "Hoja oculta": 4
       }
    },
 
    "goal" : [
       {
-         "orbament": "Estelle",
-         "line": 2,
-         "arts": ["Bola ígnea", "Fortaleza"]
-      },
-      {
-         "orbament": "Joshua",
-         "arts": ["Espiral ardiente"]
-      },
-      {
-         "arts": ["Ruina volcánica"]
+         "arts": [
+            "Martillo pétreo",
+            "Lanza de tierra",
+            "Vaho petrificante",
+            "Impacto pétreo",
+            "Rugido titánico",
+            "Favor térreo",
+            "Pared de tierra",
+            "Emblema",
+            "Ataque acuático",
+            "Impacto azul",
+            "Polvo de diamante",
+
+            "Lágrima",
+            "Lágrima+",
+            "Lágrima++",
+            "Gran lágrima",
+            "Gran lágrima+",
+            "Curalotodo",
+            "Gran curalotodo",
+            "Celestial",
+
+            "Bola ígnea",
+            "Flecha ígnea",
+            "Llama explosiva",
+            "Flecha ígnea+",
+            "Espiral ardiente",
+            "Ruina volcánica",
+            "Fortaleza",
+
+            "Ráfaga de aire",
+            "Tornado",
+            "Ciclón",
+            "Rayo",
+            "Oleada lumínica",
+            "Favor silfídico",
+            "Ala silfídica",
+
+            "Alama nublada",
+            "Lanza oscura",
+            "Puerata al infierno",
+
+            "Averno blanco",
+            "Acelerador",
+            "Acelerador+",
+            "Antiseptium",
+            "Gran antiseptium",
+
+            "Santificación",
+            "Marca del caos"
+         ]
       }
    ]
 
