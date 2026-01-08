@@ -4,7 +4,7 @@
 ;;;;  José Antonio Verde Jiménez (100472221)                               ;;;;
 ;;;;                                                                       ;;;;
 ;;;; Description:                                                          ;;;;
-;;;;  This file contains the description for the.                          ;;;;
+;;;;  This file contains the description for the domain.                   ;;;;
 ;;;;---------------------------------------------------------------------- ;;;;
 
 

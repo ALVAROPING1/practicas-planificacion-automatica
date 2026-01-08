@@ -23,7 +23,7 @@
     subtitle: [Configurador de orbamentos],
     author: [Álvaro Guerrero Espinosa (100472294)\
              José Antonio Verde Jiménez (100472221)],
-    date: [13 de enero de 2026],
+    date: [12 de enero de 2026],
     institution: [Universidad Carlos III de Madrid],
     // logo: rect(image("uc3m_logo.svg"), fill: white),
   ),
@@ -242,7 +242,7 @@ Definimos el tipo `natural` ($bb(N)$).
       edge(`insert`, "-|>")
       node((3,0), [Addition], radius: radius)
       edge((3,0), (3,0), [`element-addition`\ `finish-line-addition`], "-|>", bend: -110deg)
-      edge((3,0), (6,1), `finish-addition`, "-|>")
+      edge((3,0), (6,1), `end-addition`, "-|>")
 
       edge((0,1), (3,2), `remove`, "-|>", bend: -1deg)  // Para que aparezca abajo
       node((3,2), [Subtraction], radius: radius)
@@ -259,22 +259,69 @@ Definimos el tipo `natural` ($bb(N)$).
 ]
 
 == PDDL
+
+#slide[
 - Tipos
-  - `natural - object`
+  - `natural element - object`
+  - `quartz art category - object`
+  - `slot line orbament - object`
+- Axiomas
+  - `(enough-power-for-element ?e - element ?l - line ?a - art)`
+  - `(line-active ?l - line ?a - art)`
+  - `(orbament-active ?o - orbament ?a - art)`
+  - `(any-active ?a - art)`
+][
 - Predicados
+  #set text(size: 13pt)
   - `(addition ?lhs ?rhs ?res - natural)`
   - `(less-than ?lhs ?rhs - natural)`
-  -
+  - `(inventory-count ?q - quartz ?n - natural)`
+  - `(power ?e - element ?q - quartz ?power - natural)`
+  - `(belongs ?q - quartz ?c - category)`
+  - `(requirement ?e - element ?a - art ?n - natural)`
+  - `(contains-slot ?o - orbament ?s - slot)`
+  - `(contains-line ?o - orbament ?l - line)`
+  - `(connects ?l - line ?s - slot)`
+  - `(value ?e - element ?l - line ?n - natural)`
+  - `(contains-quartz ?s - slot ?q - quartz)`
+  - `(restricted ?o - orbament ?c - category)`
+  - `(filled ?s - slot)`
+  - `(quartz-to-be-modified ?q - quartz)`
+  - `(category-to-be-modified ?c - category)`
+  - `(slot-to-be-modified ?s - slot)`
+  - `(orbament-to-be-modified ?o - orbament)`
+]
 
 
 = Problema
 == Generación
 
+- Definición compleja del dominio
+  - Muchos objetos compartidos (naturales, orbamentos, cuarzos, artes, ...)
+  - Muchos predicados base (`addition`, `less-than`).
+  - Muchos predicados compartidos para definir los orbamentos, quarzos, artes,
+    restricciones...
+- *Solución: metaprogramación de los problemas*
+  - Problema definido en un `JSON` que se transforma a PDDL.
+  - El `JSON` define los elementos y orbamentos permitidos, el estado inicial
+    del inventario y los orbamentos, y las metas.
+  - Durante la transformación, se añaden los objetos y predicados comunes a todos los
+    problemas.
+
 == Pruebas y casos de uso
 
+- Insertar un cuarzo.
+- Activar todas las artes de un tipo dado.
+- Activar todas las artes.
+- Activar todas las artes con un solo orbamento.
+- Activar todas las artes, empezando con todos los orbamentos llenos.
+- Activar todas las artes, empezando con todos los orbamentos llenos y sin usar
+  los mejores quarzos.
+
 = Resultados
-- fast-downward
-- odin
+
+- Fast-downward
+- Odin
 - Scorpion 2023
 - DecStar-2023
 
