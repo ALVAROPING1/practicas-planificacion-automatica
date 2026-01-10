@@ -37,10 +37,7 @@
                         ; wide restriction.
 
     ;; Orbaments
-    limited  - object   ; Orbaments and losts are limited in the sense that
-                        ; there are certain restrictions
-
-    orbament - limited  ; An orbament is a set of slots connected by lines
+    orbament - object   ; An orbament is a set of slots connected by lines
                         ; associated with a character in the game.
 
     slot     - object   ; A slot is a place in the orbament where a quartz can
@@ -105,12 +102,17 @@
       ?orbament - orbament
       ?line     - line)
 
-    (orbament-wide
-      ?category - category)
-
     (connects
       ?line - line
       ?slot - slot)
+
+    (quartz-element
+      ?quartz  - quartz
+      ?element - element)
+
+    (slot-can-hold
+      ?slot    - slot
+      ?element - element)
 
     ;; ~ Dynamic properties ~
 
@@ -124,7 +126,7 @@
       ?quartz - quartz)
 
     (restricted
-      ?o        - limited
+      ?o        - orbament
       ?category - category)
 
     (filled
@@ -185,6 +187,7 @@
                  ?slot       - slot
                  ?orbament   - orbament
                  ?count      - natural
+                 ?element    - element
                  ?next-count - natural)
     ;; TODO: Add quartz elemental restriction
     :precondition (and (action-state)
@@ -192,6 +195,9 @@
                        (not (filled ?slot))
                        (not (contains-quartz ?slot ?quartz))
                        (belongs ?quartz ?category)
+                       ;; Check the element
+                       (quartz-element ?quartz ?element)
+                       (slot-can-hold ?slot ?element)
                        ;; Check the amount in the inventory
                        (inventory-count ?quartz ?count)
                        (less-than n0 ?count)    ; ?count > 0

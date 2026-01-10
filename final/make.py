@@ -92,6 +92,7 @@ def quartz_init():
     for q in quartz:
         put(2, f";;; >>> {q.name} <<< ;;;")
         put(2, f"(belongs {lispify(q.name)} {lispify(q.category.name)})")
+        put(2, f"(quartz-element {lispify(q.name)} {q.element.lisp()})")
         for e in Element:
             n = q.power[e] if e in q.power else 0
             put(2, f"(power {e.lisp()} {lispify(q.name)} n{n})")
@@ -114,18 +115,14 @@ def orbament_init():
         put(2, f";;; >>> {o.name} <<< ;;;")
         for slot in o.slots:
             put(2, f"(contains-slot {lispify(o.name)}-orbament {lispify(o.name)}-slot-{slot.num})")
+            elements = (iter(Element) if slot.restriction is None else
+                        (slot.restriction,))
+            for e in Element:
+                put(2, f"(slot-can-hold {lispify(o.name)}-slot-{slot.num} {e.lisp()})")
         for line in range(1, len(o.lines) + 1):
             put(2, f"(contains-line {lispify(o.name)}-orbament {lispify(o.name)}-line-{line})")
             for slot in o.lines[line - 1]:
                 put(2, f"(connects {lispify(o.name)}-line-{line} {lispify(o.name)}-slot-{slot})")
-
-def categories_init():
-    """ Tell which categories are orbament-wide """
-    print()
-    put(2, ";; ======== Categories ======== ;;")
-    for c in categories:
-        if c.orbament_wide:
-            put(2, f"(orbament-wide {lispify(c.name)})")
 
 def init (max_n : int):
     put(1, f"(:init")
@@ -135,7 +132,6 @@ def init (max_n : int):
     quartz_init()
     art_init()
     orbament_init()
-    categories_init()
     print()
     print()
 
@@ -176,14 +172,7 @@ def config (json : dict):
             put(2, f"(contains-quartz {lispify(o.name)}-slot-{slot.num} {lispify(q.name)})")
             lines = {i + 1 : line
                      for i, line in enumerate(o.lines) if slot.num in line}
-            # if q.category.orbament_wide:
             put(2, f"(restricted {lispify(o.name)}-orbament {lispify(q.category.name)})")
-            # else:
-            #     slots_to_restrict = \
-            #             set((x for x in line) for line in lines.values())
-            #     for slot in slots_to_restrict:
-            #         put(2, f"(restricted {lispify(o.name)}-slot-{slot} {lispify(q.category.name)})")
-
             # increment elemental value in every line
             for line in lines.keys():
                 for e in Element:
@@ -207,6 +196,9 @@ def goal (json : dict):
         name = subgoal.get("orbament")
         name = name or search(orbaments, name)
         line = subgoal.get("line")
+        for x in subgoal["arts"]:
+            if search(arts, x) is None:
+                print(x)
         for art in map(lambda x : search(arts, x), subgoal["arts"]):
             if name is None:
                 put(3, f"(any-active {lispify(art.name)})")
@@ -233,7 +225,7 @@ def max_number ():
         res = []
         while len(res) < MAX_SLOTS and qs:
             q = qs.pop()
-            if not q.category.orbament_wide or q.category not in cat:
+            if q.category not in cat:
                 cat.add(q.category)
                 res.append(q)
         best = max(sum(map(lambda q : q.power[e], res)), best)

@@ -30,25 +30,35 @@
   footer-a: (self => [A. Guerrero Espinosa & J. A. Verde Jiménez]),
 )
 
+#show table: block.with(stroke: (y: 0.7pt))
+#set table(
+  row-gutter: 0.2em,   // Row separation
+  stroke: (_, y) => if y == 0 { (bottom: 0.2pt) }
+)
+
+
+
 #set heading(numbering: numbly("{1}.", default: "1.1"))
 
 // TODO: Reemplazar con los cut-outs de los logos
 
-#let earth-color(s, weight: "normal")  = text(s, weight: weight, fill: orange)
-#let water-color(s, weight: "normal")  = text(s, weight: weight, fill: blue)
-#let fire-color(s, weight: "normal")   = text(s, weight: weight, fill: red)
-#let wind-color(s, weight: "normal")   = text(s, weight: weight, fill: green)
-#let time-color(s, weight: "normal")   = text(s, weight: weight, fill: black)
-#let space-color(s, weight: "normal")  = text(s, weight: weight, fill: yellow)
-#let mirage-color(s, weight: "normal") = text(s, weight: weight, fill: gray)
+#let earth-color(s, weight: "normal")  = text(s, weight: weight, fill: rgb("#de8b2e"))
+#let water-color(s, weight: "normal")  = text(s, weight: weight, fill: rgb("#4fc5f3"))
+#let fire-color(s, weight: "normal")   = text(s, weight: weight, fill: rgb("#b42322"))
+#let wind-color(s, weight: "normal")   = text(s, weight: weight, fill: rgb("#277f4b"))
+#let time-color(s, weight: "normal")   = text(s, weight: weight, fill: rgb("#1b1628"))
+#let space-color(s, weight: "normal")  = text(s, weight: weight, fill: rgb("#baa821"))
+#let mirage-color(s, weight: "normal") = text(s, weight: weight, fill: rgb("#555555"))
 
-#let earth  = earth-color("土", weight: "bold")
-#let water  = water-color("水", weight: "bold")
-#let fire   = fire-color("火", weight: "bold")
-#let wind   = wind-color("風", weight: "bold")
-#let time   = time-color("時", weight: "bold")
-#let space  = space-color("空", weight: "bold")
-#let mirage = mirage-color("幻", weight: "bold")
+// #let from-icon(colour, kanji, source) = colour(kanji, weight: "bold")
+#let from-icon(colour, kanji, source) = box(image(source, height: 1em, fit: "contain"), baseline: 2pt)
+#let earth  = from-icon(earth-color, "土", "Earth.png")
+#let water  = from-icon(water-color, "水", "Water.png")
+#let fire   = from-icon(fire-color, "火", "Fire.png")
+#let wind   = from-icon(wind-color, "風", "Wind.png")
+#let time   = from-icon(time-color, "時", "Time.png")
+#let space  = from-icon(space-color, "空", "Space.png")
+#let mirage = from-icon(mirage-color, "幻", "Mirage.png")
 
 #title-slide()
 
@@ -62,30 +72,30 @@
 - En ranuras se pueden insertar *cuarzos*.
 - Hay *restricciones* entre cuarzos.
 - Hay *7 elementos*:
-  #earth-color("tierra", weight: "bold"),
-  #water-color("agua", weight: "bold"),
-  #fire-color("fuego", weight: "bold"),
-  #wind-color("viento", weight: "bold"),
-  #time-color("tiempo", weight: "bold"),
-  #space-color("espacio", weight: "bold") e
-  #mirage-color("ilusión", weight: "bold").
+  #earth-color("tierra", weight: "bold") #earth,
+  #water-color("agua", weight: "bold") #water,
+  #fire-color("fuego", weight: "bold") #fire,
+  #wind-color("viento", weight: "bold") #wind,
+  #time-color("tiempo", weight: "bold") #time,
+  #space-color("espacio", weight: "bold") #space e
+  #mirage-color("ilusión", weight: "bold") #mirage.
 - Cada *cuarzo* da un poder elemental ($bb(N)$) para cada uno de los elementos.
-- Una *arte* se activa en un *orbamento* si existe alguna *línea* para la que
-  todos los *elementos* tienen valor suficiente.
 ][
-  #image("orbamento-vacío.png", height: 90%)
+  #figure(image("orbamento-vacío.png", height: 90%),
+          caption: [Orbamento vacío])
 ]
 
 #slide[
+  #figure(
+    image("panel-artes.png", height: 80%),
+    caption: [Ejemplo de artes que se pueden activar])
 ][
+- Una *arte* se activa en un *orbamento* si existe alguna *línea* para la que
+  todos los *elementos* tienen valor suficiente.
 - Cada *cuarzo* pertenece a una *categoría*.
   - Dos cuarzos de la misma categoría no pueden estar en el mismo orbamento.
 - El dominio es igual en los cinco primeros juegos de la saga (pequeñas
   variaciones).
-  // TODO: Hablar de las relajaciones del dominio: Restricciones a nivel de
-  // línea y de elemento del cuarzo
-  // Más que relajar: se simplifica el problema, complica buscar soluciones
-  // porque ahora la restricción es más fuerte.
 ]
 
 == Ejemplo
@@ -102,7 +112,8 @@
   - Línea 1: 4 #earth, 2 #fire, 2 #space, 2 #mirage
   - Línea 2: 4 #fire, 1 #time, 2 #space, 2 #mirage
 ][
-  #image("orbamento.png", height: 90%)
+  #figure(image("orbamento-ejemplo.png", height: 90%),
+          caption: [Ejemplo de configuración.])
 ]
 
 #slide[
@@ -215,15 +226,8 @@ Definimos el tipo `natural` ($bb(N)$).
 - En vez de la etapa de activación y desactivación decidimos utilizar *axiomas*
   o _*derived*_.
   - Da mejor rendimiento, del orden de pasar de días a segundos.
-- Aquí es cuando decidimos relajar el dominio y eliminar las restricciones a
-  nivel de línea.
+- No es necesario restringir las ranuras independientemente.
   - Se eliminan el estado _restrict_ y _unrestrict_.
-  - El problema era una ranura está conectada a más de una línea.
-  - No se puede poner un cuantificador universal en el efecto para activar
-    todos los predicados de restricciones a nivel de línea.
-  - Se puede endurecer la restricción si se asignan los cuarzos con restricción
-    a nivel de línea a una única categoría que restringa a nivel de orbamento.
-  - También se probó a marcar todas las ranuras.
 
 // TODO: Describir problemas: unmark arts
 ]
@@ -265,11 +269,14 @@ Definimos el tipo `natural` ($bb(N)$).
   - `natural element - object`
   - `quartz art category - object`
   - `slot line orbament - object`
-- Axiomas
-  - `(enough-power-for-element ?e - element ?l - line ?a - art)`
+#[
+- Axiomas / _Derived_
+  #set text(size: 16pt)
+  - `(enough-power-for-element` \ `?e - element ?l - line ?a - art)`
   - `(line-active ?l - line ?a - art)`
   - `(orbament-active ?o - orbament ?a - art)`
   - `(any-active ?a - art)`
+]
 ][
 - Predicados
   #set text(size: 13pt)
@@ -282,6 +289,8 @@ Definimos el tipo `natural` ($bb(N)$).
   - `(contains-slot ?o - orbament ?s - slot)`
   - `(contains-line ?o - orbament ?l - line)`
   - `(connects ?l - line ?s - slot)`
+  - `(quartz-element ?q - quartz ?e - element)`
+  - `(slot-can-hold ?s - slot ?e - element)`
   - `(value ?e - element ?l - line ?n - natural)`
   - `(contains-quartz ?s - slot ?q - quartz)`
   - `(restricted ?o - orbament ?c - category)`
@@ -318,12 +327,37 @@ Definimos el tipo `natural` ($bb(N)$).
 - Activar todas las artes, empezando con todos los orbamentos llenos y sin usar
   los mejores quarzos.
 
-= Resultados
+= Pruebas y resultados
 
+== Planificadores
 - Fast-downward
-- Odin
-- Scorpion 2023
-- DecStar-2023
+- Odin: (`planner2`)
+- SymDB: (`planner14`)
+- DecStar-2023: (`planner15`)
+- Scorpion 2023: (`planner25`)
+- Approximate Novelty: (`planner29`)
 
-= Cómo ejecutar el programa y todo eso o quizás en un README.jpeg y ya.
+== Problema 1
+#[
+#set text(12pt)
+#table(
+  columns: (auto, auto, auto, auto, auto, auto, auto, auto, auto),
+  align: center + horizon,
+  table.header(
+    [*Planificador*],
+    [*Tiempo total*],
+    [Tiempo de traducción],
+    [Tiempo de búsqueda],
+    [*Coste del plan*],
+    [Longitud del plan],
+    [Nodos expandidos],
+    [*Memoria de traducción*],
+    [*Memoria de búsqueda*]
+  )
+)
+]
 
+
+== Resultados
+#table()
+// TODO: Table

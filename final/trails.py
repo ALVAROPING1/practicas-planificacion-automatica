@@ -71,12 +71,11 @@ class Orbament:
         return f"{self.name} ({' '.join(map(repr, self.slots))})"
 
 class Category:
-    def __init__ (self, name : str, orbament_wide : bool):
+    def __init__ (self, name : str):
         self.name = name
-        self.orbament_wide = orbament_wide
 
     def __repr__ (self):
-        return f"{self.name}" + "*" if self.orbament_wide else ""
+        return f"{self.name}"
 
 class Quartz:
     def __init__ (self, name : str, category : Category, element : Element, power : Power):
@@ -103,51 +102,51 @@ def search (lst, name):
             return item
     return None
 
-septium_vein_category = Category("Categoría veta de septium", True)
-heal_category = Category("Categoría curación", True)
-mercy_category = Category("Categoría compasión", True)
-ingenuity_category = Category("Categoría ingenio", True)
-sweet_aroma_category = Category("Categoría dulce aroma", True)
-great_fortune_category = Category("Categoría gran fortuna", True)
-heavenly_insight_category = Category("Categoría percepción celestial", True)
-heat_haze_category = Category("Categoría neblina ardiente", True)
+septium_vein_category = Category("Categoría veta de septium")
+heal_category = Category("Categoría curación")
+mercy_category = Category("Categoría compasión")
+ingenuity_category = Category("Categoría ingenio")
+sweet_aroma_category = Category("Categoría dulce aroma")
+great_fortune_category = Category("Categoría gran fortuna")
+heavenly_insight_category = Category("Categoría percepción celestial")
+heat_haze_category = Category("Categoría neblina ardiente")
 
-poison_blade_category = Category("Categoría hoja envenenada", False)
-petrify_blade_category = Category("Categoría hoja petrificadora", False)
-freeze_blade_category = Category("Categoría hoja congelante", False)
-burn_blade_category = Category("Categoría hoja abrasadora", False)
-seal_blade_category = Category("Categoría hoja selladora", False)
-sleep_blade_category = Category("Categoría hoja somnífera", False)
-blind_blade_category = Category("Categoría hoja ciega", False)
-mortal_blade_category = Category("Categoría hoja mortal", False)
-mute_blade_category = Category("Categoría hoja muda", False)
-lone_blade_category = Category("Categoría hoja solitaria", False)
-chaotic_blade_category = Category("Categoría hoja caótica", False)
-hidden_blade_category = Category("Categoría hoja oculta", False)
+poison_blade_category = Category("Categoría hoja envenenada")
+petrify_blade_category = Category("Categoría hoja petrificadora")
+freeze_blade_category = Category("Categoría hoja congelante")
+burn_blade_category = Category("Categoría hoja abrasadora")
+seal_blade_category = Category("Categoría hoja selladora")
+sleep_blade_category = Category("Categoría hoja somnífera")
+blind_blade_category = Category("Categoría hoja ciega")
+mortal_blade_category = Category("Categoría hoja mortal")
+mute_blade_category = Category("Categoría hoja muda")
+lone_blade_category = Category("Categoría hoja solitaria")
+chaotic_blade_category = Category("Categoría hoja caótica")
+hidden_blade_category = Category("Categoría hoja oculta")
 
-topaz_shield_category = Category("Categoría escudo de topacio", False)
-saphire_shield_category = Category("Categoría escudo de zafiro", False)
-ruby_shield_category = Category("Categoría escudo de rubí", False)
-emerald_shield_category = Category("Categoría escudo de esmeralda", False)
-dark_shield_category = Category("Categoría escudo oscuro", False)
-golden_shield_category = Category("Categoría escudo dorado", False)
-silver_shield_category = Category("Categoría escudo plateado", False)
+topaz_shield_category = Category("Categoría escudo de topacio")
+saphire_shield_category = Category("Categoría escudo de zafiro")
+ruby_shield_category = Category("Categoría escudo de rubí")
+emerald_shield_category = Category("Categoría escudo de esmeralda")
+dark_shield_category = Category("Categoría escudo oscuro")
+golden_shield_category = Category("Categoría escudo dorado")
+silver_shield_category = Category("Categoría escudo plateado")
 
-defense_category = Category("Categoría defensa", True)
-break_category = Category("Categoría rotura", True)
-mind_category = Category("Categoría mente", True)
-hp_category = Category("Categoría PV", True)
-attack_category = Category("Categoría ataque", True)
-strike_category = Category("Categoría crítico", True)
-arts_defense_category = Category("Categoría defensa de artes", True)
-evade_category = Category("Categoría evasión", True)
-fury_category = Category("Categoría furia", True)
-action_category = Category("Categoría acción", True)
-cast_category = Category("Categoría artes", True)
-hit_category = Category("Categoría precisión", True)
-ep_cut_category = Category("Categoría ahorro de PE", True)
-impede_category = Category("Categoría anulación", True)
-ep_category = Category("Categoría PE", True)
+defense_category = Category("Categoría defensa")
+break_category = Category("Categoría rotura")
+mind_category = Category("Categoría mente")
+hp_category = Category("Categoría PV")
+attack_category = Category("Categoría ataque")
+strike_category = Category("Categoría crítico")
+arts_defense_category = Category("Categoría defensa de artes")
+evade_category = Category("Categoría evasión")
+fury_category = Category("Categoría furia")
+action_category = Category("Categoría acción")
+cast_category = Category("Categoría artes")
+hit_category = Category("Categoría precisión")
+ep_cut_category = Category("Categoría ahorro de PE")
+impede_category = Category("Categoría anulación")
+ep_category = Category("Categoría PE")
 
 categories = [
     septium_vein_category,
@@ -459,11 +458,6 @@ orbaments = [
               Slot(4, Element.Mirage), Slot(5), Slot(6)],
              [[1, 2, 3, 4, 5, 6]]),
 ]
-
-print(len(arts))
-print(len(quartz))
-print(len(categories))
-
 
 def simplify_domain (json : dict):
     if "characters" in json:
