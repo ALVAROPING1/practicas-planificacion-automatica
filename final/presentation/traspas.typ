@@ -319,23 +319,28 @@ Definimos el tipo `natural` ($bb(N)$).
 
 == Pruebas y casos de uso
 
-- Insertar un cuarzo.
-- Activar todas las artes de un tipo dado.
-- Activar todas las artes.
-- Activar todas las artes con un solo orbamento.
-- Activar todas las artes, empezando con todos los orbamentos llenos.
-- Activar todas las artes, empezando con todos los orbamentos llenos y sin usar
++ Insertar un cuarzo.
++ Activar todas las artes de un tipo dado.
++ Activar todas las artes.
++ Activar todas las artes con un solo orbamento.
++ Activar todas las artes, empezando con todos los orbamentos llenos.
++ Activar todas las artes, empezando con todos los orbamentos llenos y sin usar
   los mejores quarzos.
 
 = Pruebas y resultados
 
 == Planificadores
+
 - Fast-downward
-- Odin: (`planner2`)
-- SymDB: (`planner14`)
-- DecStar-2023: (`planner15`)
-- Scorpion 2023: (`planner25`)
-- Approximate Novelty: (`planner29`)
+  - `Lama-first`
+  - `Seq-sat-lama-2011`
+- Otros planificadores intentados
+  - Odin: (`planner2`)
+  - SymDB: (`planner14`)
+  - DecStar-2023: (`planner15`)
+  - Scorpion 2023: (`planner25`)
+  - Approximate Novelty: (`planner29`)
+  - Problema: no soportan axiomas.
 
 == Problema 1
 #[
@@ -361,3 +366,18 @@ Definimos el tipo `natural` ($bb(N)$).
 == Resultados
 #table()
 // TODO: Table
+
+= Conclusiones
+== Conclusiones
+
+- Estado actual de los planificadores caótico
+  - Ha sido necesario corregir errores de compilación en muchos de los
+    planificadores probados.
+  - Cada planificador soporta un subconjunto distinto de PDDL.
+    // - Las funcionalidades soportadas no coinciden con las versiones de PDDL.
+    //   Soportan funcionalidades de PDDL 2.2 sin soportar completamente PDDL 1.2
+  - Algunos planificadores utilizan una sintáxis de PDDL un poco distinta.
+- Son capaces de resolver problemas complejos de forma eficiente a pesar de ser
+  independientes del dominio
+  - Se han podido encontrar planes con $> 300$ pasos en un periodo de tiempo
+    razonable
