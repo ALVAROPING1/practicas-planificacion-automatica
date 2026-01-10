@@ -308,7 +308,7 @@ Definimos el tipo `natural` ($bb(N)$).
 - Definición compleja del dominio
   - Muchos objetos compartidos (naturales, orbamentos, cuarzos, artes, ...)
   - Muchos predicados base (`addition`, `less-than`).
-  - Muchos predicados compartidos para definir los orbamentos, quarzos, artes,
+  - Muchos predicados compartidos para definir los orbamentos, cuarzos, artes,
     restricciones...
 - *Solución: metaprogramación de los problemas*
   - Problema definido en un `JSON` que se transforma a PDDL.
@@ -325,7 +325,7 @@ Definimos el tipo `natural` ($bb(N)$).
 + Activar todas las artes con un solo orbamento.
 + Activar todas las artes, empezando con todos los orbamentos llenos.
 + Activar todas las artes, empezando con todos los orbamentos llenos y sin usar
-  los mejores quarzos.
+  los mejores cuarzos.
 
 = Pruebas y resultados
 

@@ -1,5 +1,4 @@
-Problem file description
-========================
+# Problem file description
 
 This directory describes the different problems in a simplified manner. When
 creating the problem file, special care must be taken when adding the
