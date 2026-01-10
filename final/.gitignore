@@ -2,3 +2,4 @@
 /__pycache__
 /sas_plan
 /output.sas
+*.sas
