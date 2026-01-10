@@ -335,11 +335,11 @@ Definimos el tipo `natural` ($bb(N)$).
   - `Lama-first`
   - `Seq-sat-lama-2011`
 - Otros planificadores intentados
-  - Odin: (`planner2`)
-  - SymDB: (`planner14`)
-  - DecStar-2023: (`planner15`)
-  - Scorpion 2023: (`planner25`)
-  - Approximate Novelty: (`planner29`)
+  - Odin (`planner2`)
+  - SymDB (`planner14`)
+  - DecStar-2023 (`planner15`)
+  - Scorpion 2023 (`planner25`) Sat
+  - Approximate Novelty (`planner29`)
   - Problema: no soportan axiomas.
 
 == Problema 1
