@@ -160,15 +160,15 @@ Definimos el tipo `natural` ($bb(N)$).
   - `(less-than ?lhs ?rhs)`
     - `(less-than n0 n1)`
     - `(less-than n3 n7)`
-    - Con `not` y `and` y cambiando el orden se puede definir el resto de
+    - Con `not`, `and`, y cambiando el orden se puede definir el resto de
       operaciones: $<=$, $<$, $=$, $>$, $>=$, $!=$.
 ][
 - Necesitamos tres parámetros por operación.
   - ¡Si queremos hacer sumas para los 7 elementos, necesitaríamos mínimo 21
     parámetros!
   - Si se tienen que instanciar todas las acciones, ignorando combinaciones
-    imposibles, para 23 naturales habría $21^23 approx 2.58 dot.c 10^(30)$
-    objetos (102 bits).
+    imposibles, para 23 naturales habría $23^21 approx 3.95 dot.c 10^(28)$
+    objetos (95 bits).
     // Comentar que identifica combinaciones imposibles y las elimina.
 - Las operaciones se tienen que hacer por pasos.
 ]
@@ -336,14 +336,14 @@ Definimos el tipo `natural` ($bb(N)$).
   - `Lama-first`
   - `Seq-sat-lama-2011`
 - Otros planificadores intentados
+  - Fast-Forward
   - Odin (`planner2`)
   - SymDB (`planner14`)
   - DecStar-2023 (`planner15`)
   - Scorpion 2023 (`planner25`) Sat
   - Approximate Novelty (`planner29`)
-  - Problema: no soportan axiomas o bien no compilan o bien no funcionan
-    directamente o bien hasta el `--show-aliases` falla o bien requieren
-    dependencias propietarias.
+  - Problema: no soportan axiomas, no compilan, no funcionan,
+    requieren dependencias propietarias, o falla el wrapper de python.
 
 #let results = csv("result.csv", delimiter: ";", row-type: dictionary)
 
@@ -389,6 +389,7 @@ Definimos el tipo `natural` ($bb(N)$).
 }
 
 #let row-maker(best, worst) = {
+  let to-mb(x) = calc.round(float(x)/1024, digits: 1)
   let funcs = (
     ("Total_Time",         "bold",   x => format-time(x)),
     ("Translation_Time",   "medium", x => format-time(x)),
@@ -398,9 +399,9 @@ Definimos el tipo `natural` ($bb(N)$).
     ("Expanded",           "medium", x => [#set text(12pt)
                                            #x]),
     ("Translation_Memory", "bold",   x => [#set text(12pt)
-                                           #x KB]),
+                                           #to-mb(x) MB]),
     ("Search_Memory",      "bold",   x => [#set text(12pt)
-                                           #x KB]),
+                                           #to-mb(x) MB]),
   )
 
   let make-row(item) = {
@@ -489,7 +490,7 @@ caption: [
   Problema sencillo que pretende activar el arte de agua «Lágrima» ($>= 1$
   #water). Los orbamentos comienzan vacíos, así que la solución óptima es única
   y es introducir un cuarzo que de al menos 1 #water en cualquier ranura de
-  cualquier orbamento. En el inventorio solo hay un cuarzo «PV 1» (1 #water).
+  cualquier orbamento. En el inventario solo hay un cuarzo «PV 1» (1 #water).
   `seq-sat-lama-2011` a su vez explora todo el espacio de búsqueda (es diminuto)
   y demuestra que el plan es óptimo.
 ])
@@ -572,5 +573,5 @@ caption: [
   - Algunos planificadores utilizan una sintaxis de PDDL un poco distinta.
 - Son capaces de resolver problemas complejos de forma eficiente a pesar de ser
   independientes del dominio
-  - Se han podido encontrar planes con $> 300$ pasos en un periodo de tiempo
+  - Se han podido encontrar planes con $~ 200$ pasos en un periodo de tiempo
     razonable
