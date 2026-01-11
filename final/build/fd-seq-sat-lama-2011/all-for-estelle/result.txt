@@ -1,0 +1,630 @@
+!!!DATA fd-seq-sat-lama-2011,all-for-estelleINFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python3 /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/translate/translate.py ../../../domain.pddl ../../all-for-estelle.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.050s CPU, 0.045s wall-clock]
+Normalizing task... [0.000s CPU, 0.001s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.005s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.006s wall-clock]
+Preparing model... [0.010s CPU, 0.016s wall-clock]
+Generated 133 rules.
+Computing model... [6.500s CPU, 6.544s wall-clock]
+234983 relevant atoms
+280267 auxiliary atoms
+515250 final queue length
+1033834 total queue pushes
+Completing instantiation... [25.460s CPU, 25.699s wall-clock]
+Instantiating: [32.590s CPU, 32.888s wall-clock]
+Computing fact groups...
+Finding invariants...
+28 initial candidates
+Finding invariants: [0.620s CPU, 0.624s wall-clock]
+Checking invariant weight... [0.010s CPU, 0.002s wall-clock]
+Instantiating groups... [0.030s CPU, 0.030s wall-clock]
+Collecting mutex groups... [0.010s CPU, 0.007s wall-clock]
+Choosing groups...
+1459 uncovered facts
+Choosing groups: [0.030s CPU, 0.028s wall-clock]
+Building translation key... [0.010s CPU, 0.011s wall-clock]
+Computing fact groups: [0.730s CPU, 0.728s wall-clock]
+Building STRIPS to SAS dictionary... [0.010s CPU, 0.010s wall-clock]
+Building dictionary for full mutex groups... [0.010s CPU, 0.007s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.008s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.070s CPU, 0.074s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [1.290s CPU, 1.290s wall-clock]
+Translating task: [24.890s CPU, 25.028s wall-clock]
+34792 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+187 propositions removed
+Detecting unreachable propositions: [14.150s CPU, 14.245s wall-clock]
+Reordering and filtering variables...
+1516 of 1516 variables necessary.
+2 of 101 mutex groups necessary.
+213559 of 213559 operators necessary.
+14577 of 14577 axiom rules necessary.
+Reordering and filtering variables: [1.990s CPU, 1.998s wall-clock]
+Translator variables: 1516
+Translator derived variables: 847
+Translator facts: 5180
+Translator goal facts: 45
+Translator mutex groups: 2
+Translator total mutex groups size: 12
+Translator operators: 213559
+Translator axioms: 14577
+Translator task size: 1708669
+Translator peak memory: 923700 KB
+Writing output... [3.040s CPU, 3.059s wall-clock]
+Done! [78.760s CPU, 79.321s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: 28800s
+INFO     search memory limit: None
+INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search --if-unit-cost 'let(hlm,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),pref=true),let(hff,ff(),iterated([lazy_greedy([hff,hlm],preferred=[hff,hlm]),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=5),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=3),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=2),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=1)],repeat_last=true,continue_on_fail=true)))' --if-non-unit-cost 'let(hlm1,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=true),let(hff1,ff(transform=adapt_costs(one)),let(hlm2,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(plusone),pref=true),let(hff2,ff(transform=adapt_costs(plusone)),iterated([lazy_greedy([hff1,hlm1],preferred=[hff1,hlm1],cost_type=one,reopen_closed=false),lazy_greedy([hff2,hlm2],preferred=[hff2,hlm2],reopen_closed=false),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=5),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=3),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=2),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=1)],repeat_last=true,continue_on_fail=true)))))' --always --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10708 KB] reading input...
+[t=1.456432s, 97192 KB] done reading input!
+[t=1.526133s, 97832 KB] Initializing landmark sum heuristic...
+[t=1.526133s, 97832 KB] Generating landmark graph...
+[t=1.602529s, 99760 KB] Building a landmark graph with reasonable orders.
+[t=1.682202s, 102100 KB] Initializing Exploration...
+[t=1.861486s, 134888 KB] Generating landmarks using the RPG/SAS+ approach
+[t=36.314023s, 138372 KB] Landmarks generation time: 34.711494s
+[t=36.314023s, 138372 KB] Discovered 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=36.314023s, 138372 KB] 176 edges
+[t=36.314023s, 138372 KB] approx. reasonable orders
+[t=36.317347s, 138372 KB] Landmarks generation time: 34.791215s
+[t=36.317347s, 138372 KB] Discovered 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=36.317347s, 138372 KB] 176 edges
+[t=36.317347s, 138372 KB] Landmark graph generation time: 34.791215s
+[t=36.317347s, 138372 KB] Landmark graph contains 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=36.317347s, 138372 KB] Landmark graph contains 176 orderings.
+[t=37.023745s, 157992 KB] Simplifying 407155 unary operators... done! [401954 unary operators]
+[t=44.789620s, 170796 KB] time to simplify: 7.765875s
+[t=44.836097s, 184480 KB] Initializing additive heuristic...
+[t=44.836097s, 184480 KB] Initializing FF heuristic...
+[t=44.898490s, 184480 KB] Initializing landmark sum heuristic...
+[t=44.898490s, 184480 KB] Generating landmark graph...
+[t=44.971550s, 184480 KB] Building a landmark graph with reasonable orders.
+[t=45.044661s, 184480 KB] Initializing Exploration...
+[t=45.207446s, 184480 KB] Generating landmarks using the RPG/SAS+ approach
+[t=80.090980s, 184624 KB] Landmarks generation time: 35.119431s
+[t=80.090980s, 184624 KB] Discovered 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=80.090980s, 184624 KB] 176 edges
+[t=80.090980s, 184624 KB] approx. reasonable orders
+[t=80.090980s, 184624 KB] Landmarks generation time: 35.192490s
+[t=80.090980s, 184624 KB] Discovered 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=80.090980s, 184624 KB] 176 edges
+[t=80.090980s, 184624 KB] Landmark graph generation time: 35.192490s
+[t=80.090980s, 184624 KB] Landmark graph contains 177 landmarks, of which 88 are disjunctive and 0 are conjunctive.
+[t=80.090980s, 184624 KB] Landmark graph contains 176 orderings.
+[t=80.788480s, 206004 KB] Simplifying 407155 unary operators... done! [401954 unary operators]
+[t=88.302892s, 217092 KB] time to simplify: 7.514412s
+[t=88.349405s, 230776 KB] Initializing additive heuristic...
+[t=88.349405s, 230776 KB] Initializing FF heuristic...
+[t=88.349405s, 230776 KB] Building successor generator...done!
+[t=88.791331s, 230776 KB] peak memory difference for successor generator creation: 0 KB
+[t=88.791331s, 230776 KB] time for successor generation creation: 0.441926s
+[t=88.791331s, 230776 KB] Variables: 1516
+[t=88.791331s, 230776 KB] FactPairs: 5180
+[t=88.791331s, 230776 KB] Bytes per state: 240
+[t=88.791331s, 230776 KB] Building successor generator...done!
+[t=88.791331s, 230776 KB] peak memory difference for successor generator creation: 0 KB
+[t=88.791331s, 230776 KB] time for successor generation creation: 0.000000s
+[t=88.791331s, 230776 KB] Variables: 1516
+[t=88.791331s, 230776 KB] FactPairs: 5180
+[t=88.791331s, 230776 KB] Bytes per state: 240
+[t=88.791331s, 230776 KB] Starting search: lazy_greedy
+[t=88.791331s, 230776 KB] Conducting lazy best first search, (real) bound = 2147483647
+[t=88.844489s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 132
+[t=88.847815s, 230776 KB] New best heuristic value for ff: 19
+[t=88.847815s, 230776 KB] g=0, 1 evaluated, 0 expanded
+[t=88.847815s, 230776 KB] Initial heuristic value for landmark_sum_heuristic: 132
+[t=88.847815s, 230776 KB] Initial heuristic value for ff: 19
+[t=89.698254s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 124
+[t=89.698254s, 230776 KB] g=2, 18 evaluated, 17 expanded
+[t=89.940801s, 230776 KB] New best heuristic value for ff: 18
+[t=89.940801s, 230776 KB] g=3, 23 evaluated, 22 expanded
+[t=100.419566s, 230776 KB] New best heuristic value for ff: 17
+[t=100.419566s, 230776 KB] g=17, 228 evaluated, 227 expanded
+[t=100.472714s, 230776 KB] New best heuristic value for ff: 16
+[t=100.472714s, 230776 KB] g=18, 229 evaluated, 228 expanded
+[t=100.529207s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 123
+[t=100.529207s, 230776 KB] New best heuristic value for ff: 15
+[t=100.529207s, 230776 KB] g=19, 230 evaluated, 229 expanded
+[t=103.189587s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 109
+[t=103.189587s, 230776 KB] g=21, 280 evaluated, 279 expanded
+[t=103.619419s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 94
+[t=103.619419s, 230776 KB] g=22, 288 evaluated, 287 expanded
+[t=111.497360s, 230776 KB] New best heuristic value for ff: 14
+[t=111.497360s, 230776 KB] g=31, 440 evaluated, 439 expanded
+[t=301.789677s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 85
+[t=301.789677s, 230776 KB] g=25, 3948 evaluated, 3947 expanded
+[t=313.392028s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 84
+[t=313.392028s, 230776 KB] New best heuristic value for ff: 13
+[t=313.392028s, 230776 KB] g=38, 4169 evaluated, 4168 expanded
+[t=314.888382s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 76
+[t=314.888382s, 230776 KB] g=40, 4198 evaluated, 4197 expanded
+[t=315.239116s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 61
+[t=315.239116s, 230776 KB] g=41, 4205 evaluated, 4204 expanded
+[t=452.869616s, 230776 KB] New best heuristic value for ff: 12
+[t=452.869616s, 230776 KB] g=23, 6941 evaluated, 6940 expanded
+[t=453.045594s, 230776 KB] New best heuristic value for ff: 11
+[t=453.045594s, 230776 KB] g=24, 6945 evaluated, 6944 expanded
+[t=650.921222s, 230776 KB] New best heuristic value for ff: 10
+[t=650.921222s, 230776 KB] g=35, 10621 evaluated, 10620 expanded
+[t=650.967653s, 230776 KB] New best heuristic value for ff: 9
+[t=650.967653s, 230776 KB] g=36, 10622 evaluated, 10621 expanded
+[t=651.017434s, 230776 KB] New best heuristic value for ff: 8
+[t=651.017434s, 230776 KB] g=37, 10623 evaluated, 10622 expanded
+[t=651.063880s, 230776 KB] New best heuristic value for ff: 6
+[t=651.063880s, 230776 KB] g=38, 10624 evaluated, 10623 expanded
+[t=1339.170427s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 60
+[t=1339.173750s, 230776 KB] g=73, 23990 evaluated, 23989 expanded
+[t=1371.444414s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 31
+[t=1371.444414s, 230776 KB] g=78, 24597 evaluated, 24596 expanded
+[t=1373.536706s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 30
+[t=1373.536706s, 230776 KB] g=92, 24640 evaluated, 24639 expanded
+[t=1378.328576s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 22
+[t=1378.328576s, 230776 KB] g=94, 24739 evaluated, 24738 expanded
+[t=1378.617501s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 10
+[t=1378.617501s, 230776 KB] g=95, 24745 evaluated, 24744 expanded
+[t=1381.669429s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 9
+[t=1381.669429s, 230776 KB] New best heuristic value for ff: 5
+[t=1381.669429s, 230776 KB] g=111, 24809 evaluated, 24808 expanded
+[t=1533.767009s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 7
+[t=1533.767009s, 230776 KB] g=114, 27916 evaluated, 27915 expanded
+[t=1538.646718s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 4
+[t=1538.650035s, 230776 KB] g=114, 28036 evaluated, 28035 expanded
+[t=1546.544711s, 230776 KB] New best heuristic value for landmark_sum_heuristic: 3
+[t=1546.544711s, 230776 KB] g=130, 28227 evaluated, 28226 expanded
+[t=12623.968753s, 367868 KB] New best heuristic value for ff: 4
+[t=12623.968753s, 367868 KB] g=168, 357564 evaluated, 357563 expanded
+[t=15218.085176s, 427024 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=15218.085176s, 427024 KB] g=133, 483615 evaluated, 483614 expanded
+[t=15218.168260s, 427024 KB] New best heuristic value for ff: 3
+[t=15218.168260s, 427024 KB] g=138, 483623 evaluated, 483622 expanded
+[t=15218.548737s, 427156 KB] New best heuristic value for ff: 2
+[t=15218.548737s, 427156 KB] g=147, 483661 evaluated, 483660 expanded
+[t=15218.562005s, 427156 KB] New best heuristic value for ff: 1
+[t=15218.562005s, 427156 KB] g=148, 483662 evaluated, 483661 expanded
+[t=15218.565330s, 427156 KB] Solution found!
+[t=15218.565330s, 427156 KB] Actual search time: 15129.773999s
+insert hoja-solitaria categoria-hoja-solitaria estelle-slot-5 estelle-orbament n1 space n0 (1)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria fire n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria space n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria water n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria wind n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria earth n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria mirage n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria time n0 n0 n0 (0)
+finish-line-addition estelle-line-2 estelle-slot-5 (0)
+finish-addition hoja-solitaria estelle-slot-5 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+finish-unmark  (0)
+insert dulce-aroma categoria-dulce-aroma estelle-slot-6 estelle-orbament n1 wind n0 (1)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma fire n5 n3 n8 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma space n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma water n0 n3 n3 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma wind n0 n3 n3 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma earth n0 n3 n3 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma mirage n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-6 dulce-aroma time n0 n0 n0 (0)
+finish-line-addition estelle-line-2 estelle-slot-6 (0)
+finish-addition dulce-aroma estelle-slot-6 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+finish-unmark  (0)
+insert gran-fortuna categoria-gran-fortuna estelle-slot-4 estelle-orbament n1 time n0 (1)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna earth n3 n5 n8 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna time n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna fire n8 n0 n8 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna water n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna space n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna fire n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna wind n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna earth n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna mirage n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna space n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 gran-fortuna time n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna water n3 n0 n3 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna wind n3 n0 n3 (0)
+element-addition estelle-line-2 estelle-slot-4 gran-fortuna mirage n0 n0 n0 (0)
+finish-line-addition estelle-line-1 estelle-slot-4 (0)
+finish-line-addition estelle-line-2 estelle-slot-4 (0)
+finish-addition gran-fortuna estelle-slot-4 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+insert hoja-oculta categoria-hoja-oculta estelle-slot-3 estelle-orbament n1 mirage n0 (1)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta fire n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta wind n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta earth n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta mirage n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta space n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta time n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 hoja-oculta water n0 n0 n0 (0)
+finish-line-addition estelle-line-1 estelle-slot-3 (0)
+finish-addition hoja-oculta estelle-slot-3 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+insert percepcion-celestial categoria-percepcion-celestial estelle-slot-2 estelle-orbament n1 space n0 (1)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial water n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial space n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial wind n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial earth n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial mirage n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial time n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-2 percepcion-celestial fire n0 n0 n0 (0)
+finish-line-addition estelle-line-1 estelle-slot-2 (0)
+finish-addition percepcion-celestial estelle-slot-2 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+remove hoja-solitaria categoria-hoja-solitaria estelle-slot-5 estelle-orbament n0 n1 (1)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria water n3 n0 n3 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria wind n3 n0 n3 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria earth n8 n0 n8 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria mirage n0 n0 n0 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria time n5 n0 n5 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria fire n8 n5 n3 (0)
+element-subtraction estelle-line-2 estelle-slot-5 hoja-solitaria space n5 n5 n0 (0)
+finish-line-subtraction estelle-line-2 estelle-slot-5 (0)
+finish-subtraction hoja-solitaria estelle-slot-5 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-line estelle-line-2 (0)
+finish-unmark  (0)
+insert hoja-solitaria categoria-hoja-solitaria estelle-slot-1 estelle-orbament n1 space n0 (1)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria water n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria fire n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria wind n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria earth n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria mirage n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria space n5 n5 n10 (0)
+element-addition estelle-line-1 estelle-slot-1 hoja-solitaria time n5 n0 n5 (0)
+finish-line-addition estelle-line-1 estelle-slot-1 (0)
+finish-addition hoja-solitaria estelle-slot-1 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+[t=15218.565330s, 427156 KB] Plan length: 149 step(s).
+[t=15218.565330s, 427156 KB] Plan cost: 7
+[t=15218.565330s, 427156 KB] Expanded 483662 state(s).
+[t=15218.565330s, 427156 KB] Reopened 0 state(s).
+[t=15218.565330s, 427156 KB] Evaluated 483663 state(s).
+[t=15218.565330s, 427156 KB] Evaluations: 967326
+[t=15218.565330s, 427156 KB] Generated 2799286 state(s).
+[t=15218.565330s, 427156 KB] Dead ends: 0 state(s).
+[t=15218.565330s, 427156 KB] Number of registered states: 483663
+[t=15218.565330s, 427156 KB] Int hash set load factor: 483663/1048576 = 0.461257
+[t=15218.565330s, 427156 KB] Int hash set resizes: 20
+[t=15218.565330s, 427156 KB] Best solution cost so far: 7
+[t=15218.565330s, 427156 KB] Solution found - keep searching
+[t=15218.601791s, 427156 KB] Building successor generator...done!
+[t=15218.601791s, 427156 KB] peak memory difference for successor generator creation: 0 KB
+[t=15218.601791s, 427156 KB] time for successor generation creation: 0.000000s
+[t=15218.601791s, 427156 KB] Variables: 1516
+[t=15218.601791s, 427156 KB] FactPairs: 5180
+[t=15218.601791s, 427156 KB] Bytes per state: 240
+[t=15218.601791s, 427156 KB] Starting search: lazy_greedy
+[t=15218.601791s, 427156 KB] Conducting lazy best first search, (real) bound = 7
+[t=15218.624883s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 132
+[t=15218.624883s, 427156 KB] New best heuristic value for ff: 25
+[t=15218.624883s, 427156 KB] g=0, 1 evaluated, 0 expanded
+[t=15218.624883s, 427156 KB] Initial heuristic value for landmark_sum_heuristic: 132
+[t=15218.624883s, 427156 KB] Initial heuristic value for ff: 25
+[t=15218.753964s, 427156 KB] New best heuristic value for ff: 24
+[t=15218.753964s, 427156 KB] g=1, 7 evaluated, 6 expanded
+[t=15218.816818s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 124
+[t=15218.816818s, 427156 KB] New best heuristic value for ff: 23
+[t=15218.816818s, 427156 KB] g=1, 10 evaluated, 9 expanded
+[t=15218.922547s, 427156 KB] New best heuristic value for ff: 22
+[t=15218.922547s, 427156 KB] g=1, 15 evaluated, 14 expanded
+[t=15223.749891s, 427156 KB] New best heuristic value for ff: 21
+[t=15223.749891s, 427156 KB] g=1, 238 evaluated, 237 expanded
+[t=15223.793095s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 123
+[t=15223.793095s, 427156 KB] New best heuristic value for ff: 20
+[t=15223.793095s, 427156 KB] g=1, 240 evaluated, 239 expanded
+[t=15224.613859s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 109
+[t=15224.613859s, 427156 KB] g=2, 277 evaluated, 276 expanded
+[t=15224.766768s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 94
+[t=15224.766768s, 427156 KB] g=2, 284 evaluated, 283 expanded
+[t=15225.883319s, 427156 KB] New best heuristic value for ff: 19
+[t=15225.883319s, 427156 KB] g=2, 335 evaluated, 334 expanded
+[t=15226.012916s, 427156 KB] New best heuristic value for ff: 18
+[t=15226.012916s, 427156 KB] g=2, 341 evaluated, 340 expanded
+[t=15226.169114s, 427156 KB] New best heuristic value for ff: 17
+[t=15226.169114s, 427156 KB] g=2, 348 evaluated, 347 expanded
+[t=15309.199362s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 85
+[t=15309.199362s, 427156 KB] g=2, 4201 evaluated, 4200 expanded
+[t=15313.651889s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 84
+[t=15313.651889s, 427156 KB] g=2, 4467 evaluated, 4466 expanded
+[t=15313.844782s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 76
+[t=15313.844782s, 427156 KB] g=3, 4479 evaluated, 4478 expanded
+[t=15314.040937s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 61
+[t=15314.040937s, 427156 KB] g=3, 4491 evaluated, 4490 expanded
+[t=15369.362304s, 427156 KB] New best heuristic value for ff: 16
+[t=15369.362304s, 427156 KB] g=2, 7890 evaluated, 7889 expanded
+[t=15379.307153s, 427156 KB] New best heuristic value for ff: 15
+[t=15379.307153s, 427156 KB] g=2, 8491 evaluated, 8490 expanded
+[t=15379.350216s, 427156 KB] New best heuristic value for ff: 14
+[t=15379.350216s, 427156 KB] g=2, 8494 evaluated, 8493 expanded
+[t=15379.393365s, 427156 KB] New best heuristic value for ff: 13
+[t=15379.393365s, 427156 KB] g=2, 8497 evaluated, 8496 expanded
+[t=15467.656977s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 37
+[t=15467.656977s, 427156 KB] g=3, 13793 evaluated, 13792 expanded
+[t=15467.912881s, 427156 KB] New best heuristic value for ff: 12
+[t=15467.912881s, 427156 KB] g=3, 13810 evaluated, 13809 expanded
+[t=15467.959440s, 427156 KB] New best heuristic value for ff: 11
+[t=15467.959440s, 427156 KB] g=3, 13813 evaluated, 13812 expanded
+[t=15468.019295s, 427156 KB] New best heuristic value for ff: 10
+[t=15468.019295s, 427156 KB] g=3, 13817 evaluated, 13816 expanded
+[t=15468.079156s, 427156 KB] New best heuristic value for ff: 9
+[t=15468.079156s, 427156 KB] g=3, 13821 evaluated, 13820 expanded
+[t=15468.139001s, 427156 KB] New best heuristic value for ff: 8
+[t=15468.139001s, 427156 KB] g=3, 13825 evaluated, 13824 expanded
+[t=15528.654019s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 36
+[t=15528.654019s, 427156 KB] New best heuristic value for ff: 7
+[t=15528.654019s, 427156 KB] g=3, 17731 evaluated, 17730 expanded
+[t=15528.730526s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 16
+[t=15528.730526s, 427156 KB] g=4, 17737 evaluated, 17736 expanded
+[t=15528.763751s, 427156 KB] New best heuristic value for ff: 6
+[t=15528.763751s, 427156 KB] g=4, 17741 evaluated, 17740 expanded
+[t=15528.780366s, 427156 KB] New best heuristic value for ff: 5
+[t=15528.780366s, 427156 KB] g=4, 17743 evaluated, 17742 expanded
+[t=15528.796941s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=15528.796941s, 427156 KB] New best heuristic value for ff: 4
+[t=15528.796941s, 427156 KB] g=4, 17745 evaluated, 17744 expanded
+[t=15528.803588s, 427156 KB] New best heuristic value for ff: 3
+[t=15528.806914s, 427156 KB] g=4, 17746 evaluated, 17745 expanded
+[t=15529.119407s, 427156 KB] New best heuristic value for ff: 2
+[t=15529.119407s, 427156 KB] g=4, 17788 evaluated, 17787 expanded
+[t=15529.132711s, 427156 KB] New best heuristic value for ff: 1
+[t=15529.132711s, 427156 KB] g=4, 17790 evaluated, 17789 expanded
+[t=15529.136036s, 427156 KB] Solution found!
+[t=15529.136036s, 427156 KB] Actual search time: 310.534244s
+insert hoja-solitaria categoria-hoja-solitaria estelle-slot-5 estelle-orbament n1 space n0 (1)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria fire n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria space n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria water n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria wind n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria earth n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria mirage n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-5 hoja-solitaria time n0 n0 n0 (0)
+finish-line-addition estelle-line-2 estelle-slot-5 (0)
+finish-addition hoja-solitaria estelle-slot-5 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+finish-unmark  (0)
+insert gran-fortuna categoria-gran-fortuna estelle-slot-6 estelle-orbament n1 time n0 (1)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna fire n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna earth n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna space n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna time n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna water n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna wind n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-6 gran-fortuna mirage n0 n0 n0 (0)
+finish-line-addition estelle-line-2 estelle-slot-6 (0)
+finish-addition gran-fortuna estelle-slot-6 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+finish-unmark  (0)
+insert hoja-oculta categoria-hoja-oculta estelle-slot-4 estelle-orbament n1 mirage n0 (1)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta fire n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta wind n0 n5 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta earth n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta mirage n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta water n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta space n5 n0 n5 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta time n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta fire n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta wind n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta earth n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta mirage n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta space n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-4 hoja-oculta time n0 n0 n0 (0)
+element-addition estelle-line-2 estelle-slot-4 hoja-oculta water n0 n0 n0 (0)
+finish-line-addition estelle-line-1 estelle-slot-4 (0)
+finish-line-addition estelle-line-2 estelle-slot-4 (0)
+finish-addition hoja-oculta estelle-slot-4 (0)
+unmark-element estelle-line-2 earth (0)
+unmark-element estelle-line-2 fire (0)
+unmark-element estelle-line-2 mirage (0)
+unmark-element estelle-line-2 space (0)
+unmark-element estelle-line-2 time (0)
+unmark-element estelle-line-2 water (0)
+unmark-element estelle-line-2 wind (0)
+unmark-line estelle-line-2 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+insert percepcion-celestial categoria-percepcion-celestial estelle-slot-3 estelle-orbament n1 space n0 (1)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial water n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial fire n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial wind n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial earth n0 n0 n0 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial mirage n5 n0 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial space n0 n5 n5 (0)
+element-addition estelle-line-1 estelle-slot-3 percepcion-celestial time n0 n0 n0 (0)
+finish-line-addition estelle-line-1 estelle-slot-3 (0)
+finish-addition percepcion-celestial estelle-slot-3 (0)
+unmark-element estelle-line-1 earth (0)
+unmark-element estelle-line-1 fire (0)
+unmark-element estelle-line-1 mirage (0)
+unmark-element estelle-line-1 space (0)
+unmark-element estelle-line-1 time (0)
+unmark-element estelle-line-1 water (0)
+unmark-element estelle-line-1 wind (0)
+unmark-line estelle-line-1 (0)
+finish-unmark  (0)
+[t=15529.136036s, 427156 KB] Plan length: 92 step(s).
+[t=15529.136036s, 427156 KB] Plan cost: 4
+[t=15529.136036s, 427156 KB] Expanded 17790 state(s).
+[t=15529.136036s, 427156 KB] Reopened 0 state(s).
+[t=15529.136036s, 427156 KB] Evaluated 17791 state(s).
+[t=15529.136036s, 427156 KB] Evaluations: 35582
+[t=15529.136036s, 427156 KB] Generated 111860 state(s).
+[t=15529.136036s, 427156 KB] Dead ends: 0 state(s).
+[t=15529.136036s, 427156 KB] Number of registered states: 17791
+[t=15529.136036s, 427156 KB] Int hash set load factor: 17791/32768 = 0.542938
+[t=15529.136036s, 427156 KB] Int hash set resizes: 15
+[t=15529.136036s, 427156 KB] Best solution cost so far: 4
+[t=15529.136036s, 427156 KB] Solution found - keep searching
+[t=15529.139363s, 427156 KB] Building successor generator...done!
+[t=15529.139363s, 427156 KB] peak memory difference for successor generator creation: 0 KB
+[t=15529.139363s, 427156 KB] time for successor generation creation: 0.000000s
+[t=15529.139363s, 427156 KB] Variables: 1516
+[t=15529.139363s, 427156 KB] FactPairs: 5180
+[t=15529.139363s, 427156 KB] Bytes per state: 240
+[t=15529.139363s, 427156 KB] Starting search: lazy_wastar
+[t=15529.139363s, 427156 KB] Conducting lazy best first search, (real) bound = 4
+[t=15529.155993s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 132
+[t=15529.155993s, 427156 KB] New best heuristic value for ff: 25
+[t=15529.155993s, 427156 KB] g=0, 1 evaluated, 0 expanded
+[t=15529.155993s, 427156 KB] Initial heuristic value for landmark_sum_heuristic: 132
+[t=15529.155993s, 427156 KB] Initial heuristic value for ff: 25
+[t=15529.255763s, 427156 KB] New best heuristic value for ff: 24
+[t=15529.255763s, 427156 KB] g=1, 7 evaluated, 6 expanded
+[t=15529.305662s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 124
+[t=15529.305662s, 427156 KB] New best heuristic value for ff: 23
+[t=15529.305662s, 427156 KB] g=1, 10 evaluated, 9 expanded
+[t=15529.385493s, 427156 KB] New best heuristic value for ff: 22
+[t=15529.385493s, 427156 KB] g=1, 15 evaluated, 14 expanded
+[t=15533.146215s, 427156 KB] New best heuristic value for ff: 21
+[t=15533.146215s, 427156 KB] g=1, 238 evaluated, 237 expanded
+[t=15533.179472s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 123
+[t=15533.179472s, 427156 KB] New best heuristic value for ff: 20
+[t=15533.179472s, 427156 KB] g=1, 240 evaluated, 239 expanded
+[t=15533.820983s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 109
+[t=15533.820983s, 427156 KB] g=2, 277 evaluated, 276 expanded
+[t=15533.940423s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 94
+[t=15533.940423s, 427156 KB] g=2, 284 evaluated, 283 expanded
+[t=15534.805054s, 427156 KB] New best heuristic value for ff: 19
+[t=15534.805054s, 427156 KB] g=2, 335 evaluated, 334 expanded
+[t=15534.907749s, 427156 KB] New best heuristic value for ff: 18
+[t=15534.907749s, 427156 KB] g=2, 341 evaluated, 340 expanded
+[t=15535.027154s, 427156 KB] New best heuristic value for ff: 17
+[t=15535.027154s, 427156 KB] g=2, 348 evaluated, 347 expanded
+[t=15601.479205s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 85
+[t=15601.479205s, 427156 KB] g=2, 4197 evaluated, 4196 expanded
+[t=15605.728438s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 84
+[t=15605.728438s, 427156 KB] g=2, 4450 evaluated, 4449 expanded
+[t=15606.037768s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 76
+[t=15606.037768s, 427156 KB] g=3, 4469 evaluated, 4468 expanded
+[t=15606.260600s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 61
+[t=15606.260600s, 427156 KB] g=3, 4483 evaluated, 4482 expanded
+[t=15662.060227s, 427156 KB] New best heuristic value for ff: 16
+[t=15662.060227s, 427156 KB] g=2, 7889 evaluated, 7888 expanded
+[t=15673.006686s, 427156 KB] New best heuristic value for ff: 15
+[t=15673.006686s, 427156 KB] g=2, 8555 evaluated, 8554 expanded
+[t=15673.053239s, 427156 KB] New best heuristic value for ff: 14
+[t=15673.053239s, 427156 KB] g=2, 8558 evaluated, 8557 expanded
+[t=15673.096485s, 427156 KB] New best heuristic value for ff: 13
+[t=15673.096485s, 427156 KB] g=2, 8561 evaluated, 8560 expanded
+[t=15745.074975s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 37
+[t=15745.074975s, 427156 KB] g=3, 12859 evaluated, 12858 expanded
+[t=15745.327139s, 427156 KB] New best heuristic value for ff: 12
+[t=15745.327139s, 427156 KB] g=3, 12876 evaluated, 12875 expanded
+[t=15745.373595s, 427156 KB] New best heuristic value for ff: 11
+[t=15745.373595s, 427156 KB] g=3, 12879 evaluated, 12878 expanded
+[t=15745.433278s, 427156 KB] New best heuristic value for ff: 10
+[t=15745.433278s, 427156 KB] g=3, 12883 evaluated, 12882 expanded
+[t=15745.493015s, 427156 KB] New best heuristic value for ff: 9
+[t=15745.493015s, 427156 KB] g=3, 12887 evaluated, 12886 expanded
+[t=15745.552774s, 427156 KB] New best heuristic value for ff: 8
+[t=15745.552774s, 427156 KB] g=3, 12891 evaluated, 12890 expanded
+[t=15806.101340s, 427156 KB] New best heuristic value for landmark_sum_heuristic: 36
+[t=15806.101340s, 427156 KB] New best heuristic value for ff: 7
+[t=15806.101340s, 427156 KB] g=3, 16797 evaluated, 16796 expanded
+Peak memory: 558696 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+Remove intermediate file output.sas
+search exit code: 23
+
+Driver aborting after search
+INFO     Planner time: 28877.26s

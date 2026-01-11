@@ -1,0 +1,687 @@
+!!!DATA fd-seq-sat-lama-2011,fullINFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python3 /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/translate/translate.py ../../../domain.pddl ../../full.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.040s CPU, 0.046s wall-clock]
+Normalizing task... [0.010s CPU, 0.002s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.006s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.000s CPU, 0.007s wall-clock]
+Preparing model... [0.020s CPU, 0.016s wall-clock]
+Generated 133 rules.
+Computing model... [26.770s CPU, 26.984s wall-clock]
+891220 relevant atoms
+975763 auxiliary atoms
+1866983 final queue length
+3886178 total queue pushes
+Completing instantiation... [99.130s CPU, 99.964s wall-clock]
+Instantiating: [127.980s CPU, 129.051s wall-clock]
+Computing fact groups...
+Finding invariants...
+28 initial candidates
+Finding invariants: [1.920s CPU, 1.937s wall-clock]
+Checking invariant weight... [0.010s CPU, 0.002s wall-clock]
+Instantiating groups... [0.050s CPU, 0.052s wall-clock]
+Collecting mutex groups... [0.020s CPU, 0.016s wall-clock]
+Choosing groups...
+5295 uncovered facts
+Choosing groups: [0.050s CPU, 0.051s wall-clock]
+Building translation key... [0.030s CPU, 0.034s wall-clock]
+Computing fact groups: [2.160s CPU, 2.175s wall-clock]
+Building STRIPS to SAS dictionary... [0.040s CPU, 0.038s wall-clock]
+Building dictionary for full mutex groups... [0.010s CPU, 0.016s wall-clock]
+Building mutex information...
+Building mutex information: [0.030s CPU, 0.026s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.320s CPU, 0.316s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [5.100s CPU, 5.122s wall-clock]
+Translating task: [93.800s CPU, 94.430s wall-clock]
+139160 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+486 propositions removed
+Detecting unreachable propositions: [55.620s CPU, 56.698s wall-clock]
+Reordering and filtering variables...
+5255 of 5255 variables necessary.
+2 of 136 mutex groups necessary.
+827175 of 827175 operators necessary.
+51022 of 51022 axiom rules necessary.
+Reordering and filtering variables: [8.710s CPU, 8.767s wall-clock]
+Translator variables: 5255
+Translator derived variables: 2855
+Translator facts: 13411
+Translator goal facts: 45
+Translator mutex groups: 2
+Translator total mutex groups size: 30
+Translator operators: 827175
+Translator axioms: 51022
+Translator task size: 6616896
+Translator peak memory: 3451600 KB
+Writing output... [11.310s CPU, 11.430s wall-clock]
+Done! [304.100s CPU, 307.211s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: 28800s
+INFO     search memory limit: None
+INFO     search command line string: /home/joseaverde/Software/downward-release-24.06.1/builds/release/bin/downward --search --if-unit-cost 'let(hlm,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),pref=true),let(hff,ff(),iterated([lazy_greedy([hff,hlm],preferred=[hff,hlm]),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=5),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=3),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=2),lazy_wastar([hff,hlm],preferred=[hff,hlm],w=1)],repeat_last=true,continue_on_fail=true)))' --if-non-unit-cost 'let(hlm1,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=true),let(hff1,ff(transform=adapt_costs(one)),let(hlm2,landmark_sum(lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(plusone),pref=true),let(hff2,ff(transform=adapt_costs(plusone)),iterated([lazy_greedy([hff1,hlm1],preferred=[hff1,hlm1],cost_type=one,reopen_closed=false),lazy_greedy([hff2,hlm2],preferred=[hff2,hlm2],reopen_closed=false),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=5),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=3),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=2),lazy_wastar([hff2,hlm2],preferred=[hff2,hlm2],w=1)],repeat_last=true,continue_on_fail=true)))))' --always --internal-plan-file sas_plan < output.sas
+[t=0.000000s, 10708 KB] reading input...
+[t=5.720225s, 343844 KB] done reading input!
+[t=5.972676s, 345212 KB] Initializing landmark sum heuristic...
+[t=5.972676s, 345212 KB] Generating landmark graph...
+[t=6.281586s, 353456 KB] Building a landmark graph with reasonable orders.
+[t=6.587224s, 362896 KB] Initializing Exploration...
+[t=7.296836s, 491988 KB] Generating landmarks using the RPG/SAS+ approach
+[t=70.921910s, 497268 KB] Landmarks generation time: 64.640325s
+[t=70.921910s, 497268 KB] Discovered 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=70.921910s, 497268 KB] 44 edges
+[t=70.921910s, 497268 KB] approx. reasonable orders
+[t=70.921910s, 497268 KB] Landmarks generation time: 64.949234s
+[t=70.921910s, 497268 KB] Discovered 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=70.921910s, 497268 KB] 44 edges
+[t=70.921910s, 497268 KB] Landmark graph generation time: 64.949234s
+[t=70.921910s, 497268 KB] Landmark graph contains 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=70.921910s, 497268 KB] Landmark graph contains 44 orderings.
+[t=73.926987s, 561368 KB] Simplifying 1588680 unary operators... done! [1568187 unary operators]
+[t=111.581404s, 630008 KB] time to simplify: 37.654416s
+[t=111.747473s, 630008 KB] Initializing additive heuristic...
+[t=111.747473s, 630008 KB] Initializing FF heuristic...
+[t=112.006581s, 630008 KB] Initializing landmark sum heuristic...
+[t=112.006581s, 630008 KB] Generating landmark graph...
+[t=112.311248s, 630008 KB] Building a landmark graph with reasonable orders.
+[t=112.620247s, 630008 KB] Initializing Exploration...
+[t=113.297891s, 649928 KB] Generating landmarks using the RPG/SAS+ approach
+[t=178.870234s, 654976 KB] Landmarks generation time: 66.555667s
+[t=178.870234s, 654976 KB] Discovered 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=178.870234s, 654976 KB] 44 edges
+[t=178.870234s, 654976 KB] approx. reasonable orders
+[t=178.870234s, 654976 KB] Landmarks generation time: 66.863653s
+[t=178.870234s, 654976 KB] Discovered 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=178.870234s, 654976 KB] 44 edges
+[t=178.870234s, 654976 KB] Landmark graph generation time: 66.863653s
+[t=178.870234s, 654976 KB] Landmark graph contains 89 landmarks, of which 0 are disjunctive and 0 are conjunctive.
+[t=178.870234s, 654976 KB] Landmark graph contains 44 orderings.
+[t=181.834689s, 739380 KB] Simplifying 1588680 unary operators... done! [1568187 unary operators]
+[t=219.934045s, 787692 KB] time to simplify: 38.099356s
+[t=220.099845s, 787692 KB] Initializing additive heuristic...
+[t=220.099845s, 787692 KB] Initializing FF heuristic...
+[t=220.103151s, 787692 KB] Building successor generator...done!
+[t=222.171808s, 787692 KB] peak memory difference for successor generator creation: 0 KB
+[t=222.171808s, 787692 KB] time for successor generation creation: 2.068657s
+[t=222.171808s, 787692 KB] Variables: 5255
+[t=222.171808s, 787692 KB] FactPairs: 13411
+[t=222.171808s, 787692 KB] Bytes per state: 728
+[t=222.171808s, 787692 KB] Building successor generator...done!
+[t=222.171808s, 787692 KB] peak memory difference for successor generator creation: 0 KB
+[t=222.171808s, 787692 KB] time for successor generation creation: 0.000000s
+[t=222.171808s, 787692 KB] Variables: 5255
+[t=222.171808s, 787692 KB] FactPairs: 13411
+[t=222.171808s, 787692 KB] Bytes per state: 728
+[t=222.171808s, 787692 KB] Starting search: lazy_greedy
+[t=222.171808s, 787692 KB] Conducting lazy best first search, (real) bound = 2147483647
+[t=222.417263s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 44
+[t=222.417263s, 787692 KB] New best heuristic value for ff: 20
+[t=222.417263s, 787692 KB] g=0, 1 evaluated, 0 expanded
+[t=222.420572s, 787692 KB] Initial heuristic value for landmark_sum_heuristic: 44
+[t=222.420572s, 787692 KB] Initial heuristic value for ff: 20
+[t=226.593423s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 42
+[t=226.593423s, 787692 KB] New best heuristic value for ff: 19
+[t=226.593423s, 787692 KB] g=2, 20 evaluated, 19 expanded
+[t=227.691428s, 787692 KB] New best heuristic value for ff: 18
+[t=227.691428s, 787692 KB] g=3, 25 evaluated, 24 expanded
+[t=278.563110s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 40
+[t=278.563110s, 787692 KB] g=3, 249 evaluated, 248 expanded
+[t=348.482348s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 39
+[t=348.482348s, 787692 KB] g=19, 552 evaluated, 551 expanded
+[t=351.238038s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 34
+[t=351.238038s, 787692 KB] g=22, 565 evaluated, 564 expanded
+[t=408.895351s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 33
+[t=408.895351s, 787692 KB] g=38, 817 evaluated, 816 expanded
+[t=412.177664s, 787692 KB] New best heuristic value for ff: 17
+[t=412.177664s, 787692 KB] g=41, 832 evaluated, 831 expanded
+[t=429.337914s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 31
+[t=429.337914s, 787692 KB] g=41, 911 evaluated, 910 expanded
+[t=433.824521s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 27
+[t=433.824521s, 787692 KB] g=42, 932 evaluated, 931 expanded
+[t=480.748871s, 787692 KB] New best heuristic value for ff: 16
+[t=480.748871s, 787692 KB] g=50, 1154 evaluated, 1153 expanded
+[t=1023.370274s, 787692 KB] New best heuristic value for ff: 15
+[t=1023.370274s, 787692 KB] g=28, 3702 evaluated, 3701 expanded
+[t=1023.941638s, 787692 KB] New best heuristic value for ff: 14
+[t=1023.941638s, 787692 KB] g=29, 3705 evaluated, 3704 expanded
+[t=1024.702736s, 787692 KB] New best heuristic value for ff: 13
+[t=1024.702736s, 787692 KB] g=30, 3709 evaluated, 3708 expanded
+[t=1025.473320s, 787692 KB] New best heuristic value for ff: 12
+[t=1025.473320s, 787692 KB] g=31, 3713 evaluated, 3712 expanded
+[t=1950.216755s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 26
+[t=1950.216755s, 787692 KB] g=73, 8160 evaluated, 8159 expanded
+[t=2022.857805s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 24
+[t=2022.857805s, 787692 KB] g=75, 8498 evaluated, 8497 expanded
+[t=2024.249039s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 19
+[t=2024.249039s, 787692 KB] g=76, 8505 evaluated, 8504 expanded
+[t=2048.790033s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 18
+[t=2048.790033s, 787692 KB] New best heuristic value for ff: 10
+[t=2048.790033s, 787692 KB] g=92, 8621 evaluated, 8620 expanded
+[t=2051.074993s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 12
+[t=2051.074993s, 787692 KB] g=94, 8632 evaluated, 8631 expanded
+[t=2052.588509s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 6
+[t=2052.588509s, 787692 KB] g=95, 8640 evaluated, 8639 expanded
+[t=2062.307743s, 787692 KB] New best heuristic value for ff: 9
+[t=2062.307743s, 787692 KB] g=107, 8692 evaluated, 8691 expanded
+[t=2062.689716s, 787692 KB] New best heuristic value for ff: 8
+[t=2062.689716s, 787692 KB] g=108, 8694 evaluated, 8693 expanded
+[t=2063.068406s, 787692 KB] New best heuristic value for ff: 7
+[t=2063.068406s, 787692 KB] g=109, 8696 evaluated, 8695 expanded
+[t=2063.446374s, 787692 KB] New best heuristic value for ff: 6
+[t=2063.446374s, 787692 KB] g=110, 8698 evaluated, 8697 expanded
+[t=2063.642403s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 5
+[t=2063.642403s, 787692 KB] New best heuristic value for ff: 5
+[t=2063.642403s, 787692 KB] g=111, 8699 evaluated, 8698 expanded
+[t=3229.843624s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 3
+[t=3229.843624s, 787692 KB] g=114, 14543 evaluated, 14542 expanded
+[t=3261.210312s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 2
+[t=3261.210312s, 787692 KB] g=130, 14734 evaluated, 14733 expanded
+[t=5019.093144s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=5019.093144s, 787692 KB] g=133, 25111 evaluated, 25110 expanded
+[t=5019.634630s, 787692 KB] New best heuristic value for ff: 4
+[t=5019.634630s, 787692 KB] g=137, 25117 evaluated, 25116 expanded
+[t=5019.814098s, 787692 KB] New best heuristic value for ff: 3
+[t=5019.814098s, 787692 KB] g=138, 25119 evaluated, 25118 expanded
+[t=5023.166287s, 787692 KB] New best heuristic value for ff: 2
+[t=5023.166287s, 787692 KB] g=147, 25157 evaluated, 25156 expanded
+[t=5023.245999s, 787692 KB] New best heuristic value for ff: 1
+[t=5023.245999s, 787692 KB] g=148, 25158 evaluated, 25157 expanded
+[t=5023.279205s, 787692 KB] Solution found!
+[t=5023.279205s, 787692 KB] Actual search time: 4801.107396s
+insert hoja-oculta categoria-hoja-oculta scherazard-slot-5 scherazard-orbament n4 mirage n3 (1)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta wind n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta mirage n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta fire n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta earth n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta space n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta time n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-5 (0)
+finish-addition hoja-oculta scherazard-slot-5 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+insert veta-de-septium categoria-veta-de-septium scherazard-slot-1 scherazard-orbament n4 earth n3 (1)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium wind n5 n3 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium earth n0 n3 n3 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium fire n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium space n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-1 veta-de-septium time n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-1 (0)
+finish-addition veta-de-septium scherazard-slot-1 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+insert gran-fortuna categoria-gran-fortuna scherazard-slot-4 scherazard-orbament n4 time n3 (1)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna earth n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna time n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna time n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna water n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna fire n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna space n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna wind n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 gran-fortuna mirage n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna wind n8 n0 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna earth n3 n5 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna space n0 n0 n0 (0)
+finish-line-addition scherazard-line-2 scherazard-slot-4 (0)
+element-addition scherazard-line-1 scherazard-slot-4 gran-fortuna fire n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-4 (0)
+finish-addition gran-fortuna scherazard-slot-4 (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-element scherazard-line-2 time (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 space (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert hoja-solitaria categoria-hoja-solitaria scherazard-slot-3 scherazard-orbament n4 space n3 (1)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria fire n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria earth n5 n0 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria mirage n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria space n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria time n5 n0 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria water n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 hoja-solitaria wind n0 n0 n0 (0)
+finish-line-addition scherazard-line-2 scherazard-slot-3 (0)
+finish-addition hoja-solitaria scherazard-slot-3 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 time (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert percepcion-celestial categoria-percepcion-celestial scherazard-slot-2 scherazard-orbament n4 space n3 (1)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial water n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial wind n8 n0 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial earth n8 n0 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial space n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial time n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial fire n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-2 (0)
+finish-addition percepcion-celestial scherazard-slot-2 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+remove hoja-solitaria categoria-hoja-solitaria scherazard-slot-3 scherazard-orbament n3 n4 (1)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria wind n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria mirage n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria water n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria earth n5 n0 n5 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria time n5 n0 n5 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria fire n5 n5 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 hoja-solitaria space n5 n5 n0 (0)
+finish-line-subtraction scherazard-line-2 scherazard-slot-3 (0)
+finish-subtraction hoja-solitaria scherazard-slot-3 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 time (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert hoja-solitaria categoria-hoja-solitaria scherazard-slot-6 scherazard-orbament n4 space n3 (1)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria water n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria fire n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria wind n8 n0 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria earth n8 n0 n8 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria space n5 n5 n10 (0)
+element-addition scherazard-line-1 scherazard-slot-6 hoja-solitaria time n5 n0 n5 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-6 (0)
+finish-addition hoja-solitaria scherazard-slot-6 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+[t=5023.279205s, 787692 KB] Plan length: 149 step(s).
+[t=5023.279205s, 787692 KB] Plan cost: 7
+[t=5023.279205s, 787692 KB] Expanded 25158 state(s).
+[t=5023.279205s, 787692 KB] Reopened 0 state(s).
+[t=5023.279205s, 787692 KB] Evaluated 25159 state(s).
+[t=5023.279205s, 787692 KB] Evaluations: 50318
+[t=5023.279205s, 787692 KB] Generated 188997 state(s).
+[t=5023.279205s, 787692 KB] Dead ends: 0 state(s).
+[t=5023.279205s, 787692 KB] Number of registered states: 25159
+[t=5023.279205s, 787692 KB] Int hash set load factor: 25159/32768 = 0.767792
+[t=5023.279205s, 787692 KB] Int hash set resizes: 15
+[t=5023.279205s, 787692 KB] Best solution cost so far: 7
+[t=5023.279205s, 787692 KB] Solution found - keep searching
+[t=5023.285834s, 787692 KB] Building successor generator...done!
+[t=5023.285834s, 787692 KB] peak memory difference for successor generator creation: 0 KB
+[t=5023.285834s, 787692 KB] time for successor generation creation: 0.000000s
+[t=5023.285834s, 787692 KB] Variables: 5255
+[t=5023.285834s, 787692 KB] FactPairs: 13411
+[t=5023.285834s, 787692 KB] Bytes per state: 728
+[t=5023.285834s, 787692 KB] Starting search: lazy_greedy
+[t=5023.285834s, 787692 KB] Conducting lazy best first search, (real) bound = 7
+[t=5023.508433s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 44
+[t=5023.508433s, 787692 KB] New best heuristic value for ff: 27
+[t=5023.508433s, 787692 KB] g=0, 1 evaluated, 0 expanded
+[t=5023.511760s, 787692 KB] Initial heuristic value for landmark_sum_heuristic: 44
+[t=5023.511760s, 787692 KB] Initial heuristic value for ff: 27
+[t=5024.696871s, 787692 KB] New best heuristic value for ff: 24
+[t=5024.696871s, 787692 KB] g=1, 7 evaluated, 6 expanded
+[t=5025.274894s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 42
+[t=5025.274894s, 787692 KB] New best heuristic value for ff: 23
+[t=5025.274894s, 787692 KB] g=1, 10 evaluated, 9 expanded
+[t=5026.261200s, 787692 KB] New best heuristic value for ff: 22
+[t=5026.261200s, 787692 KB] g=1, 15 evaluated, 14 expanded
+[t=5073.166993s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 40
+[t=5073.166993s, 787692 KB] g=1, 243 evaluated, 242 expanded
+[t=5135.699404s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 39
+[t=5135.699404s, 787692 KB] g=1, 546 evaluated, 545 expanded
+[t=5138.186186s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 34
+[t=5138.186186s, 787692 KB] g=2, 559 evaluated, 558 expanded
+[t=5186.858934s, 787692 KB] New best heuristic value for ff: 21
+[t=5186.858934s, 787692 KB] g=2, 795 evaluated, 794 expanded
+[t=5187.243898s, 787692 KB] New best heuristic value for ff: 20
+[t=5187.243898s, 787692 KB] g=2, 797 evaluated, 796 expanded
+[t=5187.632545s, 787692 KB] New best heuristic value for ff: 18
+[t=5187.632545s, 787692 KB] g=2, 799 evaluated, 798 expanded
+[t=5188.366442s, 787692 KB] New best heuristic value for ff: 17
+[t=5188.366442s, 787692 KB] g=2, 803 evaluated, 802 expanded
+[t=5188.891360s, 787692 KB] New best heuristic value for ff: 16
+[t=5188.891360s, 787692 KB] g=2, 806 evaluated, 805 expanded
+[t=5189.798263s, 787692 KB] New best heuristic value for ff: 15
+[t=5189.798263s, 787692 KB] g=2, 811 evaluated, 810 expanded
+[t=5190.492565s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 32
+[t=5190.492565s, 787692 KB] New best heuristic value for ff: 14
+[t=5190.492565s, 787692 KB] g=2, 815 evaluated, 814 expanded
+[t=5993.088297s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 31
+[t=5993.088297s, 787692 KB] g=2, 5258 evaluated, 5257 expanded
+[t=5995.765484s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 25
+[t=5995.765484s, 787692 KB] g=3, 5273 evaluated, 5272 expanded
+[t=5996.964194s, 787692 KB] New best heuristic value for ff: 13
+[t=5996.964194s, 787692 KB] g=3, 5280 evaluated, 5279 expanded
+[t=6040.303018s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 22
+[t=6040.303018s, 787692 KB] New best heuristic value for ff: 12
+[t=6040.303018s, 787692 KB] g=3, 5522 evaluated, 5521 expanded
+[t=6095.601526s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 21
+[t=6095.601526s, 787692 KB] g=3, 5828 evaluated, 5827 expanded
+[t=6096.299329s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 10
+[t=6096.299329s, 787692 KB] g=4, 5832 evaluated, 5831 expanded
+[t=6096.641677s, 787692 KB] New best heuristic value for ff: 11
+[t=6096.641677s, 787692 KB] g=4, 5834 evaluated, 5833 expanded
+[t=6097.329441s, 787692 KB] New best heuristic value for ff: 10
+[t=6097.329441s, 787692 KB] g=4, 5838 evaluated, 5837 expanded
+[t=6098.017108s, 787692 KB] New best heuristic value for ff: 9
+[t=6098.017108s, 787692 KB] g=4, 5842 evaluated, 5841 expanded
+[t=6153.957507s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 9
+[t=6153.957507s, 787692 KB] g=4, 6157 evaluated, 6156 expanded
+[t=6155.878023s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 5
+[t=6155.878023s, 787692 KB] g=5, 6168 evaluated, 6167 expanded
+[t=6156.050848s, 787692 KB] New best heuristic value for ff: 8
+[t=6156.050848s, 787692 KB] g=5, 6169 evaluated, 6168 expanded
+[t=6156.220358s, 787692 KB] New best heuristic value for ff: 7
+[t=6156.220358s, 787692 KB] g=5, 6170 evaluated, 6169 expanded
+[t=6209.287734s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 4
+[t=6209.287734s, 787692 KB] g=5, 6469 evaluated, 6468 expanded
+[t=7504.609858s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 3
+[t=7504.609858s, 787692 KB] g=6, 13566 evaluated, 13565 expanded
+[t=7559.176837s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 2
+[t=7559.176837s, 787692 KB] g=6, 13876 evaluated, 13875 expanded
+[t=7763.784570s, 787692 KB] New best heuristic value for ff: 6
+[t=7763.784570s, 787692 KB] g=6, 15038 evaluated, 15037 expanded
+[t=7780.523306s, 787692 KB] New best heuristic value for ff: 5
+[t=7780.523306s, 787692 KB] g=6, 15149 evaluated, 15148 expanded
+[t=7822.148525s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=7822.148525s, 787692 KB] g=6, 15466 evaluated, 15465 expanded
+[t=10238.661819s, 787692 KB] New best heuristic value for ff: 4
+[t=10238.661819s, 787692 KB] g=6, 36407 evaluated, 36406 expanded
+[t=10238.711687s, 787692 KB] New best heuristic value for ff: 3
+[t=10238.711687s, 787692 KB] g=6, 36408 evaluated, 36407 expanded
+[t=10240.705472s, 787692 KB] New best heuristic value for ff: 2
+[t=10240.708798s, 787692 KB] g=6, 36451 evaluated, 36450 expanded
+[t=10240.752024s, 787692 KB] New best heuristic value for ff: 1
+[t=10240.752024s, 787692 KB] g=6, 36452 evaluated, 36451 expanded
+[t=10240.771949s, 787692 KB] Solution found!
+[t=10240.771949s, 787692 KB] Actual search time: 5217.486115s
+insert hoja-oculta categoria-hoja-oculta scherazard-slot-5 scherazard-orbament n4 mirage n3 (1)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta wind n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta mirage n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta fire n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta earth n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta space n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-5 hoja-oculta time n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-5 (0)
+finish-addition hoja-oculta scherazard-slot-5 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+insert hoja-solitaria categoria-hoja-solitaria scherazard-slot-4 scherazard-orbament n4 space n3 (1)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria water n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria fire n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria wind n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria earth n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria mirage n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria space n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-4 hoja-solitaria time n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria fire n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria wind n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria space n0 n5 n5 (0)
+finish-line-addition scherazard-line-2 scherazard-slot-4 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria water n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria earth n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-4 hoja-solitaria time n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-4 (0)
+finish-addition hoja-solitaria scherazard-slot-4 (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 time (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-line scherazard-line-1 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 time (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert gran-fortuna categoria-gran-fortuna scherazard-slot-3 scherazard-orbament n4 time n3 (1)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna fire n5 n0 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna wind n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna mirage n0 n0 n0 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna earth n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna space n5 n0 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna time n0 n5 n5 (0)
+element-addition scherazard-line-2 scherazard-slot-3 gran-fortuna water n0 n0 n0 (0)
+finish-line-addition scherazard-line-2 scherazard-slot-3 (0)
+finish-addition gran-fortuna scherazard-slot-3 (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 time (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert percepcion-celestial categoria-percepcion-celestial scherazard-slot-2 scherazard-orbament n4 space n3 (1)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial water n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial fire n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial wind n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial space n5 n5 n10 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial earth n0 n0 n0 (0)
+element-addition scherazard-line-1 scherazard-slot-2 percepcion-celestial time n0 n0 n0 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-2 (0)
+finish-addition percepcion-celestial scherazard-slot-2 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+remove gran-fortuna categoria-gran-fortuna scherazard-slot-3 scherazard-orbament n3 n4 (1)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna water n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna fire n5 n0 n5 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna wind n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna mirage n0 n0 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna space n5 n0 n5 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna earth n5 n5 n0 (0)
+element-subtraction scherazard-line-2 scherazard-slot-3 gran-fortuna time n5 n5 n0 (0)
+finish-line-subtraction scherazard-line-2 scherazard-slot-3 (0)
+finish-subtraction gran-fortuna scherazard-slot-3 (0)
+unmark-element scherazard-line-2 water (0)
+unmark-element scherazard-line-2 fire (0)
+unmark-element scherazard-line-2 wind (0)
+unmark-element scherazard-line-2 mirage (0)
+unmark-element scherazard-line-2 space (0)
+unmark-element scherazard-line-2 earth (0)
+unmark-element scherazard-line-2 time (0)
+unmark-line scherazard-line-2 (0)
+finish-unmark  (0)
+insert gran-fortuna categoria-gran-fortuna scherazard-slot-6 scherazard-orbament n4 time n3 (1)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna water n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna fire n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna wind n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna earth n0 n5 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna mirage n5 n0 n5 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna space n10 n0 n10 (0)
+element-addition scherazard-line-1 scherazard-slot-6 gran-fortuna time n0 n5 n5 (0)
+finish-line-addition scherazard-line-1 scherazard-slot-6 (0)
+finish-addition gran-fortuna scherazard-slot-6 (0)
+unmark-element scherazard-line-1 water (0)
+unmark-element scherazard-line-1 fire (0)
+unmark-element scherazard-line-1 wind (0)
+unmark-element scherazard-line-1 earth (0)
+unmark-element scherazard-line-1 mirage (0)
+unmark-element scherazard-line-1 space (0)
+unmark-element scherazard-line-1 time (0)
+unmark-line scherazard-line-1 (0)
+finish-unmark  (0)
+[t=10240.771949s, 787692 KB] Plan length: 130 step(s).
+[t=10240.771949s, 787692 KB] Plan cost: 6
+[t=10240.771949s, 787692 KB] Expanded 36452 state(s).
+[t=10240.771949s, 787692 KB] Reopened 0 state(s).
+[t=10240.771949s, 787692 KB] Evaluated 36453 state(s).
+[t=10240.771949s, 787692 KB] Evaluations: 72906
+[t=10240.771949s, 787692 KB] Generated 261268 state(s).
+[t=10240.771949s, 787692 KB] Dead ends: 0 state(s).
+[t=10240.771949s, 787692 KB] Number of registered states: 36453
+[t=10240.771949s, 787692 KB] Int hash set load factor: 36453/65536 = 0.556229
+[t=10240.771949s, 787692 KB] Int hash set resizes: 16
+[t=10240.771949s, 787692 KB] Best solution cost so far: 6
+[t=10240.771949s, 787692 KB] Solution found - keep searching
+[t=10240.775275s, 787692 KB] Building successor generator...done!
+[t=10240.775275s, 787692 KB] peak memory difference for successor generator creation: 0 KB
+[t=10240.775275s, 787692 KB] time for successor generation creation: 0.000000s
+[t=10240.775275s, 787692 KB] Variables: 5255
+[t=10240.775275s, 787692 KB] FactPairs: 13411
+[t=10240.775275s, 787692 KB] Bytes per state: 728
+[t=10240.775275s, 787692 KB] Starting search: lazy_wastar
+[t=10240.775275s, 787692 KB] Conducting lazy best first search, (real) bound = 6
+[t=10240.894924s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 44
+[t=10240.894924s, 787692 KB] New best heuristic value for ff: 27
+[t=10240.894924s, 787692 KB] g=0, 1 evaluated, 0 expanded
+[t=10240.894924s, 787692 KB] Initial heuristic value for landmark_sum_heuristic: 44
+[t=10240.894924s, 787692 KB] Initial heuristic value for ff: 27
+[t=10241.559672s, 787692 KB] New best heuristic value for ff: 24
+[t=10241.559672s, 787692 KB] g=1, 7 evaluated, 6 expanded
+[t=10241.885463s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 42
+[t=10241.885463s, 787692 KB] New best heuristic value for ff: 23
+[t=10241.885463s, 787692 KB] g=1, 10 evaluated, 9 expanded
+[t=10242.433913s, 787692 KB] New best heuristic value for ff: 22
+[t=10242.433913s, 787692 KB] g=1, 15 evaluated, 14 expanded
+[t=10268.361425s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 40
+[t=10268.361425s, 787692 KB] g=1, 243 evaluated, 242 expanded
+[t=10302.645907s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 39
+[t=10302.649230s, 787692 KB] g=1, 546 evaluated, 545 expanded
+[t=10304.022385s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 34
+[t=10304.022385s, 787692 KB] g=2, 559 evaluated, 558 expanded
+[t=10330.547778s, 787692 KB] New best heuristic value for ff: 21
+[t=10330.551093s, 787692 KB] g=2, 795 evaluated, 794 expanded
+[t=10330.760545s, 787692 KB] New best heuristic value for ff: 20
+[t=10330.760545s, 787692 KB] g=2, 797 evaluated, 796 expanded
+[t=10330.973337s, 787692 KB] New best heuristic value for ff: 18
+[t=10330.973337s, 787692 KB] g=2, 799 evaluated, 798 expanded
+[t=10331.378865s, 787692 KB] New best heuristic value for ff: 17
+[t=10331.382187s, 787692 KB] g=2, 803 evaluated, 802 expanded
+[t=10331.671441s, 787692 KB] New best heuristic value for ff: 16
+[t=10331.671441s, 787692 KB] g=2, 806 evaluated, 805 expanded
+[t=10332.176695s, 787692 KB] New best heuristic value for ff: 15
+[t=10332.176695s, 787692 KB] g=2, 811 evaluated, 810 expanded
+[t=10332.562173s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 32
+[t=10332.562173s, 787692 KB] New best heuristic value for ff: 14
+[t=10332.562173s, 787692 KB] g=2, 815 evaluated, 814 expanded
+[t=10780.235583s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 31
+[t=10780.235583s, 787692 KB] g=2, 5258 evaluated, 5257 expanded
+[t=10781.734963s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 25
+[t=10781.734963s, 787692 KB] g=3, 5273 evaluated, 5272 expanded
+[t=10782.409823s, 787692 KB] New best heuristic value for ff: 13
+[t=10782.409823s, 787692 KB] g=3, 5280 evaluated, 5279 expanded
+[t=10806.620811s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 22
+[t=10806.620811s, 787692 KB] New best heuristic value for ff: 12
+[t=10806.620811s, 787692 KB] g=3, 5522 evaluated, 5521 expanded
+[t=10837.199190s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 21
+[t=10837.199190s, 787692 KB] g=3, 5827 evaluated, 5826 expanded
+[t=10837.588231s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 10
+[t=10837.588231s, 787692 KB] g=4, 5831 evaluated, 5830 expanded
+[t=10837.781052s, 787692 KB] New best heuristic value for ff: 11
+[t=10837.781052s, 787692 KB] g=4, 5833 evaluated, 5832 expanded
+[t=10838.163384s, 787692 KB] New best heuristic value for ff: 10
+[t=10838.163384s, 787692 KB] g=4, 5837 evaluated, 5836 expanded
+[t=10838.545774s, 787692 KB] New best heuristic value for ff: 9
+[t=10838.545774s, 787692 KB] g=4, 5841 evaluated, 5840 expanded
+[t=10869.535920s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 9
+[t=10869.535920s, 787692 KB] g=4, 6156 evaluated, 6155 expanded
+[t=10870.603053s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 5
+[t=10870.603053s, 787692 KB] g=5, 6167 evaluated, 6166 expanded
+[t=10870.696142s, 787692 KB] New best heuristic value for ff: 8
+[t=10870.696142s, 787692 KB] g=5, 6168 evaluated, 6167 expanded
+[t=10870.792544s, 787692 KB] New best heuristic value for ff: 7
+[t=10870.792544s, 787692 KB] g=5, 6169 evaluated, 6168 expanded
+[t=10900.319862s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 4
+[t=10900.319862s, 787692 KB] g=5, 6469 evaluated, 6468 expanded
+[t=11613.890840s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 2
+[t=11613.890840s, 787692 KB] g=5, 13514 evaluated, 13513 expanded
+[t=11614.352888s, 787692 KB] New best heuristic value for ff: 6
+[t=11614.352888s, 787692 KB] g=5, 13522 evaluated, 13521 expanded
+[t=11614.469221s, 787692 KB] New best heuristic value for ff: 5
+[t=11614.469221s, 787692 KB] g=5, 13524 evaluated, 13523 expanded
+[t=11630.730146s, 787692 KB] New best heuristic value for landmark_sum_heuristic: 1
+[t=11630.730146s, 787692 KB] g=5, 13742 evaluated, 13741 expanded
+Peak memory: 964716 KB
+caught signal 24 -- exiting
+Time limit has been reached.
+Remove intermediate file output.sas
+search exit code: 23
+
+Driver aborting after search
+INFO     Planner time: 29104.84s

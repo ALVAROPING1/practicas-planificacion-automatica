@@ -54,8 +54,7 @@ fi
 
 BUILD=build
 MAX_TIME=28800       # 8 hours
-PROBLEMS="insert-1 full-mirage full-earth full-water all-for-estelle complex mega-complex very-difficult"
-# TODO: Full
+PROBLEMS="insert-1 full-mirage full-earth full-water full all-for-estelle complex mega-complex very-difficult"
 
 run_helper () {
         local name
@@ -72,9 +71,8 @@ run_helper () {
         MUTEX=../../mutex
         cd "$BUILD/$name/$problem"
         echo $problem $name
-        printf "$name,$problem" > result.csv
-        sleep 60.0
-        run "$path" "$args" ../../../domain.pddl "../../$problem.pddl" | awk -f ../../../process-fd.awk >> result.csv &
+        printf "!!!DATA $name,$problem" > result.txt
+        run "$path" "$args" ../../../domain.pddl "../../$problem.pddl" >> result.txt &
         cd ../../..
         MUTEX=build/mutex
         SEM=build/sem
@@ -105,15 +103,16 @@ declare -a FD_SEQ_SAT_LAMA_2011=(
 #    "dec-star-2023-agl"
 #    "$HOME/PDDL/planner15/fast-downward.py"
 #    "--alias seq-agl-decstar --search-time-limit $MAX_TIME")
-declare -a SCORPION_2023=(
-   "scorpion"
-   "$HOME/PDDL/planner25/fast-downward.py"
-   "--alias seq-opt-scorpion-2023 --search-time-limit $MAX_TIME")
+
+# declare -a SCORPION_2023=(
+#    "scorpion"
+#    "$HOME/PDDL/planner25/fast-downward.py"
+#    "--alias seq-opt-scorpion-2023 --search-time-limit $MAX_TIME")
 
 declare -a PLANNERS=(
    "(${FD_LAMA_FIRST[*]@Q})"
    "(${FD_SEQ_SAT_LAMA_2011[*]@Q})"
-   "(${SCORPION_2023[*]@Q})"
+   # "(${SCORPION_2023[*]@Q})"
 )
 
 for problem in $PROBLEMS; do
