@@ -29,12 +29,7 @@
     art      - object   ; Arts are unlocked after obtaining certain elemental
                         ; value for a line in an orbament.
 
-    category - object   ; There are line-wide and orbament-wide restrictions.
-                        ; You cannot place two `blade' quartz inside the same
-                        ; line, but can on different lines in the same orbament.
-                        ; You cannot place, for instance, a `Defensa 1' and
-                        ; `Defensa 2' in the same orbament. There is a class-
-                        ; wide restriction.
+    category - object   ; Each quartz belongs to category.
 
     ;; Orbaments
     orbament - object   ; An orbament is a set of slots connected by lines
@@ -189,7 +184,6 @@
                  ?count      - natural
                  ?element    - element
                  ?next-count - natural)
-    ;; TODO: Add quartz elemental restriction
     :precondition (and (action-state)
                        (contains-slot ?orbament ?slot)
                        (not (filled ?slot))
@@ -202,16 +196,7 @@
                        (inventory-count ?quartz ?count)
                        (less-than n0 ?count)    ; ?count > 0
                        (addition n1 ?next-count ?count)
-                       ;; If the quartz has an orbament-wide restriction, then
-                       ;; check there is no other quartz with the same
-                       ;; restriction in the same orbament.
                        (not (restricted ?orbament ?category)))
-                       ;; Otherwise, check that there is no line that connects
-                       ;; the slot which has a line-wide restriction.
-                       ;; (imply (not (orbament-wide ?category))
-                       ;;        (forall (?line - line)
-                       ;;          (imply (connects ?line ?slot)
-                       ;;                 (not (restricted ?line ?slot))))))
     :effect (and (filled ?slot)
                  (quartz-to-be-modified ?quartz)
                  (slot-to-be-modified ?slot)
