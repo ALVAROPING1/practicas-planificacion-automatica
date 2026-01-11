@@ -342,30 +342,215 @@ Definimos el tipo `natural` ($bb(N)$).
   - Approximate Novelty (`planner29`)
   - Problema: no soportan axiomas.
 
-== Problema 1
-#[
-#set text(12pt)
-#table(
-  columns: (auto, auto, auto, auto, auto, auto, auto, auto, auto),
-  align: center + horizon,
-  table.header(
-    [*Planificador*],
-    [*Tiempo total*],
-    [Tiempo de traducción],
-    [Tiempo de búsqueda],
-    [*Coste del plan*],
-    [Longitud del plan],
-    [Nodos expandidos],
-    [*Memoria de traducción*],
-    [*Memoria de búsqueda*]
-  )
-)
-]
+#let results = csv("result.csv", delimiter: ";", row-type: dictionary)
 
+#let planner-names = (
+  fd-lama-first:        [#set text(12pt)
+                         FD (`lama-first`)],
+  fd-lama-firstX:       [#set text(12pt)
+                         FD (`lama-first`) \* ],
+  fd-seq-sat-lama-2011: [#set text(12pt)
+                         FD (`seq-sat-lama-2011`)]
+)
+
+#let double-width(n) = if n < 10 { "0" + str(n) } else { str(n) }
+
+#let format-time(t) = {
+  t = float(t) / 3600
+  let h = calc.floor(t)
+  t = (t - h) * 60
+  let m = calc.floor(t)
+  t = (t - m) * 60
+  let s = calc.round(t, digits: 2)
+  if h > 0 {
+    // [$#h "h" #double-width(m) "min" #double-width(s) "s"$]
+    [#set text(12pt)
+     #h h #double-width(m) $'$ #double-width(s) $''$]
+  } else if m > 0 {
+    // [$#m "min" #double-width(s) "s"$]
+    [#set text(12pt)
+     #m $'$ #double-width(s) $''$]
+  } else {
+    // [$#s "s"$]
+    [#set text(12pt)
+     #s $''$]
+  }
+}
+
+#let format-cost(c) = {
+  if c == "infinity" {
+    c = [$∞$]
+  }
+  [#set text(12pt)
+   #c]
+}
+
+#let row-maker(best, worst) = {
+  let funcs = (
+    ("Total_Time",         "bold",   x => format-time(x)),
+    ("Translation_Time",   "medium", x => format-time(x)),
+    ("Search_Time",        "medium", x => format-time(x)),
+    ("Plan_Cost",          "bold",   x => format-cost(x)),
+    ("Plan_Length",        "medium", x => format-cost(x)),
+    ("Expanded",           "medium", x => [#set text(12pt)
+                                           #x]),
+    ("Translation_Memory", "bold",   x => [#set text(12pt)
+                                           #x KB]),
+    ("Search_Memory",      "bold",   x => [#set text(12pt)
+                                           #x KB]),
+  )
+
+  let make-row(item) = {
+    let mapper(args) = {
+      let key = args.at(0)
+      let weight = args.at(1)
+      let func = args.at(2)
+      let val = item.at(key)
+      if best.at(key) == worst.at(key) {
+        text(func(val), weight: weight)
+      } else if best.at(key) == val {
+        [#text(func(val), fill: blue, weight: weight)]
+      } else if worst.at(key) == val {
+        [#text(func(val), fill: red, weight: weight)]
+      } else {
+        text(func(val), weight: weight)
+      }
+    }
+    ((planner-names.at(item.Planner),) + funcs.map(mapper))
+  }
+  make-row
+}
+
+#let make-best(problem) = {
+  let filtered = results.filter(x => x.Problem == problem);
+  let best = filtered.pop();
+  let worst = best;
+  let fields = (
+    "Total_Time",
+    "Translation_Time",
+    "Search_Time",
+    "Plan_Cost",
+    "Plan_Length",
+    "Expanded",
+    "Translation_Memory",
+    "Search_Memory")
+  for x in filtered {
+    for field in fields {
+      if float(x.at(field)) > float(worst.at(field)) {
+        worst.at(field) = x.at(field);
+      }
+      if float(x.at(field)) < float(best.at(field)) {
+        best.at(field) = x.at(field);
+      }
+    }
+  }
+  (best, worst)
+}
+
+#let compare(problem, caption: none) = {
+  let (best, worst) = make-best(problem)
+  let make-row = row-maker(best, worst)
+  figure(
+    table(
+      columns: (7em, 5em, 5em, 5em, auto, auto, auto, 4em, 4em),
+      align: center + horizon,
+      table.header(
+        [#set text(12pt)
+         *Planificador*],
+        [#set text(12pt)
+         *Tiempo total*],
+        [#set text(12pt)
+         Tiempo de traducción],
+        [#set text(12pt)
+         Tiempo de búsqueda],
+        [#set text(12pt)
+         *Coste del plan*],
+        [#set text(12pt)
+         Longitud del plan],
+        [#set text(12pt)
+         Nodos expandidos],
+        [#set text(12pt)
+         *Memoria de traducción*],
+        [#set text(12pt)
+         *Memoria de búsqueda*]
+      ),
+      ..results.filter(x => x.Problem == problem).map(make-row).flatten()
+    ),
+    caption: caption
+  )
+}
 
 == Resultados
-#table()
-// TODO: Table
+#compare("insert-1",
+caption: [
+  Problema sencillo que pretende activar el arte de agua «Lágrima» ($>= 1$
+  #water). Los orbamentos comienzan vacíos, así que la solución óptima es única
+  y es introducir un cuarzo que de al menos 1 #water en cualquier ranura de
+  cualquier orbamento. En el inventorio solo hay un cuarzo «PV 1» (1 #water).
+])
+
+#compare("full-mirage",
+caption: [
+  Problema que intentan que se activen todas las artes de tipo espejismo
+  (#mirage), que como son dos, debería ser más sencillo que el resto de
+  alternativas. Las artes son «Santificación» ($>= 2$ #mirage, $>= 1$ #water,
+  $>= 1$ #wind, $>= 1$ #space) y «Marca del caos ($>= 3$ #mirage). En el
+  inventario hay un cuarzo de cada tipo y los orbamentos empiezan vacíos.
+])<tab:full-mirage>
+
+
+#compare("full-earth",
+caption: [
+  El problema es similar al de la @tab:full-mirage. En este caso con las mismas
+  condiciones iniciales, se intenta activar todas las artes de tipo tierra
+  (#earth), entre todos los personajes. En total hay ocho artes de tipo tierra
+  distintas.
+])<tab:full-earth>
+
+#compare("full-water",
+caption: [
+  El problema es similar al de la @tab:full-mirage y de la @tab:full-earth.
+  En este caso con las artes de tipo agua (#water), entre todos los personajes.
+  En total hay once artes de tipo agua. Sin embargo, se necesitan menos cuarzos
+  para activar que en las de tipo tierra (#earth).
+])
+
+#compare("full",
+caption: [
+  En este problema el objetivo es activar todas entre todos los personajes.
+  Los orbamentos comienzan vacíos y hay cuatro objetos de cada en el
+  inventario.
+])
+
+
+#compare("all-for-estelle",
+caption: [
+  En este problema se empieza con un elemento de cada en el inventario y un
+  único orbamento vacío. El objetivo es activar *todas* las artes en un único
+  personaje. Se puede ver que las soluciones subóptimas generar acciones de
+  más, en este caso, de eliminación de cuarzos.
+])
+
+#compare("complex",
+caption: [
+  En este problema se tienen cuatro orbamentos que empiezan completamente
+  llenos con cuarzos. En el inventario hay cuatro de cada tipo de cuarzo
+  excepto los mejores cuarzos (dan más potencia elemental) que solo hay uno de
+  cada. El objetivo es el mismo, activar todas las artes a la vez.
+])<tab:complex>
+
+#compare("very-difficult",
+caption: [
+  Este problema es el más difícil, las condiciones iniciales son las mismas
+  que el de la @tab:complex, pero sin ninguno de los mejores cuarzos (antes uno
+  de cada, ahora cero de cada). El objetivo es el mismo. En este caso se pasó
+  del límite de tiempo impuesto de ocho horas. \
+
+  \* Una mención especial a que cuando estábamos trabajando con un dominio más
+  relajado, donde no había restricciones de elemento por ranura, encontraba la
+  solución de este problema en solo cuatro horas.
+])
+
 
 = Conclusiones
 == Conclusiones
