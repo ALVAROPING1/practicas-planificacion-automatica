@@ -572,6 +572,8 @@ caption: [
     //   Soportan funcionalidades de PDDL 2.2 sin soportar completamente PDDL 1.2
   - Algunos planificadores utilizan una sintaxis de PDDL un poco distinta.
 - Son capaces de resolver problemas complejos de forma eficiente a pesar de ser
-  independientes del dominio
+  independientes del dominio.
   - Se han podido encontrar planes con $~ 200$ pasos en un periodo de tiempo
-    razonable
+    razonable.
+  - La mayor parte del consumo de memoria ocurre durante la traducción. La
+    búsqueda utiliza muy poca memoria aún expandiendo muchos estados.
