@@ -77,8 +77,8 @@
   #fire-color("fuego", weight: "bold") #fire,
   #wind-color("viento", weight: "bold") #wind,
   #time-color("tiempo", weight: "bold") #time,
-  #space-color("espacio", weight: "bold") #space e
-  #mirage-color("ilusión", weight: "bold") #mirage.
+  #space-color("espacio", weight: "bold") #space y
+  #mirage-color("espejismo", weight: "bold") #mirage.
 - Cada *cuarzo* da un poder elemental ($bb(N)$) para cada uno de los elementos.
 ][
   #figure(image("orbamento-vacío.png", height: 90%),
@@ -94,6 +94,7 @@
   todos los *elementos* tienen valor suficiente.
 - Cada *cuarzo* pertenece a una *categoría*.
   - Dos cuarzos de la misma categoría no pueden estar en el mismo orbamento.
+  - Hay *ranuras* que solo permiten *cuarzos* de cierto *elemento*.
 - El dominio es igual en los cinco primeros juegos de la saga (pequeñas
   variaciones).
 ]
@@ -106,11 +107,11 @@
   - Precisión 2 (+2 #space).
   - Rotura 2 (+2 #earth).
   - Ataque 2 (+2 #fire).
-  - Hoja petrificadora (+2 #fire).
+  - Hoja petrificadora (+2 #earth).
   - PE 2 (+1 #time, +2 #space, +2 #mirage).
 - Total
   - Línea 1: 4 #earth, 2 #fire, 2 #space, 2 #mirage
-  - Línea 2: 4 #fire, 1 #time, 2 #space, 2 #mirage
+  - Línea 2: 2 #earth, 2 #fire, 1 #time, 2 #space, 2 #mirage
 ][
   #figure(image("orbamento-ejemplo.png", height: 90%),
           caption: [Ejemplo de configuración.])
@@ -166,8 +167,8 @@ Definimos el tipo `natural` ($bb(N)$).
   - ¡Si queremos hacer sumas para los 7 elementos, necesitaríamos mínimo 21
     parámetros!
   - Si se tienen que instanciar todas las acciones, ignorando combinaciones
-    imposibles, para 22 naturales habría $21^22 approx 1.23 dot.c 10^(29)$
-    objetos (97 bits).
+    imposibles, para 23 naturales habría $21^23 approx 2.58 dot.c 10^(30)$
+    objetos (102 bits).
     // Comentar que identifica combinaciones imposibles y las elimina.
 - Las operaciones se tienen que hacer por pasos.
 ]
@@ -207,7 +208,7 @@ Definimos el tipo `natural` ($bb(N)$).
 
       node((6,1), [Unmark], radius: radius)
       edge((6,1), (0,1), `end-unmark`, "-|>")
-      edge((6,1), (6,1), [`unmark-art`\ `unmark-line`\ `unmark-art`], "-|>", bend: -130deg)
+      edge((6,1), (6,1), [`unmark-art`\ `unmark-line`\ `unmark-element`], "-|>", bend: -130deg)
     }
   ),
 )
@@ -340,7 +341,9 @@ Definimos el tipo `natural` ($bb(N)$).
   - DecStar-2023 (`planner15`)
   - Scorpion 2023 (`planner25`) Sat
   - Approximate Novelty (`planner29`)
-  - Problema: no soportan axiomas.
+  - Problema: no soportan axiomas o bien no compilan o bien no funcionan
+    directamente o bien hasta el `--show-aliases` falla o bien requieren
+    dependencias propietarias.
 
 #let results = csv("result.csv", delimiter: ";", row-type: dictionary)
 
@@ -361,7 +364,7 @@ Definimos el tipo `natural` ($bb(N)$).
   t = (t - h) * 60
   let m = calc.floor(t)
   t = (t - m) * 60
-  let s = calc.round(t, digits: 2)
+  let s = calc.round(t, digits: 4)
   if h > 0 {
     // [$#h "h" #double-width(m) "min" #double-width(s) "s"$]
     [#set text(12pt)
@@ -487,6 +490,8 @@ caption: [
   #water). Los orbamentos comienzan vacíos, así que la solución óptima es única
   y es introducir un cuarzo que de al menos 1 #water en cualquier ranura de
   cualquier orbamento. En el inventorio solo hay un cuarzo «PV 1» (1 #water).
+  `seq-sat-lama-2011` a su vez explora todo el espacio de búsqueda (es diminuto)
+  y demuestra que el plan es óptimo.
 ])
 
 #compare("full-mirage",
@@ -519,7 +524,8 @@ caption: [
 caption: [
   En este problema el objetivo es activar todas entre todos los personajes.
   Los orbamentos comienzan vacíos y hay cuatro objetos de cada en el
-  inventario.
+  inventario. Las dos filas de `seq-sat-lama-2011` corresponden a la misma
+  ejecución, pero a planes sucesivos que ha ido generando.
 ])
 
 
@@ -528,7 +534,9 @@ caption: [
   En este problema se empieza con un elemento de cada en el inventario y un
   único orbamento vacío. El objetivo es activar *todas* las artes en un único
   personaje. Se puede ver que las soluciones subóptimas generar acciones de
-  más, en este caso, de eliminación de cuarzos.
+  más, en este caso, de eliminación de cuarzos. Las dos filas de
+  `seq-sat-lama-2011` corresponden a la misma ejecución, pero a planes
+  sucesivos que ha ido generando.
 ])
 
 #compare("complex",
@@ -561,7 +569,7 @@ caption: [
   - Cada planificador soporta un subconjunto distinto de PDDL.
     // - Las funcionalidades soportadas no coinciden con las versiones de PDDL.
     //   Soportan funcionalidades de PDDL 2.2 sin soportar completamente PDDL 1.2
-  - Algunos planificadores utilizan una sintáxis de PDDL un poco distinta.
+  - Algunos planificadores utilizan una sintaxis de PDDL un poco distinta.
 - Son capaces de resolver problemas complejos de forma eficiente a pesar de ser
   independientes del dominio
   - Se han podido encontrar planes con $> 300$ pasos en un periodo de tiempo
